@@ -6,7 +6,7 @@
 #    By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/06 10:43:32 by ltrinchi          #+#    #+#              #
-#    Updated: 2022/02/23 15:59:44 by ltrinchi         ###   ########.fr        #
+#    Updated: 2022/03/16 16:14:24 by ltrinchi         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,7 +93,7 @@ all: $(PATH_TO_OBJS) $(NAME)
 $(PATH_TO_OBJS):
 	mkdir -p ./objs/
 
-$(PATH_TO_OBJS)%.o: $(PATH_TO_SRCS)%.c Makefile
+$(PATH_TO_OBJS)%.o: $(PATH_TO_SRCS)%.c Makefile srcs/libft.h
 	printf "\033[2K\r$(YELLOW)⏳ Compiling:$(WHITE) $< 🤞\033[0m"  
 	$(CC) $(CFLAGS) -c $< -o $@
 
