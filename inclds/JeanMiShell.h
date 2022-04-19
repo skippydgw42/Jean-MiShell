@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   JeanMiShell.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:59:28 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/03/16 16:01:18 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/04/19 13:18:49 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,19 @@
 # define JEANMISHELL_H
 
 # include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <signal.h>
+# include <dirent.h>
+# include <termios.h>
+# include <curses.h>
+# include <sys/types.h>
+# include <sys/uio.h>
+# include <sys/wait.h>
+# include <sys/stat.h>
+# include <sys/ioctl.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 #endif
