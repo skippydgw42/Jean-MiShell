@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/16 15:58:35 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/04/19 13:59:12 by mdegraeu         ###   ########.fr       */
+/*   Created: 2022/04/19 13:21:15 by mdegraeu          #+#    #+#             */
+/*   Updated: 2022/04/19 13:44:39 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclds/JeanMiShell.h"
 
-int	main(void)
+void	ft_echo(char *str, int flag)
 {
-	printf("Hello Les Gens-MiShell\n");
-	return (0);
+	if (str)
+	{
+		printf("%s", str);
+		if (!flag)
+			printf("\n");
+	}
+	else
+		printf("\n");
 }
