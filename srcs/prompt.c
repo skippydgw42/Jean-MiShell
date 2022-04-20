@@ -6,13 +6,13 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 17:47:24 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/04/20 16:11:40 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/04/20 19:02:57 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclds/JeanMiShell.h"
 
-void	ft_prompt()
+void	ft_prompt(void)
 {
 	char *str;
 
@@ -21,7 +21,7 @@ void	ft_prompt()
 		str = readline(GREEN "Jean_MiShell>> " WHITE);
 		if (ft_strlen(str))
 			add_history(str);
-		ft_cd(str);
+		ft_cd(str, lstenv);
 		free(str);
 	}
 }
