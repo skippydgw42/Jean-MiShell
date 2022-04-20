@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:59:28 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/04/20 14:25:29 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/04/20 16:26:27 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,21 +39,15 @@
 # define WHITE "\033[0;37m"
 # define GREEN "\033[0;32m"
 
-typedef struct s_data
-{
-	char	*pwd;
-	char	*oldpwd;
-}	t_data;
-
 /****************************************/
 /*----------------SRCS------------------*/
 /****************************************/
-void	ft_prompt(t_data *data);
+void	ft_prompt(void);
 
 /****************************************/
 /*--------------BUILTINS----------------*/
 /****************************************/
 void	ft_echo(char *str, int flag);
-void	ft_cd(char *str, t_data *data);
+void	ft_cd(char *str, t_env *lstenv);
 
 #endif

@@ -6,14 +6,41 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 11:57:11 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/04/20 14:43:31 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/04/20 16:29:04 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclds/JeanMiShell.h"
 
-void	ft_cd(char *str, t_data *data)
+char	*ft_cpyold_path(t_env *lstenv)
 {
+	char	*ret;
+
+	while (ft_strcmp(lstenv->varName, "PWD") != 0)
+		lstenv = lstenv->next;
+	ret = ft_strdup(lstenv->path);
+	return (ret);
+}
+
+void	ft_cd(char *str, t_env *lstenv)
+{
+	if (chdir(str) == -1)
+		perror(str);
+	else
+	{
+		while (ft_strcmp(lstenv->varName, "OLDPWD") != 0)
+			lstenv = lstenv->next;
+		if (lstenv->path)
+			free(lstenv->path);
+		lstenv->path = ft_cpyold_path(lstenv);
+		while (ft_strcmp(lstenv->varName, "PWD") != 0)
+			lstenv = lstenv->next;
+		if (lstenv->path)
+			free(lstenv->path);
+		lstenv->path = getcwd(NULL, 0);
+	}
+}
+/*          cd nature         */
 	// char	*path;
 
 	// if (!str)
@@ -21,18 +48,4 @@ void	ft_cd(char *str, t_data *data)
 	// 	path = getenv("HOME");
 	// 	chdir(path);
 	// }
-	if (chdir(str) == -1)
-		perror(str);
-	else
-	{
-		if (data->oldpwd)
-			free(data->oldpwd);
-		if (data->pwd)
-		{
-			data->oldpwd = ft_strdup(data->pwd);
-			free(data->pwd);
-		}
-		data->pwd = getcwd(NULL, 0);
-	}
-	printf("old: %s\nnew: %s\n", data->oldpwd, data->pwd);
-}
+	
