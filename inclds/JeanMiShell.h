@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   JeanMiShell.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:59:28 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/04/20 11:09:19 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/04/20 11:49:33 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include <sys/ioctl.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include "../libft/srcs/libft.h"
 
 // Printf Colors
 # define RED "\033[0;31m"
@@ -38,6 +39,14 @@
 # define WHITE "\033[0;37m"
 # define GREEN "\033[0;32m"
 
+/****************************************/
+/*----------------SRCS------------------*/
+/****************************************/
+void	ft_prompt(void);
+
+/****************************************/
+/*--------------BUILTINS----------------*/
+/****************************************/
 void	ft_echo(char *str, int flag);
 
 #endif

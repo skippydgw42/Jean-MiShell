@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegraeu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/04 15:22:16 by mdegraeu          #+#    #+#             */
-/*   Updated: 2021/11/04 15:45:37 by mdegraeu         ###   ########lyon.fr   */
+/*   Created: 2022/04/19 17:47:24 by mdegraeu          #+#    #+#             */
+/*   Updated: 2022/04/20 11:48:11 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../inclds/JeanMiShell.h"
 
-void	ft_putnbr_fd(int n, int fd)
+void	ft_prompt(void)
 {
-	long	nb;
-
-	nb = n;
-	if (nb < 0)
+	char *str;
+	while (1)
 	{
-		nb *= -1;
-		write(fd, "-", 1);
+		str = readline(GREEN "Jean_MiShell>> " WHITE);
+		if (ft_strlen(str))
+			add_history(str);
+		free(str);
 	}
-	if (nb > 9)
-	{
-		ft_putnbr_fd(nb / 10, fd);
-		ft_putnbr_fd(nb % 10, fd);
-	}
-	else
-		ft_putchar_fd(nb + '0', fd);
 }

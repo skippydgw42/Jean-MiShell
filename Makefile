@@ -12,7 +12,9 @@
 
 NAME = Jean-MiShell
 
-SRCS_WITHOUT_PATH = main.c
+SRCS_WITHOUT_PATH = \
+					main.c	\
+					prompt.c
 
 BUILTINS_WITHOUT_PATH = echo.c
 

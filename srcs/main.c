@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:58:35 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/04/20 11:09:25 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/04/20 11:34:59 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,7 @@ void	ft_text_color(int i)
 
 int	main(void)
 {
-	char *str;
-	while (1)
-	{
-		str = readline(GREEN "Jean_MiShell>> " WHITE);
-		free(str);
-	}
+	ft_prompt();
 	
 	return (0);
 }
