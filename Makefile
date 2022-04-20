@@ -16,7 +16,9 @@ SRCS_WITHOUT_PATH = \
 					main.c	\
 					prompt.c
 
-BUILTINS_WITHOUT_PATH = echo.c
+BUILTINS_WITHOUT_PATH = \
+					echo.c	\
+					cd.c	
 
 OBJS_SRCS_WITHOUT_PATH = $(SRCS_WITHOUT_PATH:.c=.o)
 
