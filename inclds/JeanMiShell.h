@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:59:28 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/04/20 16:26:27 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/04/20 16:37:28 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@ void	ft_prompt(void);
 /****************************************/
 void	ft_echo(char *str, int flag);
 void	ft_cd(char *str, t_env *lstenv);
+void	ft_pwd(t_env *lstenv);
 
 #endif

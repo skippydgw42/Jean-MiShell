@@ -18,7 +18,8 @@ SRCS_WITHOUT_PATH = \
 
 BUILTINS_WITHOUT_PATH = \
 					echo.c	\
-					cd.c	
+					cd.c	\
+					pwd.c
 
 OBJS_SRCS_WITHOUT_PATH = $(SRCS_WITHOUT_PATH:.c=.o)
 
