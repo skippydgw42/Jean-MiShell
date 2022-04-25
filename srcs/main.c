@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:58:35 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/04/20 14:25:35 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/04/25 11:01:24 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ void	ft_text_color(int i)
 
 int	main(void)
 {
-	t_data	*data;
+	// t_data	*data;
 
-	data = malloc(sizeof(t_data));
-	ft_prompt(data);
+	// data = malloc(sizeof(t_data));
+	// ft_prompt(data);
 	
 	return (0);
 }

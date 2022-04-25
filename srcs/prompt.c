@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 17:47:24 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/04/21 17:05:56 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/04/25 11:54:04 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_prompt(void)
 		str = readline(GREEN "Jean_MiShell>> " WHITE);
 		if (ft_strlen(str))
 			add_history(str);
-		ft_cd(str, lstenv);
+		// ft_cd(str, lstenv);
 		free(str);
 	}
 }
