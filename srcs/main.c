@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:58:35 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/04/25 12:09:35 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/04/25 15:39:06 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,7 @@ int	main(int ac, char **av, char **env)
 
 	t_env	*lstenv;
 
-	lstenv = malloc(sizeof(t_env));
-	if (!lstenv)
-		return (EXIT_FAILURE);
-	ft_set_lstenv(env, lstenv);
+	lstenv = ft_set_lstenv(env);
 	ft_free_lstenv(lstenv);
-	// data = malloc(sizeof(t_data));
-	// ft_prompt(data);
-	
 	return (0);
 }
