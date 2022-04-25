@@ -14,7 +14,9 @@ NAME = Jean-MiShell
 
 SRCS_WITHOUT_PATH = \
 					main.c	\
-					prompt.c
+					prompt.c \
+					set_lstenv.c \
+					free_lstenv.c
 
 BUILTINS_WITHOUT_PATH = \
 					echo.c	\

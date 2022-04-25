@@ -1,41 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   set_lstenv.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/16 15:58:35 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/04/25 12:09:35 by ltrinchi         ###   ########lyon.fr   */
+/*   Created: 2022/04/25 11:24:42 by ltrinchi          #+#    #+#             */
+/*   Updated: 2022/04/25 12:09:05 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclds/JeanMiShell.h"
 
-void	ft_text_color(int i)
+int ft_set_lstenv(char **env, t_env *lstenv)
 {
-	if (i == 1)
+	(void)lstenv;
+	int i;
+	char **split;
+
+	i = 0;
+	while (env[i])
 	{
-		printf(GREEN);
+		split = ft_split(env[i], '=');
+		lstenv->varName = split[0];
+		lstenv->value = split[1];
+		if (lstenv->value == NULL)
+			lstenv->value = "";
+		i++;
 	}
-}
-
-int	main(int ac, char **av, char **env)
-{
-	// t_data	*data;
-	(void)ac;
-	(void)av;
-	(void)env;
-
-	t_env	*lstenv;
-
-	lstenv = malloc(sizeof(t_env));
-	if (!lstenv)
-		return (EXIT_FAILURE);
-	ft_set_lstenv(env, lstenv);
-	ft_free_lstenv(lstenv);
-	// data = malloc(sizeof(t_data));
-	// ft_prompt(data);
-	
-	return (0);
+	return (EXIT_SUCCESS);
 }

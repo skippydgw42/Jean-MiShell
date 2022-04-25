@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:59:28 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/04/25 11:00:59 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/04/25 12:11:45 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ typedef struct s_env
 /*----------------SRCS------------------*/
 /****************************************/
 void	ft_prompt(void);
+int		ft_set_lstenv(char **env, t_env *lstenv);
+int		ft_free_lstenv(t_env *lstenv);
 
 /****************************************/
 /*--------------BUILTINS----------------*/
