@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 12:09:52 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/04/25 16:25:33 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/04/25 16:40:06 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_free_lstenv(t_data *data)
 {
 	t_env	*ptr;
 
-	while (data->lstenv->next != data->start)
+	while (data->lstenv)
 	{
 		ptr = data->lstenv;
 		if (ptr->varName)

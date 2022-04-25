@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:58:35 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/04/25 16:24:46 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/04/25 16:39:47 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,13 @@ int	main(int ac, char **av, char **env)
 
 	data = malloc(sizeof(t_data));
 	data->lstenv = ft_set_lstenv(env);
-	ft_looplst(data);
-	while (data->lstenv->next != data->start)
+	data->start = data->lstenv;
+	while (data->lstenv)
 	{
 		printf("%s\n", data->lstenv->varName);
 		data->lstenv = data->lstenv->next;
 	}
+	data->lstenv = data->start;
 	ft_free_lstenv(data);
 	return (0);
 }

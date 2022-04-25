@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:59:28 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/04/25 16:24:40 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/04/25 16:40:28 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ typedef struct s_data
 /****************************************/
 int		ft_free_dstr(char **str);
 int		ft_free_lstenv(t_data *data);
-void	ft_looplst(t_data *data);
 
 /****************************************/
 /*----------------SRCS------------------*/

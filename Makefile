@@ -25,7 +25,6 @@ BUILTINS_WITHOUT_PATH = \
 ADD_WITHOUT_PATH =	\
 					free_dstr.c \
 					free_lstenv.c \
-					loop_lst.c
 
 OBJS_SRCS_WITHOUT_PATH = $(SRCS_WITHOUT_PATH:.c=.o)
 OBJS_BUILTINS_WITHOUT_PATH = $(BUILTINS_WITHOUT_PATH:.c=.o)
