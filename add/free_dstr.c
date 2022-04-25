@@ -1,43 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_lstenv.c                                       :+:      :+:    :+:   */
+/*   free_dstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/25 11:24:42 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/04/25 16:06:57 by mdegraeu         ###   ########.fr       */
+/*   Created: 2022/04/25 15:55:18 by mdegraeu          #+#    #+#             */
+/*   Updated: 2022/04/25 15:56:51 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclds/JeanMiShell.h"
 
-t_env *ft_set_lstenv(char **env)
+int	ft_free_dstr(char **str)
 {
-	char	**split;
-	int		i;
-	t_env	*new;
-	t_env	*start;
-	t_env	*buff;
+	int	i;
 
 	i = 0;
-	buff = NULL;
-	while (env[i])
+	while (str[i])
 	{
-		split = ft_split(env[i], '=');
-		new = malloc(sizeof(t_env));
-		new->varName = ft_strdup(split[0]);
-		new->value = ft_strdup(split[1]);
-		free(split[0]);
-		free(split[1]);
-		free(split);
-		new->next = NULL;
-		if (buff == NULL)
-			start = new;
-		else
-			buff->next = new;
-		buff = new;
+		free(str[i]);
 		i++;
 	}
-	return (start);
+	free(str);
+	return (EXIT_SUCCESS);
 }
