@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 16:34:19 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/04/20 19:02:01 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/04/21 13:31:22 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,4 +18,5 @@ void	ft_pwd()
 
 	pwd = getcwd(NULL, 0);
 	printf("%s\n", pwd);
+	free(pwd);
 }
