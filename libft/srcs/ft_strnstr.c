@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 13:48:40 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/02/23 16:11:07 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/04/25 10:53:08 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,8 @@ static int	ft_check_word(const char *haystack,
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
 	size_t	i;
-	char	test;
 
 	i = 0;
-	test = 1;
 	if (needle[0] == 0)
 		return ((char *)haystack);
 	if (len == 0)

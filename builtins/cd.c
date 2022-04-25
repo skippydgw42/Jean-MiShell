@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 11:57:11 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/04/20 16:29:04 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/04/25 10:57:57 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_cpyold_path(t_env *lstenv)
 
 	while (ft_strcmp(lstenv->varName, "PWD") != 0)
 		lstenv = lstenv->next;
-	ret = ft_strdup(lstenv->path);
+	ret = ft_strdup(lstenv->value);
 	return (ret);
 }
 
@@ -30,14 +30,14 @@ void	ft_cd(char *str, t_env *lstenv)
 	{
 		while (ft_strcmp(lstenv->varName, "OLDPWD") != 0)
 			lstenv = lstenv->next;
-		if (lstenv->path)
-			free(lstenv->path);
-		lstenv->path = ft_cpyold_path(lstenv);
+		if (lstenv->value)
+			free(lstenv->value);
+		lstenv->value = ft_cpyold_path(lstenv);
 		while (ft_strcmp(lstenv->varName, "PWD") != 0)
 			lstenv = lstenv->next;
-		if (lstenv->path)
-			free(lstenv->path);
-		lstenv->path = getcwd(NULL, 0);
+		if (lstenv->value)
+			free(lstenv->value);
+		lstenv->value = getcwd(NULL, 0);
 	}
 }
 /*          cd nature         */

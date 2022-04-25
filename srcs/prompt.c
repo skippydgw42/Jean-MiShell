@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 17:47:24 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/04/20 19:02:57 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/04/25 11:01:31 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_prompt(void)
 		str = readline(GREEN "Jean_MiShell>> " WHITE);
 		if (ft_strlen(str))
 			add_history(str);
-		ft_cd(str, lstenv);
+		// ft_cd(str, lstenv);
 		free(str);
 	}
 }

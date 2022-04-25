@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   JeanMiShell.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:59:28 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/04/20 19:03:27 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/04/25 11:00:59 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,19 @@
 # define CYAN "\033[0;36m"
 # define WHITE "\033[0;37m"
 # define GREEN "\033[0;32m"
+
+// Structures
+typedef struct s_env
+{
+	char			*varName;
+	char			*value;
+	struct s_env	*next;
+}	t_env;
+
+// typedef struct s_data
+// {
+
+// }	t_data;
 
 /****************************************/
 /*----------------SRCS------------------*/
