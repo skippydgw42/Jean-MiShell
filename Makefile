@@ -24,11 +24,14 @@ BUILTINS_WITHOUT_PATH = \
 
 ADD_WITHOUT_PATH =	\
 					free_dstr.c \
-					free_lstenv.c \
+					free_lstenv.c
+
+PARSING_WITHOUT_PATH = \
 
 OBJS_SRCS_WITHOUT_PATH = $(SRCS_WITHOUT_PATH:.c=.o)
 OBJS_BUILTINS_WITHOUT_PATH = $(BUILTINS_WITHOUT_PATH:.c=.o)
 OBJS_ADD_WITHOUT_PATH = $(ADD_WITHOUT_PATH:.c=.o)
+OBJS_PARSING_WITHOUT_PATH = $(PARSING_WITHOUT_PATH:.c=.o)
 
 HEADER_WITHOUT_PATH = JeanMiShell.h
 
@@ -37,17 +40,22 @@ PATH_TO_BUILTINS = ./builtins/
 PATH_TO_OBJS = ./objs/
 PATH_TO_HEADER = ./inclds/
 PATH_TO_ADD = ./add/
+PATH_TO_PARSING = ./parsing/
 
 SRCS = $(addprefix $(PATH_TO_SRCS), $(SRCS_WITHOUT_PATH))
 BUILTINS = $(addprefix $(PATH_TO_BUILTINS), $(BUILTINS_WITHOUT_PATH))
 ADD = $(addprefix $(PATH_TO_ADD), $(ADD_WITHOUT_PATH))
+PARSING = $(addprefix $(PATH_TO_PARSING), $(PARSING_WITHOUT_PATH))
+
 OBJS_SRCS = $(addprefix $(PATH_TO_OBJS), $(OBJS_SRCS_WITHOUT_PATH))
 OBJS_BUILTINS = $(addprefix $(PATH_TO_OBJS), $(OBJS_BUILTINS_WITHOUT_PATH))
 OBJS_ADD = $(addprefix $(PATH_TO_OBJS), $(OBJS_ADD_WITHOUT_PATH))
+OBJS_PARSING = $(addprefix $(PATH_TO_OBJS), $(OBJS_PARSING_WITHOUT_PATH))
 
 OBJS =	$(OBJS_SRCS) \
 		$(OBJS_BUILTINS) \
-		$(OBJS_ADD)
+		$(OBJS_ADD) \
+		$(OBJS_PARSING)
 
 HEADER = $(addprefix $(PATH_TO_HEADER), $(HEADER_WITHOUT_PATH))
 
@@ -93,6 +101,10 @@ $(OBJS_BUILTINS):$(PATH_TO_OBJS)%.o	: $(PATH_TO_BUILTINS)%.c Makefile $(HEADER) 
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJS_ADD):$(PATH_TO_OBJS)%.o	: $(PATH_TO_ADD)%.c Makefile $(HEADER) $(LIBFT_A)
+	printf "\033[2K\r$(YELLOW)⏳ Compiling:$(WHITE) $< 🤞"
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJS_PARSING):$(PATH_TO_OBJS)%.o	: $(PATH_TO_PARSING)%.c Makefile $(HEADER) $(LIBFT_A)
 	printf "\033[2K\r$(YELLOW)⏳ Compiling:$(WHITE) $< 🤞"
 	$(CC) $(CFLAGS) -c $< -o $@
 
