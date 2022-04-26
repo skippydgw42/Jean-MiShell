@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   JeanMiShell.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:59:28 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/04/25 16:40:28 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/04/25 16:54:59 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ t_env	*ft_set_lstenv(char **env);
 void	ft_echo(char *str, int flag);
 void	ft_cd(char *str, t_env *lstenv);
 void	ft_pwd(void);
+int		ft_env(t_data *data);
 
 
 #endif

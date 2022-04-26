@@ -1,36 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/16 15:58:35 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/04/25 16:56:19 by ltrinchi         ###   ########lyon.fr   */
+/*   Created: 2022/04/25 16:29:05 by ltrinchi          #+#    #+#             */
+/*   Updated: 2022/04/25 16:55:10 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclds/JeanMiShell.h"
 
-void	ft_text_color(int i)
+int	ft_env(t_data *data)
 {
-	if (i == 1)
+	while (data->lstenv)	
 	{
-		printf(GREEN);
+		printf("%s=%s\n", data->lstenv->varName, data->lstenv->value);
+		data->lstenv = data->lstenv->next;
 	}
-}
-
-int	main(int ac, char **av, char **env)
-{
-	t_data	*data;
-	(void)ac;
-	(void)av;
-	(void)env;
-
-	data = malloc(sizeof(t_data));
-	data->lstenv = ft_set_lstenv(env);
-	data->start = data->lstenv;
-	ft_env(data);
-	ft_free_lstenv(data);
-	return (0);
+	data->lstenv = data->start;
+	return (EXIT_SUCCESS);
 }

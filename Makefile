@@ -20,7 +20,8 @@ SRCS_WITHOUT_PATH = \
 BUILTINS_WITHOUT_PATH = \
 					echo.c	\
 					cd.c	\
-					pwd.c
+					pwd.c \
+					env.c
 
 ADD_WITHOUT_PATH =	\
 					free_dstr.c \
