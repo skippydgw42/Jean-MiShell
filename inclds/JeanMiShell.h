@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:59:28 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/04/25 12:11:45 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/04/26 12:03:12 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <signal.h>
 # include <dirent.h>
 # include <termios.h>
-# include <curses.h>
 # include <sys/types.h>
 # include <sys/uio.h>
 # include <sys/wait.h>
@@ -39,11 +38,18 @@
 # define WHITE "\033[0;37m"
 # define GREEN "\033[0;32m"
 
+typedef enum e_boolean
+{
+	false,
+	true
+}	t_boolean;
+
 // Structures
 typedef struct s_env
 {
 	char			*varName;
 	char			*value;
+	t_boolean		is_export;
 	struct s_env	*next;
 }	t_env;
 
