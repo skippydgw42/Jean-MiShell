@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:59:28 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/04/26 12:04:57 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/04/26 12:09:23 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include <sys/ioctl.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/errno.h>
 # include "../libft/srcs/libft.h"
 
 // Printf Colors

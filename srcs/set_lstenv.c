@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_lstenv.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:24:42 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/04/25 16:41:58 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/04/26 12:15:07 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,14 @@ t_env *ft_set_lstenv(char **env)
 	{
 		split = ft_split(env[i], '=');
 		new = malloc(sizeof(t_env));
+		if (!new)
+		{
+			perror("Error:");
+			exit(errno);
+		}
 		new->varName = ft_strdup(split[0]);
 		new->value = ft_strdup(split[1]);
+		new->is_export = true;
 		ft_free_dstr(split);
 		new->next = NULL;
 		if (buff == NULL)
