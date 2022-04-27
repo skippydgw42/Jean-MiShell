@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:59:28 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/04/26 12:09:23 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/04/26 14:41:59 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	ft_echo(char *str, int flag);
 void	ft_cd(char *str, t_env *lstenv);
 void	ft_pwd(void);
 int		ft_env(t_data *data);
+int		ft_export(char *str, t_data *data);
 
 
 #endif

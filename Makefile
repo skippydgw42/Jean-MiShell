@@ -21,7 +21,8 @@ BUILTINS_WITHOUT_PATH = \
 					echo.c	\
 					cd.c	\
 					pwd.c \
-					env.c
+					env.c \
+					export.c
 
 ADD_WITHOUT_PATH =	\
 					free_dstr.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_dstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ltninchi <ltninchi@student.42lyonlyonr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 15:55:18 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/04/25 15:56:51 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/04/27 19:09:30 by ltninchi         ###   ########lyonlyo   */
 /*                                                                            */
 /* ************************************************************************** */
 

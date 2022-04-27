@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:58:35 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/04/26 12:13:25 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/04/27 16:22:51 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	main(int ac, char **av, char **env)
 	t_data	*data;
 	(void)ac;
 	(void)av;
-	(void)env;
 
 	data = malloc(sizeof(t_data));
 	if (!data)
@@ -35,7 +34,8 @@ int	main(int ac, char **av, char **env)
 	}
 	data->lstenv = ft_set_lstenv(env);
 	data->start = data->lstenv;
-	ft_env(data);
+	
+	ft_export(NULL, data);
 	ft_free_lstenv(data);
 	return (0);
 }
