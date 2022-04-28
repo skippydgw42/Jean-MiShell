@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_lstenv.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 12:09:52 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/04/25 16:40:06 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/04/27 16:51:41 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_free_lstenv(t_data *data)
 {
 	t_env	*ptr;
 
-	while (data->lstenv)
+	while (data->lstenv->next)
 	{
 		ptr = data->lstenv;
 		if (ptr->varName)

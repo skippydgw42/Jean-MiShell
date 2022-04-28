@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:58:35 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/04/27 16:22:51 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/04/28 13:55:39 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,13 @@ int	main(int ac, char **av, char **env)
 	data->lstenv = ft_set_lstenv(env);
 	data->start = data->lstenv;
 	
+	ft_export("coucou=luca", data);
+	// ft_export("coucou1=lucaa", data);
+	// ft_export("coucou=lucaa", data);
 	ft_export(NULL, data);
+	// ft_export(NULL, data);
+	// ft_env(data);
+	// ft_env(data);
 	ft_free_lstenv(data);
 	return (0);
 }

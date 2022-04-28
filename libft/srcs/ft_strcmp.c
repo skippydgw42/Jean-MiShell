@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 09:55:39 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/04/26 16:58:37 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/04/28 10:01:35 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_strcmp(const char *s1, const char *s2)
 	size_t	i;
 
 	i = 0;
-	if (!s1 || !s1)
+	if (!s1 || !s2)
 		return (0);
 	while ((s1[i] || s2[i]))
 	{

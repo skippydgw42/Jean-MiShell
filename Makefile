@@ -63,7 +63,8 @@ HEADER = $(addprefix $(PATH_TO_HEADER), $(HEADER_WITHOUT_PATH))
 
 	##### COMMANDS ######
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+# CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -g
 RM = rm -rf
 	#####################
 
