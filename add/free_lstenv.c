@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 12:09:52 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/04/27 16:51:41 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/04/28 15:28:06 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_free_lstenv(t_data *data)
 {
 	t_env	*ptr;
 
-	while (data->lstenv->next)
+	while (data->lstenv)
 	{
 		ptr = data->lstenv;
 		if (ptr->varName)
