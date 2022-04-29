@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:58:35 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/04/28 16:15:46 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/04/29 14:52:17 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	main(int ac, char **av, char **env)
 	data->lstenv = ft_set_lstenv(env);
 	data->start = data->lstenv;
 
+	ft_export(NULL, data);
 	ft_free_lstenv(data);
 	return (0);
 }

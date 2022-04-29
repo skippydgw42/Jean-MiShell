@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 11:35:15 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/04/28 15:40:45 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/04/29 14:26 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,17 +83,18 @@ static int	ft_print_export(t_data *data)
 	return (EXIT_SUCCESS);
 }
 
-static int	ft_already_export(char **split, t_data *data)
+static int	ft_already_export(char *varName, char *value, t_data *data)
 {
 	data->lstenv = data->start;
 	while (data->lstenv)
 	{
-		if (ft_strcmp(split[0], data->lstenv->varName) == 0)
+		if (ft_strcmp(varName, data->lstenv->varName) == 0)
 		{
 			if (data->lstenv->value)
 				free(data->lstenv->value);
-			data->lstenv->value = ft_strdup(split[1]);
-			ft_free_dstr(split);
+			data->lstenv->value = ft_strdup(value);
+			free(varName);
+			free(value);
 			data->lstenv = data->start;
 			return (true);
 		}
@@ -102,10 +103,10 @@ static int	ft_already_export(char **split, t_data *data)
 	return (false);
 }
 
-// Si export n'a pas d'argument, il faut passer str = NULL a la fonction
-int	ft_export(char *str, t_data *data)
+int	ft_export_str(char *str, t_data *data)
 {
-	char	**split;
+	char	*varName;
+	char	*value;
 	int		i;
 	char	*ptr;
 	t_env	*new;
@@ -113,8 +114,16 @@ int	ft_export(char *str, t_data *data)
 	i = 0;
 	if (str)
 	{
-		split = ft_split(str, '=');
-		if (ft_already_export(split, data) == true)
+		// FIXME  Gestion de plusieurs declaration a la fois PB:split decoupe a chaque '=',
+		// split = ft_split(str, '=');
+		varName = ft_substr(str, 0, ft_strchr(str, '=') - str);
+		if (!ft_strlen(varName))
+		{
+			perror("Error:");
+			exit(errno);
+		}
+		value = ft_strdup(ft_strchr(str, '=') + 1);
+		if (ft_already_export(varName, value, data) == true)
 			return (EXIT_SUCCESS);
 		new = malloc(sizeof(t_env));
 		if (!new)
@@ -122,8 +131,15 @@ int	ft_export(char *str, t_data *data)
 			perror("Error:");
 			exit(errno);
 		}
-		new->varName = ft_strdup(split[0]);
-		new->value = ft_strdup(split[1]);
+		if (!varName)
+		{
+			perror("Error:");
+			exit(errno);
+		}
+		new->varName = ft_strdup(varName);
+		free(varName);
+		new->value = ft_strdup(value);
+		free(value);
 		if (new->value == NULL)
 			new->value = "";
 		new->is_export = true;
@@ -132,8 +148,27 @@ int	ft_export(char *str, t_data *data)
 		while (data->lstenv->next)
 			data->lstenv = data->lstenv->next;
 		data->lstenv->next = new;
-		ft_free_dstr(split);
 		data->lstenv = data->start;
+	}
+	return (EXIT_SUCCESS);
+}
+
+// NOTE Si export n'a pas d'argument, il faut passer str = NULL a la fonction
+int	ft_export(char *str, t_data *data)
+{
+	char	**split;
+	int		i;
+
+	i = 0;
+	if (str)
+	{
+		split = ft_split(str, ' ');
+		while (split[i])
+		{
+			ft_export_str(split[i], data);
+			i++;
+		}
+		ft_free_dstr(split);
 	}
 	else
 		ft_print_export(data);
