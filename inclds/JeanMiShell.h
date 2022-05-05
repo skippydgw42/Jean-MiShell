@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   JeanMiShell.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:59:28 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/04/28 16:14:20 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/05 15:32:59 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,14 @@ void	ft_cd(char *str, t_env *lstenv);
 void	ft_pwd(void);
 int		ft_env(t_data *data);
 int		ft_export(char *str, t_data *data);
-void		ft_unset(char *str, t_data *data);
+void	ft_unset(char *str, t_data *data);
 
+/****************************************/
+/*---------------PARSING----------------*/
+/****************************************/
+int		ft_quotes(char *str, int q);
+char	**ft_parsing(char *str);
+char	*ft_subcpy(char *str, int q);
+int		ft_nargs(char *str, int q);
 
 #endif

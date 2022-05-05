@@ -30,6 +30,8 @@ ADD_WITHOUT_PATH =	\
 					free_lstenv.c
 
 PARSING_WITHOUT_PATH = \
+					pars_utils.c \
+					parsing.c \
 
 OBJS_SRCS_WITHOUT_PATH = $(SRCS_WITHOUT_PATH:.c=.o)
 OBJS_BUILTINS_WITHOUT_PATH = $(BUILTINS_WITHOUT_PATH:.c=.o)
