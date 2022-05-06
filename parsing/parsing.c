@@ -1,34 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.c                                           :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/19 17:47:24 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/05/05 15:32:17 by mdegraeu         ###   ########.fr       */
+/*   Created: 2022/04/26 13:32:20 by mdegraeu          #+#    #+#             */
+/*   Updated: 2022/05/05 15:30:26 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclds/JeanMiShell.h"
 
-void	ft_prompt(void)
+char	**ft_parsing(char *str)
 {
-	char *str;
-	char **test;
+	int	q;
+	int	i;
+	int	j;
+	int	k;
+	char	**args;
 
-	while (1)
+	q = 0;
+	i = 0;
+	j = 0;
+	k = ft_nargs(str, q);
+	args = malloc(sizeof(char *) * (k + 1));
+	while (j < k)
 	{
-		str = readline(GREEN "Jean_MiShell>> " WHITE);
-		if (ft_strlen(str))
-			add_history(str);
-		test = ft_parsing(str);
-		int	i = 0;
-		while (test[i])
-		{
-			printf("%s\n", test[i]);
-			i++;
-		}
-		free(str);
+		args[j] = ft_subcpy(&str[i], q);
+		i = ft_strlen(args[j]) + i + 1;
+		j++;
 	}
+	args[j] = 0;
+	return (args);
 }
