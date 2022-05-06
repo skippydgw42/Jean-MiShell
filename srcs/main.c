@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:58:35 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/05/05 15:33:31 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/05/06 09:22:52 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@ void	ft_text_color(int i)
 int	main(int ac, char **av, char **env)
 {
 	t_data	*data;
+	int		i;
+
 	(void)ac;
 	(void)av;
-
 	data = malloc(sizeof(t_data));
 	if (!data)
 	{

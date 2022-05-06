@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 11:35:15 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/04/28 15:40:45 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/04/29 14:26 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,25 +28,31 @@ static int	ft_size_lst(t_data *data)
 	return (i);
 }
 
-static int	ft_print(t_data *data, char *str)
+static void	ft_print(t_data *data, char *str)
 {
-	data->lstenv = data->start;
-	while (data->lstenv)
+	t_env	*env;
+
+	env = data->start;
+	while (env)
 	{
-		if (ft_strcmp(data->lstenv->varName, str) == 0)
+		if (ft_strcmp(env->varname, str) == 0)
 		{
-			if (data->lstenv->is_export == true)
-				printf("declare -x %s=\"%s\"\n", data->lstenv->varName,
-						data->lstenv->value);
+			if (env->is_export == true)
+			{
+				if (env->value)
+				{
+					printf("declare -x %s=\"%s\"\n", env->varname, env->value);
+				}
+				else
+					printf("declare -x %s\n", env->varname);
+			}
 			break ;
 		}
-		data->lstenv = data->lstenv->next;
+		env = env->next;
 	}
-	data->lstenv = data->start;
-	return (EXIT_SUCCESS);
 }
 
-static int	ft_print_export(t_data *data)
+static void	ft_print_export(t_data *data)
 {
 	char	*buff;
 	char	*was_print;
@@ -61,13 +67,13 @@ static int	ft_print_export(t_data *data)
 		buff = NULL;
 		while (data->lstenv)
 		{
-			if (ft_strcmp(buff, data->lstenv->varName) >= 0)
+			if (ft_strcmp(buff, data->lstenv->varname) >= 0)
 			{
 				if (was_print == NULL || strcmp(was_print,
-						data->lstenv->varName) < 0)
+						data->lstenv->varname) < 0)
 				{
 					free(buff);
-					buff = ft_strdup(data->lstenv->varName);
+					buff = ft_strdup(data->lstenv->varname);
 				}
 			}
 			data->lstenv = data->lstenv->next;
@@ -80,62 +86,119 @@ static int	ft_print_export(t_data *data)
 		nb_print++;
 	}
 	free(was_print);
-	return (EXIT_SUCCESS);
 }
 
-static int	ft_already_export(char **split, t_data *data)
+static int	ft_already_export(char *varname, char *value, t_data *data)
 {
-	data->lstenv = data->start;
-	while (data->lstenv)
+	t_env	*env;
+
+	env = data->start;
+	while (env)
 	{
-		if (ft_strcmp(split[0], data->lstenv->varName) == 0)
+		if (ft_strcmp(varname, env->varname) == 0)
 		{
-			if (data->lstenv->value)
-				free(data->lstenv->value);
-			data->lstenv->value = ft_strdup(split[1]);
-			ft_free_dstr(split);
-			data->lstenv = data->start;
+			if (value)
+			{
+				free(env->value);
+				env->value = ft_strdup(value);
+				free(value);
+			}
+			free(varname);
 			return (true);
 		}
-		data->lstenv = data->lstenv->next;
+		env = env->next;
 	}
 	return (false);
 }
 
-// Si export n'a pas d'argument, il faut passer str = NULL a la fonction
-int	ft_export(char *str, t_data *data)
+char	*ft_get_varname(char *str)
 {
-	char	**split;
-	int		i;
 	char	*ptr;
+
+	ptr = ft_strchr(str, '=');
+	if (!ptr)
+		return (ft_strdup(str));
+	return (ft_substr(str, 0, ptr - str));
+}
+
+char	*ft_get_value(char *str)
+{
+	char	*ptr;
+
+	ptr = ft_strchr(str, '=');
+	if (!ptr)
+		return (NULL);
+	return (ft_substr(str, ptr - str + 1, ft_strlen(ptr)));
+}
+
+void	ft_add_back(char *varname, char *value, t_data *data)
+{
+	t_env	*env;
+	t_env	*buff;
 	t_env	*new;
+
+	env = data->start;
+	buff = NULL;
+	while (env)
+	{
+		buff = env;
+		env = env->next;
+	}
+	new = malloc(sizeof(t_env));
+	if (!new)
+	{
+		perror("Error:");
+		exit(errno);
+	}
+	new->varname = ft_strdup(varname);
+	free(varname);
+	new->value = ft_strdup(value);
+	free(value);
+	new->next = NULL;
+	new->is_export = true;
+	buff->next = new;
+}
+
+int	ft_export_str(char *str, t_data *data)
+{
+	char	*varname;
+	char	*value;
+
+	varname = ft_get_varname(str);
+	if (ft_check_varname(varname) == false)
+	{
+		printf("Jean_MiShell: export: `%s': not a valid identifier", varname);
+		exit(errno);
+	}
+	value = ft_get_value(str);
+	if (ft_already_export(varname, value, data) == true)
+	{
+		return (EXIT_SUCCESS);
+	}
+	ft_add_back(varname, value, data);
+	return (EXIT_SUCCESS);
+}
+
+int	ft_export(char **str, t_data *data)
+{
+	int	i;
 
 	i = 0;
 	if (str)
 	{
-		split = ft_split(str, '=');
-		if (ft_already_export(split, data) == true)
-			return (EXIT_SUCCESS);
-		new = malloc(sizeof(t_env));
-		if (!new)
+		while (str[i])
 		{
-			perror("Error:");
-			exit(errno);
+			ft_export_str(str[i], data);
+			i++;
 		}
-		new->varName = ft_strdup(split[0]);
-		new->value = ft_strdup(split[1]);
-		if (new->value == NULL)
-			new->value = "";
-		new->is_export = true;
-		new->next = NULL;
-		data->lstenv = data->start;
-		while (data->lstenv->next)
-			data->lstenv = data->lstenv->next;
-		data->lstenv->next = new;
-		ft_free_dstr(split);
-		data->lstenv = data->start;
 	}
 	else
 		ft_print_export(data);
 	return (EXIT_SUCCESS);
 }
+
+//NOTE Si export n'a pas d'argument, il faut passer str = NULL a la fonction
+//NOTE export luca -> luca
+//NOTE export luca="" -> luca=""
+//NOTE	export luca (avec luca="qch" dans env) alors rien
+//NOTE	export affichage d'erreur quand le noms des var commence par un numero
