@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   JeanMiShell.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:59:28 by ltrinchi          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/05/06 08:29:51 by ltrinchi         ###   ########lyon.fr   */
-=======
-/*   Updated: 2022/05/05 15:32:59 by mdegraeu         ###   ########.fr       */
->>>>>>> 48204ca62e8ad906c52a6945463d5b87d4b70ad7
+/*   Updated: 2022/05/06 09:23:04 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
