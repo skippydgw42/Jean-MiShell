@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:58:35 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/05/06 09:22:52 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/06 10:43:23 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(int ac, char **av, char **env)
 	}
 	data->lstenv = ft_set_lstenv(env);
 	data->start = data->lstenv;
-	ft_prompt();
+	ft_prompt(data);
 	ft_free_lstenv(data);
 	return (0);
 }

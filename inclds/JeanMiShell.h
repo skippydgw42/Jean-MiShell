@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:59:28 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/05/06 10:39:46 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/05/06 12:05:24 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,13 @@ typedef struct s_env
 	struct s_env	*next;
 }	t_env;
 
+typedef struct s_args
+{
+	char			*str;
+	int				flag;
+	struct s_args	*next;
+}	t_args;
+
 typedef struct s_data
 {
 	t_env	*lstenv;
@@ -70,7 +77,7 @@ int		ft_check_varname(char *varname);
 /****************************************/
 /*----------------SRCS------------------*/
 /****************************************/
-void	ft_prompt(void);
+void	ft_prompt(t_data *data);
 t_env	*ft_set_lstenv(char **env);
 
 /****************************************/
