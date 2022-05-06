@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:24:42 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/04/26 12:15:07 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/05 16:51:15 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_env *ft_set_lstenv(char **env)
 			perror("Error:");
 			exit(errno);
 		}
-		new->varName = ft_strdup(split[0]);
+		new->varname = ft_strdup(split[0]);
 		new->value = ft_strdup(split[1]);
 		new->is_export = true;
 		ft_free_dstr(split);

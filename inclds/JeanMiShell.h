@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:59:28 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/04/28 16:14:20 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/06 08:29:51 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef enum e_boolean
 // Structures
 typedef struct s_env
 {
-	char			*varName;
+	char			*varname;
 	char			*value;
 	t_boolean		is_export;
 	struct s_env	*next;
@@ -65,6 +65,7 @@ typedef struct s_data
 /****************************************/
 int		ft_free_dstr(char **str);
 int		ft_free_lstenv(t_data *data);
+int		ft_check_varname(char *varname);
 
 /****************************************/
 /*----------------SRCS------------------*/
@@ -79,8 +80,8 @@ void	ft_echo(char *str, int flag);
 void	ft_cd(char *str, t_env *lstenv);
 void	ft_pwd(void);
 int		ft_env(t_data *data);
-int		ft_export(char *str, t_data *data);
-void		ft_unset(char *str, t_data *data);
+int		ft_export(char **str, t_data *data);
+void	ft_unset(char *str, t_data *data);
 
 
 #endif

@@ -27,7 +27,8 @@ BUILTINS_WITHOUT_PATH = \
 
 ADD_WITHOUT_PATH =	\
 					free_dstr.c \
-					free_lstenv.c
+					free_lstenv.c \
+					check_varname.c
 
 PARSING_WITHOUT_PATH = \
 

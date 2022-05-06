@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:58:35 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/04/29 14:52:17 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/05 16:31:19 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@ void	ft_text_color(int i)
 int	main(int ac, char **av, char **env)
 {
 	t_data	*data;
+	int		i;
+
 	(void)ac;
 	(void)av;
-
 	data = malloc(sizeof(t_data));
 	if (!data)
 	{
@@ -35,7 +36,6 @@ int	main(int ac, char **av, char **env)
 	data->lstenv = ft_set_lstenv(env);
 	data->start = data->lstenv;
 
-	ft_export(NULL, data);
 	ft_free_lstenv(data);
 	return (0);
 }

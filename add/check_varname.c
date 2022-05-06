@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_lstenv.c                                      :+:      :+:    :+:   */
+/*   check_varName.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/25 12:09:52 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/05/06 08:30:11 by ltrinchi         ###   ########lyon.fr   */
+/*   Created: 2022/05/05 14:28:00 by ltrinchi          #+#    #+#             */
+/*   Updated: 2022/05/05 16:46:36 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclds/JeanMiShell.h"
 
-int	ft_free_lstenv(t_data *data)
+int	ft_check_varname(char *varname)
 {
-	t_env	*ptr;
+	int	i;
 
-	while (data->lstenv)
+	i = 0;
+	if (!ft_isalpha(varname[0]) && varname[0] != '_')
 	{
-		ptr = data->lstenv;
-		if (ptr->varname)
-			free(ptr->varname);
-		if (ptr->value)
-			free(ptr->value);
-		data->lstenv = data->lstenv->next;
-		free(ptr);
+		return (false);
 	}
-	free(data);
-	return (EXIT_SUCCESS);
+	while (varname[i])
+	{
+		if (!ft_isalnum(varname[i]) && varname[i] != '_')
+		{
+			return (false);
+		}
+		i++;
+	}
+	return (true);
 }
