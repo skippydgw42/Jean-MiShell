@@ -30,6 +30,7 @@ ADD_WITHOUT_PATH =	\
 					free_lstenv.c
 
 PARSING_WITHOUT_PATH = \
+					prepars_utils.c \
 					pars_utils.c \
 					parsing.c \
 

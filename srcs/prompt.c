@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 17:47:24 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/05/05 15:32:17 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/05/05 16:45:44 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,15 @@
 void	ft_prompt(void)
 {
 	char *str;
-	char **test;
+	t_data *data;
 
 	while (1)
 	{
 		str = readline(GREEN "Jean_MiShell>> " WHITE);
 		if (ft_strlen(str))
 			add_history(str);
-		test = ft_parsing(str);
-		int	i = 0;
-		while (test[i])
-		{
-			printf("%s\n", test[i]);
-			i++;
-		}
+		if (!ft_parsing(data, str))
+			printf("error\n");
 		free(str);
 	}
 }

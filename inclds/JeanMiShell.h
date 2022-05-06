@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:59:28 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/05/05 15:32:59 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/05/05 16:43:59 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,10 @@ void	ft_unset(char *str, t_data *data);
 /*---------------PARSING----------------*/
 /****************************************/
 int		ft_quotes(char *str, int q);
-char	**ft_parsing(char *str);
 char	*ft_subcpy(char *str, int q);
 int		ft_nargs(char *str, int q);
+int		ft_is_close(char *str);
+char	**ft_preparsing(char *str);
+char	**ft_parsing(t_data *data, char *str);
 
 #endif
