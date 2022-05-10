@@ -34,6 +34,7 @@ PARSING_WITHOUT_PATH = \
 					prepars_utils.c \
 					pars_utils.c \
 					parsing.c \
+					postpars.c \
 
 OBJS_SRCS_WITHOUT_PATH = $(SRCS_WITHOUT_PATH:.c=.o)
 OBJS_BUILTINS_WITHOUT_PATH = $(BUILTINS_WITHOUT_PATH:.c=.o)

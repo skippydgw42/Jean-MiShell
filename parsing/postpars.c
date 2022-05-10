@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 14:22:36 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/05/06 15:57:25 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/05/09 18:42:09 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,48 +67,93 @@ int	ft_rollst(t_env *lst, char *str)
 		if (!ft_strcmp(to_find, lst->varname))
 		{
 			free(to_find);
-			return (ft_strlen(lst->value));
+			return (1);
 		}
 		lst = lst->next;
 	}
 	return (0);
 }
 
-char	*ft_replace(t_data *data, char *str)
+void	ft_rcpy(t_data *data, char *str, char *dst)
 {
-	int		i;
-	int		val;
-	int		name;
-	char	*dst;
-
-	val = ft_rollst(data->lstenv, str);
-	if (val)
-		name = ft_strlen(data->lstenv->varname);
-	else
-		name = 0;
-	dst = malloc(sizeof(char) * (ft_strlen(str) - name + val));
-	
-}
-
-t_args	*ft_postpars(t_data *data, char **str)
-{
-	int		i;
-	int		j;
-	t_args	*args;
+	int	i;
+	int	j;
+	int	k;
 
 	i = 0;
 	j = 0;
+	k = 0;
 	while (str[i])
 	{
-		if (ft_needreplace(str[i]))
+		if (str[i] == '$')
 		{
-			ft_rollst(data->lstenv, str[i]);
-			args->str = ft_replace(data->lstenv, str[i]);
+			if (ft_rollst(data->lstenv, str))
+			{
+				while (data->lstenv->value[j])
+					dst[k++] = data->lstenv->value[j++];
+			}
+			while (str[i] && str[i] != ' ')
+				i++;
+			data->lstenv = data->start;
 		}
 		else
-			args->str = ft_strdup(str[i]);
-		free(str[i]);
+			dst[k++] = str[i++];
+	}
+	dst[k] = '\0';
+}
+
+int	ft_finddellen(char *str)
+{
+	int	i;
+	int	del;
+
+	i = 0;
+	del = 0;
+	while (str[i])
+	{
+		if (str[i] == '$')
+			while (str[i] && str[i] != ' ')
+			{
+				del++;
+				i++;
+			}
+		else
+			i++;
+	}
+	return (del);
+}
+
+int	ft_findaddlen(t_data *data, char *str)
+{
+	int	i;
+	int	add;
+
+	i = 0;
+	add = 0;
+	while (str[i])
+	{
+		if (str[i] == '$')
+		{
+			ft_rollst(data->lstenv, str);
+			add = add + ft_strlen(data->lstenv->value);
+			data->lstenv = data->start;
+		}
 		i++;
 	}
-	return (args);
+	data->lstenv = data->start;
+	return (add);
+}
+
+void	ft_replace(t_data *data, t_args *args)
+{
+	int		addlen;
+	int		dellen;
+	char	*dst;
+
+	addlen = ft_findaddlen(data, args->str);
+	dellen = ft_finddellen(args->str);
+	dst = malloc(sizeof(char) * (ft_strlen(args->str) - dellen + addlen));
+	ft_rcpy(data, args->str, dst);
+	free(args->str);
+	args->str = dst;
 }

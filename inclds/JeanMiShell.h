@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:59:28 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/05/06 12:05:24 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/05/09 18:37:06 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct s_data
 {
 	t_env	*lstenv;
 	t_env	*start;
+	t_args	*lstargs;
 }	t_data;
 
 /****************************************/
@@ -97,7 +98,11 @@ int		ft_quotes(char *str, int q);
 char	*ft_subcpy(char *str, int q);
 int		ft_nargs(char *str, int q);
 int		ft_is_close(char *str);
-char	**ft_preparsing(char *str);
-char	**ft_parsing(t_data *data, char *str);
+void	ft_preparsing(t_args **lstargs, char *str);
+int		ft_parsing(t_data *data, char *str);
+void	ft_postpars(t_data *data);
+
+int		ft_needreplace(char *str);
+void	ft_replace(t_data *data, t_args *args);
 
 #endif
