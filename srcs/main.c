@@ -6,19 +6,12 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:58:35 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/05/10 11:37:24 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 16:18:08 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclds/JeanMiShell.h"
 
-void	ft_text_color(int i)
-{
-	if (i == 1)
-	{
-		printf(GREEN);
-	}
-}
 
 void	ft_signal_handler(int sig)
 {
@@ -33,6 +26,7 @@ int	main(int ac, char **av, char **env)
 	t_data	*data;
 	int		i;
 
+
 	(void)ac;
 	(void)av;
 	signal(SIGQUIT, SIG_IGN);
@@ -45,6 +39,10 @@ int	main(int ac, char **av, char **env)
 	}
 	data->lstenv = ft_set_lstenv(env);
 	data->start = data->lstenv;
+	tcgetattr(STDIN_FILENO, &data->saved);
+	tcgetattr(STDIN_FILENO, &data->attributes);
+	data->attributes.c_lflag &= ~ ECHOCTL;
+	tcsetattr(STDIN_FILENO, TCSAFLUSH, &data->attributes);
 	ft_prompt(data);
 	ft_free_lstenv(data);
 	return (0);

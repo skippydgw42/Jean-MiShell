@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   JeanMiShell.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:59:28 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/05/09 18:37:06 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/05/10 14:54:46 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,11 @@ typedef struct s_args
 
 typedef struct s_data
 {
-	t_env	*lstenv;
-	t_env	*start;
-	t_args	*lstargs;
+	t_env			*lstenv;
+	t_env			*start;
+	t_args			*lstargs;
+	struct termios	saved;
+	struct termios	attributes;
 }	t_data;
 
 /****************************************/
@@ -74,6 +76,7 @@ typedef struct s_data
 int		ft_free_dstr(char **str);
 int		ft_free_lstenv(t_data *data);
 int		ft_check_varname(char *varname);
+void	ft_exit(t_data *data);
 
 /****************************************/
 /*----------------SRCS------------------*/

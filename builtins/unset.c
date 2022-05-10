@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 15:58:28 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/05/06 09:34:35 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/10 14:58:17 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_unset(char **varnames, t_data *data)
 		{
 			printf("Jean_MiShell: export: `%s': not a valid identifier",
 					varnames[i]);
-			exit(errno);
+			ft_exit(data);
 		}
 		ft_unset_str(varnames[i], data);
 		i++;
