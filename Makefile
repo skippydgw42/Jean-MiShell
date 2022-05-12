@@ -33,6 +33,7 @@ ADD_WITHOUT_PATH =	\
 PARSING_WITHOUT_PATH = \
 					prepars_utils.c \
 					pars_utils.c \
+					postpars_utils.c \
 					parsing.c \
 					postpars.c \
 

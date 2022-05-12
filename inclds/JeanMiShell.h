@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:59:28 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/05/09 18:37:06 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/05/11 11:18:45 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	ft_unset(char **str, t_data *data);
 /****************************************/
 /*---------------PARSING----------------*/
 /****************************************/
-int		ft_quotes(char *str, int q);
+int		ft_quotes(char c, int q);
 char	*ft_subcpy(char *str, int q);
 int		ft_nargs(char *str, int q);
 int		ft_is_close(char *str);
@@ -104,5 +104,11 @@ void	ft_postpars(t_data *data);
 
 int		ft_needreplace(char *str);
 void	ft_replace(t_data *data, t_args *args);
+char	*ft_find_varname(char *str, int q);
+int		ft_finddellen(char *str);
+int		ft_findaddlen(t_data *data, char *str);
+int		ft_rollst(t_env **lst, char *str, int q);
+int		ft_separator(char c);
+
 
 #endif

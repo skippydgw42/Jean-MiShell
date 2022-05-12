@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 13:32:20 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/05/09 18:39:12 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/05/10 14:18:56 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_postpars(t_data *data)
 	{
 		if (ft_needreplace(data->lstargs->str))
 			ft_replace(data, data->lstargs);
-		else
+		// else
 			// ft_supquotes(data->lstargs);
 		data->lstargs = data->lstargs->next;
 	}
@@ -61,15 +61,19 @@ void	ft_postpars(t_data *data)
 
 int	ft_parsing(t_data *data, char *str)
 {
+	t_args	*start;
+
 	data->lstargs = NULL;
 	if (ft_is_close(str))
 		return (0);
 	ft_preparsing(&data->lstargs, str);
 	ft_postpars(data);
+	start = data->lstargs;
 	while (data->lstargs)
 	{
 		printf("%s\n", data->lstargs->str);
 		data->lstargs = data->lstargs->next;
 	}
+	data->lstargs = start;
 	return (1);
 }

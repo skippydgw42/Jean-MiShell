@@ -1,38 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pars_utils.c                                       :+:      :+:    :+:   */
+/*   prepars_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:29:25 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/05/05 15:30:22 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/05/10 17:33:06 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclds/JeanMiShell.h"
 
-int	ft_quotes(char *str, int q)
+int	ft_quotes(char c, int q)
 {
 	if (q == 0)
 	{
-		if (str[0] == '\'')
+		if (c == '\'')
 			q = 1;
-		else if (str[0] == '\"')
+		else if (c == '\"')
 			q = 2;
 	}
 	else if (q == 1)
 	{
-		if (str[0] == '\'' && (!str[1] || str[1] == ' '))
+		if (c == '\'')
 			q = 0;
-		else if (str[0] == '\'' && str[1] == '\"')
+		else if (c == '\'')
 			q = 2;
 	}
 	else if (q == 2)
 	{
-		if (str[0] == '\"' && (!str[1] || str[1] == ' '))
+		if (c == '\"')
 			q = 0;
-		else if (str[0] == '\"' && str[1] == '\'')
+		else if (c == '\"')
 			q = 1;
 	}
 	return (q);
@@ -47,11 +47,11 @@ int	ft_nargs(char *str, int q)
 	ct = 1;
 	while (str[i])
 	{
-		q = ft_quotes(&str[i], q);
+		q = ft_quotes(str[i], q);
 		if (q == 0 && str[i] == ' ')
 		{
 			ct++;
-			while (str[i] && (ft_quotes(&str[i + 1], q) == 0 && str[i] == ' '))
+			while (str[i] && (ft_quotes(str[i + 1], q) == 0 && str[i] == ' '))
 				i++;
 		}
 		i++;
@@ -66,10 +66,10 @@ int	ft_sublen(char *str, int q)
 	i = 0;
 	while (str[i])
 	{
-		q = ft_quotes(&str[i], q);
+		q = ft_quotes(str[i], q);
 		if (q == 0 && str[i] == ' ')
 		{
-			while (ft_quotes(&str[i], q) == 0 && str[i] == ' ')
+			while (ft_quotes(str[i], q) == 0 && str[i] == ' ')
 				i++;
 			break ;
 		}
@@ -87,7 +87,7 @@ char	*ft_subcpy(char *str, int q)
 	dst = malloc(sizeof(char) * (ft_sublen(str, q) + 1));
 	while (str[i])
 	{
-		q = ft_quotes(&str[i], q);
+		q = ft_quotes(str[i], q);
 		if (q == 0 && str[i] == ' ')
 		{
 			i++;

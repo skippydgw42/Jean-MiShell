@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 16:42:35 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/05/05 16:43:48 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/05/10 17:33:19 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_is_close(char *str)
 	q = 0;
 	while (str[i])
 	{
-		q = ft_quotes(&str[i], q);
+		q = ft_quotes(str[i], q);
 		i++;
 	}
 	return (q);
