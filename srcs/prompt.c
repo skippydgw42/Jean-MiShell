@@ -3,10 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 17:47:24 by mdegraeu          #+#    #+#             */
 /*   Updated: 2022/05/10 13:43:48 by mdegraeu         ###   ########.fr       */
+=======
+/*   Updated: 2022/05/10 15:33:55 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +25,14 @@ void	ft_prompt(t_data *data)
 			add_history(str);
 		if (!ft_parsing(data, str))
 			printf("error\n");
-		if (!ft_strcmp(data->lstargs->str, "export"))
+		else if (str == NULL)
 		{
-			while (data->lstargs)
-			{
-				ft_export(&data->lstargs->next->str, data);
-				data->lstargs = data->lstargs->next;
-			}
+			printf("exit\n"); //NOTE Gestion de ctrl-d
+			ft_exit(0);
 		}
-		else if (!ft_strcmp(data->lstargs->str, "export") && !data->lstargs->next)
-		{
-			while (data->lstenv)
-			{
-				printf("%s\n", data->lstenv->value);
-				data->lstenv = data->lstenv->next;
-			}
-		}
-		data->lstenv = data->start;
+		// ft_export(str, data);
+		// if (!ft_parsing(data, str))
+			// printf("error\n");
 		free(str);
 	}
 }
