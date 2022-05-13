@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 13:32:20 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/05/10 14:18:56 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/05/13 13:37:38 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,14 @@ int	ft_parsing(t_data *data, char *str)
 	if (ft_is_close(str))
 		return (0);
 	ft_preparsing(&data->lstargs, str);
-	ft_postpars(data);
 	start = data->lstargs;
+	ft_flag(data->lstargs);
 	while (data->lstargs)
 	{
-		printf("%s\n", data->lstargs->str);
+		printf("str: %s\nflag: %d\n",data->lstargs->str, data->lstargs->flag);
 		data->lstargs = data->lstargs->next;
 	}
+	ft_postpars(data);
 	data->lstargs = start;
 	return (1);
 }

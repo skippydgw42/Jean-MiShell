@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   JeanMiShell.h                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/16 15:59:28 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/05/12 13:21:46 by mdegraeu         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef JEANMISHELL_H
 # define JEANMISHELL_H
 
@@ -38,6 +26,10 @@
 # define CYAN "\033[0;36m"
 # define WHITE "\033[0;37m"
 # define GREEN "\033[0;32m"
+
+# define CMD_F 0
+# define REDIR_F 1
+# define STR_F 2
 
 typedef enum e_boolean
 {
@@ -112,6 +104,7 @@ int		ft_finddellen(char *str);
 int		ft_findaddlen(t_data *data, char *str);
 int		ft_rollst(t_env **lst, char *str, int q);
 int		ft_separator(char c);
+void	ft_flag(t_args *args);
 
 
 #endif

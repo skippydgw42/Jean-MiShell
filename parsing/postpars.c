@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 14:22:36 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/05/11 16:15:52 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/05/12 13:54:44 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,9 @@ void	ft_rcpy(t_data *data, char *str, char *dst, int q)
 				i++;
 		}
 		else if ((prev_q == 0 && q == 2) || (prev_q == 2 && q == 0))
-				i++;
+			i++;
 		else if ((prev_q == 0 && q == 1) || (prev_q == 1 && q == 0))
-				i++;
+			i++;
 		else
 			dst[j++] = str[i++];
 	}

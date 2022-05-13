@@ -37,6 +37,7 @@ PARSING_WITHOUT_PATH = \
 					postpars_utils.c \
 					parsing.c \
 					postpars.c \
+					check_flag.c \
 
 OBJS_SRCS_WITHOUT_PATH = $(SRCS_WITHOUT_PATH:.c=.o)
 OBJS_BUILTINS_WITHOUT_PATH = $(BUILTINS_WITHOUT_PATH:.c=.o)
@@ -82,8 +83,8 @@ RM = rm -rf
 PATH_TO_LIBFT = ./libft/
 LIBFT_A = $(PATH_TO_LIBFT)libft.a
 READLINE_LIB = -lreadline
-READLINE_HOMEBREW_LIB = -L ~/homebrew/opt/readline/lib
-READLINE_HOMEBREW_INCLUDE = -I ~/homebrew/opt/readline/include
+READLINE_HOMEBREW_LIB = -L ~/.brew/opt/readline/lib
+READLINE_HOMEBREW_INCLUDE = -I ~/.brew/opt/readline/include
 	###################
 
 	#################################

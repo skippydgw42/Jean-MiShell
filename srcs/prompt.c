@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 17:47:24 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/05/10 13:43:48 by mdegraeu         ###   ########.fr       */
-=======
-/*   Updated: 2022/05/10 15:33:55 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/12 13:42:19 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../inclds/JeanMiShell.h"
 
