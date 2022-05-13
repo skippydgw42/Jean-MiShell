@@ -129,7 +129,7 @@ $(OBJS_PARSING):$(PATH_TO_OBJS)%.o	: $(PATH_TO_PARSING)%.c Makefile $(HEADER) $(
 	printf "\033[2K\r$(YELLOW)⏳ Compiling:$(WHITE) $< 🤞"
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(OBJS_EXEC):$(PATH_TO_OBJS)%.o	: $(PATH_TO_EXEC)%.c Makefile $(HEADER) $(LIBFT_A)
+$(OBJS_EXEC):$(EXEC_TO_OBJS)%.o	: $(PATH_TO_EXEC)%.c Makefile $(HEADER) $(LIBFT_A)
 	printf "\033[2K\r$(YELLOW)⏳ Compiling:$(WHITE) $< 🤞"
 	$(CC) $(CFLAGS) -c $< -o $@
 
