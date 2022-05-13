@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:58:35 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/05/12 14:18:16 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/05/13 14:01:37 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,25 @@
 
 void	ft_signal_handler(int sig)
 {
-	printf("\n");
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
+	if (sig == SIGINT)
+	{
+		printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
 }
 
-int	main(int ac, char **av, char **env)
+int main(int ac, char **av, char **env)
 {
-	t_data	*data;
-	int		i;
-
+	t_data *data;
 
 	(void)ac;
 	(void)av;
+
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, ft_signal_handler);
+
 	data = malloc(sizeof(t_data));
 	if (!data)
 	{
@@ -39,11 +42,14 @@ int	main(int ac, char **av, char **env)
 	}
 	data->lstenv = ft_set_lstenv(env);
 	data->start = data->lstenv;
+
 	tcgetattr(STDIN_FILENO, &data->saved);
 	tcgetattr(STDIN_FILENO, &data->attributes);
-	data->attributes.c_lflag &= ~ ECHOCTL;
+	data->attributes.c_lflag &= ~ECHOCTL;
 	tcsetattr(STDIN_FILENO, TCSAFLUSH, &data->attributes);
+
 	ft_prompt(data);
+
 	ft_free_lstenv(data);
 	return (0);
 }
