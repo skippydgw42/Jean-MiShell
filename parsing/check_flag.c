@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 13:35:42 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/05/13 13:38:59 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/05/16 11:36:39 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,22 +42,20 @@ int	ft_analyse_str(char *str)
 	return (STR_F);
 }
 
-void	ft_flag(t_args *lstargs)
+void	ft_flag(t_data *data)
 {
 	int	ret;
-	t_args	*start;
 
-	start = lstargs;
-	while (lstargs)
+	while (data->lstargs)
 	{
-		ret = ft_analyse_str(lstargs->str);
+		ret = ft_analyse_str(data->lstargs->str);
 		if (ret == 0)
-			lstargs->flag = CMD_F;
+			data->lstargs->flag = CMD_F;
 		else if (ret == 1)
-			lstargs->flag = REDIR_F;
+			data->lstargs->flag = REDIR_F;
 		else if (ret == 2)
-			lstargs->flag = STR_F;
-		lstargs = lstargs->next;
+			data->lstargs->flag = STR_F;
+		data->lstargs = data->lstargs->next;
 	}
-	lstargs = start;
+	data->lstargs = data->args_start;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:29:05 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/05/05 16:51:33 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/16 11:33:20 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ int	ft_env(t_data *data)
 		}
 		data->lstenv = data->lstenv->next;
 	}
-	data->lstenv = data->start;
+	data->lstenv = data->env_start;
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:54:28 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/05/11 16:13:12 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/05/16 12:00:22 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	ft_needreplace(char *str)
 {
+	//fonction inutilisée ??
 	int	i;
 	int	q;
 
@@ -112,10 +113,10 @@ int	ft_findaddlen(t_data *data, char *str)
 		{
 			if (ft_rollst(&data->lstenv, &str[i], q))
 				add = add + ft_strlen(data->lstenv->value);
-			data->lstenv = data->start;
+			data->lstenv = data->env_start;
 		}
 		i++;
 	}
-	data->lstenv = data->start;
+	data->lstenv = data->env_start;
 	return (add);
 }

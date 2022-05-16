@@ -17,14 +17,14 @@ static int	ft_size_lst(t_data *data)
 	int	i;
 
 	i = 0;
-	data->lstenv = data->start;
+	data->lstenv = data->env_start;
 	while (data->lstenv)
 	{
 		if (data->lstenv->is_export == true)
 			i++;
 		data->lstenv = data->lstenv->next;
 	}
-	data->lstenv = data->start;
+	data->lstenv = data->env_start;
 	return (i);
 }
 
@@ -32,7 +32,7 @@ static void	ft_print(t_data *data, char *str)
 {
 	t_env	*env;
 
-	env = data->start;
+	env = data->env_start;
 	while (env)
 	{
 		if (ft_strcmp(env->varname, str) == 0)
@@ -82,7 +82,7 @@ static void	ft_print_export(t_data *data)
 		free(was_print);
 		was_print = ft_strdup(buff);
 		free(buff);
-		data->lstenv = data->start;
+		data->lstenv = data->env_start;
 		nb_print++;
 	}
 	free(was_print);
@@ -92,7 +92,7 @@ static int	ft_already_export(char *varname, char *value, t_data *data)
 {
 	t_env	*env;
 
-	env = data->start;
+	env = data->env_start;
 	while (env)
 	{
 		if (ft_strcmp(varname, env->varname) == 0)
@@ -137,7 +137,7 @@ void	ft_add_back(char *varname, char *value, t_data *data)
 	t_env	*buff;
 	t_env	*new;
 
-	env = data->start;
+	env = data->env_start;
 	buff = NULL;
 	while (env)
 	{

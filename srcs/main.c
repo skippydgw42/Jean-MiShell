@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:58:35 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/05/16 10:22:44 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/16 11:33:08 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int main(int ac, char **av, char **env)
 		return (errno);
 	}
 	data->lstenv = ft_set_lstenv(env);
-	data->start = data->lstenv;
+	data->env_start = data->lstenv;
 
 	// TODO Creer une fonction Init
 	// NOTE Gestion de l'affichage du ^C

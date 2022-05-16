@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 14:22:36 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/05/12 13:54:44 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/05/16 11:34:47 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	ft_paralcpy(t_data *data, char *str, char *dst, int q)
 		while (data->lstenv->value[j])
 			dst[i++] = data->lstenv->value[j++];
 	}
-	data->lstenv = data->start;
+	data->lstenv = data->env_start;
 	return (i);
 }
 

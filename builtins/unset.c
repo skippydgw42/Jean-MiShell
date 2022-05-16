@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 15:58:28 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/05/10 14:58:17 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/16 11:34:12 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static void	ft_unset_str(char *varname, t_data *data)
 				previous->next = env->next;
 			else
 			{
-				data->start = env->next;
-				data->lstenv = data->start;
+				data->env_start = env->next;
+				data->lstenv = data->env_start;
 			}
 			free(env->varname);
 			free(env->value);

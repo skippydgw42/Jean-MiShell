@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 13:32:20 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/05/13 13:37:38 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/05/16 14:07:44 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	ft_preparsing(t_args **lstargs, char *str)
 	prev = NULL;
 	while (n)
 	{
+		while (str[i] == ' ' && ft_quotes(str[i], q) == 0)
+			i++;
 		new = malloc(sizeof(t_args));
 		new->next = 0;
 		if (prev)
@@ -43,38 +45,39 @@ void	ft_postpars(t_data *data)
 {
 	int		i;
 	int		j;
-	t_args	*start;
 
 	i = 0;
 	j = 0;
-	start = data->lstargs;
 	while (data->lstargs)
 	{
-		if (ft_needreplace(data->lstargs->str))
-			ft_replace(data, data->lstargs);
-		// else
-			// ft_supquotes(data->lstargs);
+		ft_replace(data, data->lstargs);
 		data->lstargs = data->lstargs->next;
 	}
-	data->lstargs = start;
+	data->lstargs = data->args_start;
 }
 
 int	ft_parsing(t_data *data, char *str)
 {
-	t_args	*start;
-
 	data->lstargs = NULL;
 	if (ft_is_close(str))
 		return (0);
 	ft_preparsing(&data->lstargs, str);
-	start = data->lstargs;
-	ft_flag(data->lstargs);
+	data->args_start = data->lstargs;
+	printf("\n=========prepars out=========\n");
 	while (data->lstargs)
 	{
-		printf("str: %s\nflag: %d\n",data->lstargs->str, data->lstargs->flag);
+		printf("str: %s\n",data->lstargs->str);
 		data->lstargs = data->lstargs->next;
 	}
+	data->lstargs = data->args_start;
+	ft_flag(data);
 	ft_postpars(data);
-	data->lstargs = start;
+	printf("\n=========postpars out=========\n");
+	while (data->lstargs)
+	{
+		printf("str: %s\n",data->lstargs->str);
+		data->lstargs = data->lstargs->next;
+	}
+	data->lstargs = data->args_start;
 	return (1);
 }

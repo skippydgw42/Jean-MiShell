@@ -56,8 +56,9 @@ typedef struct s_args
 typedef struct s_data
 {
 	t_env			*lstenv;
-	t_env			*start;
+	t_env			*env_start;
 	t_args			*lstargs;
+	t_args			*args_start;
 	struct termios	saved;
 	struct termios	attributes;
 }	t_data;
@@ -104,7 +105,7 @@ int		ft_finddellen(char *str);
 int		ft_findaddlen(t_data *data, char *str);
 int		ft_rollst(t_env **lst, char *str, int q);
 int		ft_separator(char c);
-void	ft_flag(t_args *args);
+void	ft_flag(t_data *data);
 
 
 #endif
