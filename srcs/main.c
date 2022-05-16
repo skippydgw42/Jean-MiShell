@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:58:35 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/05/13 14:01:37 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/05/16 10:22:44 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int main(int ac, char **av, char **env)
 	data->lstenv = ft_set_lstenv(env);
 	data->start = data->lstenv;
 
+	// TODO Creer une fonction Init
+	// NOTE Gestion de l'affichage du ^C
 	tcgetattr(STDIN_FILENO, &data->saved);
 	tcgetattr(STDIN_FILENO, &data->attributes);
 	data->attributes.c_lflag &= ~ECHOCTL;
