@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:38:54 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/05/18 12:05:23 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/18 13:42:22 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 // NOTE La fonction retourne -1 en cas de PB (error: pipe|close|fork)
 // NOTE La fonction retourne -2 dans le cas du ctrl-c
 // NOTE La fonction retourne le fd du heredoc si tout est OK
-
-// FIXME Lors de ctrl-c affichage en double du prompte
-// TODO Revoir le code pour le faire plus propre (principalement sur les valeurs de retour)
 
 static void ft_exit_signal(int sig)
 {
