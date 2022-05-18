@@ -3,14 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 17:47:24 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/05/16 11:37:01 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/05/18 11:37:06 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclds/JeanMiShell.h"
+
+#define BUFFER_SIZE 42
+
+void	ft_read(int	fd)
+{
+	char 	buff[BUFFER_SIZE + 1];
+	int		i;
+
+	i = 1;
+	while (i)
+	{
+		i = read(fd, buff, BUFFER_SIZE);
+		if (i < 0)
+		{
+			exit(errno);
+		}
+		buff[i] = 0;
+		printf("%s", buff);
+	}
+}
 
 void ft_prompt(t_data *data)
 {
@@ -26,8 +46,13 @@ void ft_prompt(t_data *data)
 			printf("exit\n"); // NOTE Gestion de ctrl-d
 			ft_exit(0);
 		}
-		if (!ft_parsing(data, str))
-			printf("error\n");
+		
+		int	fd;
+		fd = ft_heredoc(str);
+		if (fd > 0)
+			ft_read(fd);
+		// if (!ft_parsing(data, str))
+		// printf("error\n");
 		// ft_export(str, data);
 		// if (!ft_parsing(data, str))
 		// printf("error\n");
