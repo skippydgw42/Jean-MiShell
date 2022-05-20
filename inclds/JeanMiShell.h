@@ -27,9 +27,13 @@
 # define WHITE "\033[0;37m"
 # define GREEN "\033[0;32m"
 
-# define CMD_F 0
-# define REDIR_F 1
-# define STR_F 2
+# define PIPE_F 0
+# define CMD_F 1
+# define BUILT_F 2
+# define REDIR_F 3
+# define HD_F 4
+# define FILE_F 5
+# define STR_F 6
 
 typedef enum e_boolean
 {
@@ -67,7 +71,7 @@ typedef struct s_data
 /*-----------------ADD------------------*/
 /****************************************/
 int		ft_free_dstr(char **str);
-int		ft_free_lstenv(t_data *data);
+int		ft_free_data(t_data *data);
 int		ft_check_varname(char *varname);
 void	ft_exit(t_data *data);
 
@@ -91,8 +95,8 @@ void	ft_unset(char **str, t_data *data);
 /*---------------PARSING----------------*/
 /****************************************/
 int		ft_quotes(char c, int q);
-char	*ft_subcpy(char *str, int q);
-int		ft_nargs(char *str, int q);
+void	ft_subcpy(t_args *new, char *str);
+int		ft_nargs(char *str);
 int		ft_is_close(char *str);
 void	ft_preparsing(t_args **lstargs, char *str);
 int		ft_parsing(t_data *data, char *str);
@@ -105,7 +109,12 @@ int		ft_finddellen(char *str);
 int		ft_findaddlen(t_data *data, char *str);
 int		ft_rollst(t_env **lst, char *str, int q);
 int		ft_separator(char c);
-void	ft_flag(t_data *data);
 
+char	*ft_cpytopipe(char *str, int q);
+int		ft_lentopipe(char *str, int q);
+int		ft_npipe(char *str);
+void	ft_secondsplitlst(t_args *lstargs);
+
+void	ft_flag(t_data *data);
 
 #endif

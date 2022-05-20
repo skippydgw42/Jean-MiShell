@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_lstenv.c                                      :+:      :+:    :+:   */
+/*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/25 12:09:52 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/05/06 08:30:11 by ltrinchi         ###   ########lyon.fr   */
+/*   Created: 2022/05/20 14:50:21 by mdegraeu          #+#    #+#             */
+/*   Updated: 2022/05/20 15:26:10 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclds/JeanMiShell.h"
 
-int	ft_free_lstenv(t_data *data)
+int	ft_exec(t_data *data)
 {
-	t_env	*ptr;
+	int	error_return;
 
-	while (data->lstenv)
-	{
-		ptr = data->lstenv;
-		if (ptr->varname)
-			free(ptr->varname);
-		if (ptr->value)
-			free(ptr->value);
-		data->lstenv = data->lstenv->next;
-		free(ptr);
-	}
-	free(data);
-	return (EXIT_SUCCESS);
+	error_return = 0;
+	ft_built();
+	return (error_return);
 }

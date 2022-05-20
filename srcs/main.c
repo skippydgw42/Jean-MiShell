@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:58:35 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/05/16 11:33:08 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/05/20 15:23:59 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,6 @@ int main(int ac, char **av, char **env)
 
 	ft_prompt(data);
 
-	ft_free_lstenv(data);
+	ft_free_data(data);
 	return (0);
 }
