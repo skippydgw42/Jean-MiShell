@@ -73,6 +73,7 @@ typedef struct s_data
 int		ft_free_dstr(char **str);
 int		ft_free_data(t_data *data);
 int		ft_check_varname(char *varname);
+void	ft_signal_handler(int sig);
 void	ft_exit(t_data *data);
 
 /****************************************/
@@ -80,6 +81,7 @@ void	ft_exit(t_data *data);
 /****************************************/
 void	ft_prompt(t_data *data);
 t_env	*ft_set_lstenv(char **env);
+int		ft_heredoc(char *delimiter);
 
 /****************************************/
 /*--------------BUILTINS----------------*/

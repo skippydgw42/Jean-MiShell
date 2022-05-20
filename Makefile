@@ -16,6 +16,7 @@ SRCS_WITHOUT_PATH = \
 					main.c	\
 					prompt.c \
 					set_lstenv.c \
+					heredoc.c
 
 BUILTINS_WITHOUT_PATH = \
 					echo.c	\
@@ -29,7 +30,8 @@ ADD_WITHOUT_PATH =	\
 					free_dstr.c \
 					free_lstenv.c \
 					check_varname.c \
-					ft_exit.c
+					signal_handler.c \
+					exit.c
 
 PARSING_WITHOUT_PATH = \
 					prepars_utils.c \
@@ -81,7 +83,7 @@ HEADER = $(addprefix $(PATH_TO_HEADER), $(HEADER_WITHOUT_PATH))
 	##### COMMANDS ######
 CC = gcc
 # CFLAGS = -Wall -Wextra -Werror -g
-CFLAGS = -g
+CFLAGS =
 RM = rm -rf
 	#####################
 
@@ -114,9 +116,11 @@ $(PATH_TO_OBJS):
 rsc:
 	make -C $(PATH_TO_LIBFT)
 
+$(LIBFT_A): rsc
+
 $(OBJS_SRCS):$(PATH_TO_OBJS)%.o	: $(PATH_TO_SRCS)%.c Makefile $(HEADER) $(LIBFT_A)
 	printf "\033[2K\r$(YELLOW)⏳ Compiling:$(WHITE) $< 🤞"
-	$(CC) $(CFLAGS) -c $< -o $@ $(READLINE_HOMEBREW_INCLUDE)
+	$(CC) $(CFLAGS) -c $< -o $@ 
 
 $(OBJS_BUILTINS):$(PATH_TO_OBJS)%.o	: $(PATH_TO_BUILTINS)%.c Makefile $(HEADER) $(LIBFT_A)
 	printf "\033[2K\r$(YELLOW)⏳ Compiling:$(WHITE) $< 🤞"
@@ -124,7 +128,7 @@ $(OBJS_BUILTINS):$(PATH_TO_OBJS)%.o	: $(PATH_TO_BUILTINS)%.c Makefile $(HEADER) 
 
 $(OBJS_ADD):$(PATH_TO_OBJS)%.o	: $(PATH_TO_ADD)%.c Makefile $(HEADER) $(LIBFT_A)
 	printf "\033[2K\r$(YELLOW)⏳ Compiling:$(WHITE) $< 🤞"
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(READLINE_HOMEBREW_INCLUDE) -c $< -o $@
 
 $(OBJS_PARSING):$(PATH_TO_OBJS)%.o	: $(PATH_TO_PARSING)%.c Makefile $(HEADER) $(LIBFT_A)
 	printf "\033[2K\r$(YELLOW)⏳ Compiling:$(WHITE) $< 🤞"

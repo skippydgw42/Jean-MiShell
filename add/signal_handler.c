@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   signal_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/11 14:11:36 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/05/17 15:54:28 by ltrinchi         ###   ########lyon.fr   */
+/*   Created: 2022/05/17 15:55:35 by ltrinchi          #+#    #+#             */
+/*   Updated: 2022/05/17 16:26:48 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../inclds/JeanMiShell.h"
 
-void	ft_putstr_fd(char *s, int fd)
+void	ft_signal_handler(int sig)
 {
-	int	i;
-
-	i = 0;
-	if (!s)
-		return ;
-	while (s[i])
+	if (sig == SIGINT)
 	{
-		write(fd, &s[i], 1);
-		i++;
+		printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
 	}
 }
