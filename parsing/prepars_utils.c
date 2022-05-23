@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:29:25 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/05/20 17:29:24 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/05/23 10:44:25 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,16 +122,17 @@ void	ft_splitlst(t_args *lstargs, int n)
 	ft_replacestr(lstargs);
 }
 
-void	ft_secondsplitlst(t_args *lstargs)
+void	ft_secondsplitlst(t_data *data)
 {
 	int	needsplit;
 
-	while (lstargs)
+	while (data->lstargs)
 	{
-		needsplit = ft_needsplit(lstargs->str);
+		needsplit = ft_needsplit(data->lstargs->str);
 		if (needsplit)
-			ft_splitlst(lstargs, needsplit);
+			ft_splitlst(data->lstargs, needsplit);
 		else
-			lstargs = lstargs->next;
+			data->lstargs = data->lstargs->next;
 	}
+	data->lstargs = data->args_start;
 }

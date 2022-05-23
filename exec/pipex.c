@@ -5,29 +5,29 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/21 13:29:49 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/03/21 15:18:54 by mdegraeu         ###   ########.fr       */
+/*   Created: 2022/05/23 11:12:35 by mdegraeu          #+#    #+#             */
+/*   Updated: 2022/05/23 11:18:41 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#include "../inclds/JeanMiShell.h"
 
-int	exec_process(t_struct *vars)
+int	ft_exec_process(t_pipex *vars)
 {
 	char	**cflags;
 
-	cflags = get_flags(vars->f_cmd[vars->i]);
+	cflags = ft_get_flags(vars->f_cmd[vars->i]);
 	if (!cflags)
 		return (err_mess("cflags_c Error\n", cflags));
 	if (execve(vars->p_cmd[vars->i], cflags, vars->env) == -1)
 	{
-		free_doubleptr(cflags);
+		ft_free_dstr(cflags);
 		exit (p_error("C_Process: Command not found"));
 	}
 	return (1);
 }
 
-int	pipexec(t_struct *vars)
+int	ft_pipexec(t_pipex *vars)
 {
 	if (vars->i == 0)
 	{
@@ -46,12 +46,12 @@ int	pipexec(t_struct *vars)
 		dup2(vars->fd, STDOUT_FILENO);
 		close(vars->fd);
 	}
-	close_pipe(vars);
-	exec_process(vars);
+	ft_close_pipe(vars);
+	ft_exec_process(vars);
 	return (1);
 }
 
-int	pipex(t_struct *vars)
+int	ft_pipex(t_pipex *vars)
 {
 	int	pid;
 
@@ -73,7 +73,7 @@ int	pipex(t_struct *vars)
 				if (vars->fd < 0)
 					return (0);
 			}
-			pipexec(vars);
+			ft_pipexec(vars);
 		}
 		vars->i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 13:32:20 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/05/20 17:58:48 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/05/23 10:44:30 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	ft_presplitpipe(t_args **lstargs, char *str)
 	i = 0;
 	n = ft_npipe(str);
 	prev = NULL;
-	printf("npipe: %d\n", n);
 	while (n)
 	{
 		while (str[i] == ' ' && ft_quotes(str[i], q) == 0)
@@ -62,21 +61,12 @@ int	ft_parsing(t_data *data, char *str)
 	data->lstargs = NULL;
 	if (ft_is_close(str))
 		return (0);
-	printf("\n=========presplit out=========\n");
 	ft_presplitpipe(&data->lstargs, str);
 	data->args_start = data->lstargs;
-
-	printf("\n=========prepars out=========\n");
-	ft_secondsplitlst(data->lstargs);
-	data->lstargs = data->args_start;
-
-	printf("\n=============flag=============\n");
+	ft_secondsplitlst(data);
 	ft_flag(data);
-	data->lstargs = data->args_start;
-
-	printf("\n=========postpars out=========\n");
-	//leaks dans ft_replace dans ft_postpars
 	ft_postpars(data);
+	printf("\n=========PARSING OUT==========\n");
 	while (data->lstargs)
 	{
 		printf("str: %s      flag: %d\n",data->lstargs->str, data->lstargs->flag);

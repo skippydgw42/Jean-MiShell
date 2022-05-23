@@ -57,6 +57,20 @@ typedef struct s_args
 	struct s_args	*next;
 }	t_args;
 
+typedef struct s_pipex
+{
+	int		ac;
+	char	**files;
+	char	**env;
+	char	**f_cmd;
+	char	**p_cmd;
+	int		*array;
+	int		arr_size;
+	int		nb_pipe;
+	int		i;
+	int		fd;
+}	t_pipex;
+
 typedef struct s_data
 {
 	t_env			*lstenv;
@@ -116,8 +130,12 @@ int		ft_separator(char c);
 char	*ft_cpytopipe(char *str, int q);
 int		ft_lentopipe(char *str, int q);
 int		ft_npipe(char *str);
-void	ft_secondsplitlst(t_args *lstargs);
+void	ft_secondsplitlst(t_data *data);
 
 void	ft_flag(t_data *data);
 
+/****************************************/
+/*-----------------EXEC-----------------*/
+/****************************************/
+int		ft_exec(t_data *data);
 #endif

@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 14:22:36 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/05/20 18:00:09 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/05/23 10:37:47 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,5 @@ void	ft_replace(t_data *data, t_args *args)
 	ft_rcpy(data, args->str, dst, 0);
 	free(args->str);
 	args->str = NULL;
-	args->str = ft_strdup(dst);
-	// exit(EXIT_SUCCESS);
+	args->str = dst;
 }

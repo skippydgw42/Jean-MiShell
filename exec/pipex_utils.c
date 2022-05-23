@@ -1,49 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   pipex_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/25 13:42:35 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/03/09 18:22:03 by mdegraeu         ###   ########.fr       */
+/*   Created: 2022/05/23 11:15:37 by mdegraeu          #+#    #+#             */
+/*   Updated: 2022/05/23 11:17:36 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#include "../inclds/JeanMiShell.h"
 
-int	hm_cmd(char **cmd)
+void	ft_close_pipe(t_pipex *vars)
 {
 	int	i;
 
 	i = 0;
-	while (cmd[i])
+	while (i < vars->arr_size)
+	{
+		close(vars->array[i]);
 		i++;
-	return (i + 1);
+	}
 }
 
-char	*split_flags(char *av)
+char	**ft_cflags_null(void)
 {
-	char	*str;
-	int		i;
-	int		j;
+	char	**flags;
 
-	i = 0;
-	while (av[i] == ' ' && av[i])
-		i++;
-	j = i;
-	while (av[i] != ' ' && av[i])
-		i++;
-	str = malloc(sizeof(char) * (i - j + 1));
-	if (!str)
+	flags = malloc(sizeof(char *) * 1);
+	if (!flags)
 		return (NULL);
-	i = 0;
-	while (av[j] != ' ' && av[j])
-	{
-		str[i] = av[j];
-		i++;
-		j++;
-	}
-	str[i] = '\0';
-	return (str);
+	flags[0] = NULL;
+	return (flags);
+}
+
+char	**ft_get_flags(char *av)
+{
+	char	**flags;
+
+	if (ft_strlen(av) == 0)
+		return (cflags_null());
+	flags = ft_split(av, ' ');
+	if (!flags)
+		return (NULL);
+	return (flags);
 }
