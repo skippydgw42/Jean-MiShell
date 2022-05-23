@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 14:22:36 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/05/16 11:34:47 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/05/20 18:00:09 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,4 +102,5 @@ void	ft_replace(t_data *data, t_args *args)
 	free(args->str);
 	args->str = NULL;
 	args->str = ft_strdup(dst);
+	// exit(EXIT_SUCCESS);
 }

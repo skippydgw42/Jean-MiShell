@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:24:32 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/05/20 15:24:33 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/05/20 15:54:50 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ int	ft_free_lstenv(t_data *data)
 
 int	ft_free_data(t_data *data)
 {
-	ft_free_lstargs(data);
+	// ft_free_lstargs(data);
 	ft_free_lstenv(data);
 	free(data);
+	return (EXIT_SUCCESS);
 }

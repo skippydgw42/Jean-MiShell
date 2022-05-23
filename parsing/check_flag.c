@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 13:35:42 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/05/20 14:24:10 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/05/20 17:57:36 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,39 @@ t_args	*ft_genericflags(t_args *lstargs, t_args *set)
 	return (lstargs);
 }
 
+void	ft_cmdfileflags(t_args *lstargs)
+{
+	t_args	*set;
+
+	while (lstargs)
+	{
+		set = lstargs;
+		while (lstargs->next && lstargs->flag != PIPE_F)
+		{
+			if (set->flag == CMD_F || set->flag == BUILT_F)
+				lstargs = lstargs->next;
+			else if (lstargs->flag == REDIR_F)
+			{
+				lstargs->next->flag = FILE_F;
+				lstargs = set;
+				while (lstargs)
+				{
+					if (lstargs->flag != REDIR_F && lstargs->flag != FILE_F)
+					{
+						lstargs->flag = CMD_F;
+						set = lstargs;
+						break ;
+					}
+					lstargs = lstargs->next;
+				}
+			}
+			else
+				lstargs = lstargs->next;
+		}
+		lstargs = lstargs->next;
+	}
+}
+
 void	ft_flag(t_data *data)
 {
 	t_args	*set;
@@ -58,15 +91,9 @@ void	ft_flag(t_data *data)
 	while (data->lstargs)
 	{
 		set = data->lstargs;
-		printf("set: %s\n", set->str);
 		data->lstargs = ft_genericflags(data->lstargs, set);
 	}
 	data->lstargs = data->args_start;
+	ft_cmdfileflags(data->lstargs);
+	data->lstargs = data->args_start;
 }
-
-// parcourir lst
-// set les flags des pipes
-// reparcourir la chaine
-// voir si j'ai des redir avant le |
-// si non -> lst[0] = built ou cmd et la suite sont ses args
-// si redir : ?

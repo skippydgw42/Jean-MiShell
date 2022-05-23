@@ -28,7 +28,7 @@ BUILTINS_WITHOUT_PATH = \
 
 ADD_WITHOUT_PATH =	\
 					free_dstr.c \
-					free_lstenv.c \
+					free_data.c \
 					check_varname.c \
 					signal_handler.c \
 					exit.c
