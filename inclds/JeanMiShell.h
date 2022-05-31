@@ -59,16 +59,18 @@ typedef struct s_args
 
 typedef struct s_pipex
 {
-	int		ac;
-	char	**files;
-	char	**env;
-	char	**f_cmd;
-	char	**p_cmd;
-	int		*array;
-	int		arr_size;
-	int		nb_pipe;
+	// int		ac;
+	// char	**files;
+	// char	**f_cmd;
+	// char	**p_cmd;
+	// int		*array;
+	// int		arr_size;
+	// int		fd;
 	int		i;
-	int		fd;
+	int		nb_pipe;
+	char	**env;
+	char	**path_cmd;
+	char	**flags_cmd;
 }	t_pipex;
 
 typedef struct s_data
@@ -138,4 +140,7 @@ void	ft_flag(t_data *data);
 /*-----------------EXEC-----------------*/
 /****************************************/
 int		ft_exec(t_data *data);
+void	ft_free_pipex_struct(t_pipex *src);
+int		ft_nb_of_pipe(t_data *data);
+
 #endif

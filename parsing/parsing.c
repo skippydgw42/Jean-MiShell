@@ -1,12 +1,12 @@
-/* ************************************************************************** */
+// /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 13:32:20 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/05/23 10:44:30 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/05/31 11:16:54 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,18 +60,18 @@ int	ft_parsing(t_data *data, char *str)
 {
 	data->lstargs = NULL;
 	if (ft_is_close(str))
-		return (0);
+		return (false);
 	ft_presplitpipe(&data->lstargs, str);
 	data->args_start = data->lstargs;
 	ft_secondsplitlst(data);
 	ft_flag(data);
 	ft_postpars(data);
-	printf("\n=========PARSING OUT==========\n");
-	while (data->lstargs)
-	{
-		printf("str: %s      flag: %d\n",data->lstargs->str, data->lstargs->flag);
-		data->lstargs = data->lstargs->next;
-	}
-	data->lstargs = data->args_start;
-	return (1);
+	// printf("\n=========PARSING OUT==========\n");
+	// while (data->lstargs)
+	// {
+		// printf("str: \"%s\"      flag: %d\n",data->lstargs->str, data->lstargs->flag);
+		// data->lstargs = data->lstargs->next;
+	// }
+	// data->lstargs = data->args_start;
+	return (true);
 }

@@ -42,8 +42,10 @@ PARSING_WITHOUT_PATH = \
 					postpars.c \
 					check_flag.c \
 
-EXEC_WITHOUT _PATH = \
+EXEC_WITHOUT_PATH = \
 					exec.c \
+					free_pipex_struct.c \
+					nb_of_pipe.c
 
 OBJS_SRCS_WITHOUT_PATH = $(SRCS_WITHOUT_PATH:.c=.o)
 OBJS_BUILTINS_WITHOUT_PATH = $(BUILTINS_WITHOUT_PATH:.c=.o)
@@ -84,7 +86,7 @@ HEADER = $(addprefix $(PATH_TO_HEADER), $(HEADER_WITHOUT_PATH))
 	##### COMMANDS ######
 CC = gcc
 # CFLAGS = -Wall -Wextra -Werror -g
-CFLAGS =
+CFLAGS = -g
 RM = rm -rf
 	#####################
 
@@ -135,7 +137,7 @@ $(OBJS_PARSING):$(PATH_TO_OBJS)%.o	: $(PATH_TO_PARSING)%.c Makefile $(HEADER) $(
 	printf "\033[2K\r$(YELLOW)⏳ Compiling:$(WHITE) $< 🤞"
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(OBJS_EXEC):$(EXEC_TO_OBJS)%.o	: $(PATH_TO_EXEC)%.c Makefile $(HEADER) $(LIBFT_A)
+$(OBJS_EXEC):$(PATH_TO_OBJS)%.o	: $(PATH_TO_EXEC)%.c Makefile $(HEADER) $(LIBFT_A)
 	printf "\033[2K\r$(YELLOW)⏳ Compiling:$(WHITE) $< 🤞"
 	$(CC) $(CFLAGS) -c $< -o $@
 
