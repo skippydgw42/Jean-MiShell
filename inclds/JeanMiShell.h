@@ -61,8 +61,6 @@ typedef struct s_pipex
 {
 	// int		ac;
 	// char	**files;
-	// char	**f_cmd;
-	// char	**p_cmd;
 	// int		*array;
 	// int		arr_size;
 	// int		fd;

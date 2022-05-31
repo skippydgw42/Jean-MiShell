@@ -64,22 +64,15 @@ int	ft_parsing(t_data *data, char *str)
 	ft_presplitpipe(&data->lstargs, str);
 	data->args_start = data->lstargs;
 	ft_secondsplitlst(data);
-	// ft_thirdsplitlst(data);
-	printf("\n=========THIRD OUT==========\n");
+	ft_thirdsplitlst(data);
+	ft_flag(data);
+	ft_postpars(data);
+	printf("\n=========PARSING OUT==========\n");
 	while (data->lstargs)
 	{
-		printf("str: %s.      flag: %d\n",data->lstargs->str, data->lstargs->flag);
+		printf("str: \"%s\"      flag: %d\n",data->lstargs->str, data->lstargs->flag);
 		data->lstargs = data->lstargs->next;
 	}
 	data->lstargs = data->args_start;
-	ft_flag(data);
-	ft_postpars(data);
-	// printf("\n=========PARSING OUT==========\n");
-	// while (data->lstargs)
-	// {
-		// printf("str: \"%s\"      flag: %d\n",data->lstargs->str, data->lstargs->flag);
-		// data->lstargs = data->lstargs->next;
-	// }
-	// data->lstargs = data->args_start;
 	return (true);
 }

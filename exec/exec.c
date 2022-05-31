@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 14:50:21 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/05/31 11:39:20 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/31 15:24:19 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,26 +97,67 @@ static	char	*ft_take_path(char *cmd, char **env)
 		i++;
 		free(path);
 	}
+	ft_free_tab_char(list_path);
 	return (NULL);
 }
 
-char **ft_get_path_cmd(t_data *data, int nb_pipe, char **env)
+char **ft_get_path_cmd(t_data *data, int nb_cmd, char **env)
 {
 	int		i;
 	char	**rtn;
 	t_args	*start;
 
 	i = 0;
-	rtn = ft_calloc(nb_pipe + 1, sizeof(char *));
+	rtn = ft_calloc(nb_cmd + 1, sizeof(char *));
+	if (rtn == NULL)
+		return (NULL);
+	start = data->args_start;
+	while (start)
+	{
+		// FIXME Supprimer start->flags == STR_R car ajout a cause d'un bug dans le parsing
+		if (start->flag == CMD_F || start->flag == STR_F)
+		{
+			rtn[i] = ft_take_path(start->str, env);
+		}
+		if (start->flag == PIPE_F)
+		{
+			i++;
+		}
+		start = start->next;
+	}
+	return (rtn);
+}
+
+char	**ft_get_flags_cmd(t_data *data, int nb_cmd)
+{
+	int		i;
+	char	**rtn;
+	char	*ptr;
+	t_args	*start;
+
+	i = 0;
+	rtn = ft_calloc(nb_cmd + 1, sizeof(char *));
 	if (rtn == NULL)
 		return (NULL);
 	start = data->args_start;
 	while (start)
 	{
 		if (start->flag == CMD_F)
-		 {
-			printf("%d:%s\n", i, ft_take_path(start->str,env));
-		 }
+		{
+			rtn[i] = ft_strdup(start->str);
+			start = start->next;
+			while (start)
+			{
+				if (start->flag != STR_F)
+					break ;
+				ptr = rtn[i];
+				rtn[i] = ft_strjoin(rtn[i], start->str);
+				free(ptr);
+				start = start->next;
+			}
+		}
+		if (!start)
+			break ;
 		if (start->flag == PIPE_F)
 			i++;
 		start = start->next;
@@ -128,23 +169,38 @@ t_pipex *ft_init_struct_pipex(t_data *data)
 {
 	t_pipex *rtn;
 
+	// NOTE Allocation de la memoire pour la struct
 	rtn = malloc(sizeof(t_pipex));
 	if (rtn == NULL)
 		return (rtn);
-	
+
+	// NOTE Init les var d'env
 	rtn->env = ft_set_env(data);
 	if (rtn->env == NULL)
 	{
 		ft_free_pipex_struct(rtn);
 		return (NULL);
 	}
+
+	// NOTE Init le nombre de pipe
 	rtn->nb_pipe = ft_nb_of_pipe(data);
-	rtn->path_cmd = ft_get_path_cmd(data, rtn->nb_pipe, rtn->env);
+
+	// NOTE	Init les paths vers les commandes
+	rtn->path_cmd = ft_get_path_cmd(data, rtn->nb_pipe + 1, rtn->env);
 	if (rtn->path_cmd == NULL)
 	{
 		ft_free_pipex_struct(rtn);
 		return (NULL);
 	}
+
+	// NOTE Init les flags des commandes
+	rtn->flags_cmd = ft_get_flags_cmd(data, rtn->nb_pipe + 1);
+	if (rtn->flags_cmd == NULL)
+	{
+		ft_free_pipex_struct(rtn);
+		return (NULL);
+	}
+
 	return (rtn);
 }
 
@@ -153,11 +209,11 @@ int ft_exec(t_data *data)
 	t_pipex *vars;
 
 	// TODO initialiser la structures
-	
+
 	vars = ft_init_struct_pipex(data);
 	if (vars == NULL)
 		return (false);
-
+	ft_free_pipex_struct(vars);
 
 	// TODO Initialiser les pipes
 	// ft_init_pipex();
