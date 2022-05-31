@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 17:47:24 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/05/20 17:24:50 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/05/31 11:40:04 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,21 @@ void ft_prompt(t_data *data)
 			printf("exit\n"); // NOTE Gestion de ctrl-d
 			ft_exit(0);
 		}
-		ft_parsing(data, str);
+		// if (ft_parsing(data, str) == true)
+			// ft_exec(data);
+
 		ft_free_lstargs(data);
-		
-		int	fd;
-		// fd = ft_heredoc(str);
-		// if (fd > 0)
-			// ft_read(fd);
-		// if (!ft_parsing(data, str))
-		// printf("error\n");
-		// ft_export(str, data);
-		// if (!ft_parsing(data, str))
-		// printf("error\n");
 		free(str);
 	}
 }
+
+//   NOTE HEREDOC
+// int	fd;
+// fd = ft_heredoc(str);
+// if (fd > 0)
+// ft_read(fd);
+// if (!ft_parsing(data, str))
+// printf("error\n");
+// ft_export(str, data);
+// if (!ft_parsing(data, str))
+// printf("error\n");
