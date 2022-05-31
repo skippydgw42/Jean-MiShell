@@ -41,6 +41,8 @@ PARSING_WITHOUT_PATH = \
 					parsing.c \
 					postpars.c \
 					check_flag.c \
+					pars_err.c \
+					thirdsplit.c
 
 EXEC_WITHOUT_PATH = \
 					exec.c \

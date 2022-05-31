@@ -6,7 +6,11 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 13:32:20 by mdegraeu          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/05/31 11:16:54 by ltrinchi         ###   ########lyon.fr   */
+=======
+/*   Updated: 2022/05/31 11:39:09 by mdegraeu         ###   ########.fr       */
+>>>>>>> becd0627e9c398932daaacb869b2f51883ea1aa2
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +68,14 @@ int	ft_parsing(t_data *data, char *str)
 	ft_presplitpipe(&data->lstargs, str);
 	data->args_start = data->lstargs;
 	ft_secondsplitlst(data);
+	// ft_thirdsplitlst(data);
+	printf("\n=========THIRD OUT==========\n");
+	while (data->lstargs)
+	{
+		printf("str: %s.      flag: %d\n",data->lstargs->str, data->lstargs->flag);
+		data->lstargs = data->lstargs->next;
+	}
+	data->lstargs = data->args_start;
 	ft_flag(data);
 	ft_postpars(data);
 	// printf("\n=========PARSING OUT==========\n");
