@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 13:35:42 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/05/20 17:57:36 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/05/30 13:32:13 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ t_args	*ft_genericflags(t_args *lstargs, t_args *set)
 	redir = 0;
 	while (lstargs)
 	{
+		if (!ft_strcmp(lstargs->str, "|") && lstargs->next)
+			lstargs = lstargs->next;
 		lstargs->flag = ft_piperedir_flags(lstargs->str);
 		if (lstargs->flag == REDIR_F || lstargs->flag == HD_F)
 			redir = 1;
@@ -62,7 +64,7 @@ void	ft_cmdfileflags(t_args *lstargs)
 		{
 			if (set->flag == CMD_F || set->flag == BUILT_F)
 				lstargs = lstargs->next;
-			else if (lstargs->flag == REDIR_F)
+			else if (lstargs->flag == REDIR_F && lstargs->next->flag != REDIR_F)
 			{
 				lstargs->next->flag = FILE_F;
 				lstargs = set;

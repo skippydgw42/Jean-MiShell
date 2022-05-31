@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 11:22:18 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/05/23 11:25:33 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/05/23 14:20:55 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,29 +81,6 @@ int	paths_cmd(t_pipex *vars)
 		free(main_cmd);
 	}
 	vars->p_cmd[i] = 0;
-	return (1);
-}
-
-int	init_struct(int ac, char **av, char **env, t_pipex *vars)
-{
-	vars->i = 0;
-	vars->ac = ac - 1;
-	vars->nb_pipe = vars->ac - 3;
-	vars->arr_size = vars->nb_pipe * 2;
-	if (!get_files(av, vars))
-		return (0);
-	if (!get_paths(env, vars))
-		return (0);
-	if (!flags_cmd(av, vars))
-		return (0);
-	vars->p_cmd = malloc(sizeof(char *) * (vars->ac));
-	if (!vars->p_cmd)
-		return (0);
-	if (!paths_cmd(vars))
-		return (0);
-	vars->array = malloc(sizeof(int) * (vars->arr_size));
-	if (!vars->array)
-		return (0);
 	return (1);
 }
 

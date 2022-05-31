@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:29:25 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/05/23 10:44:25 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/05/31 11:38:13 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,12 @@ int	ft_needsplit(char *str)
 		q = ft_quotes(str[i], q);
 		if (q == 0 && str[i] == ' ')
 		{
-			while (str[i] == ' ')
+			if (str[i] == ' ')
+			{
+				while (str[i] == ' ')
+					i++;
+			}
+			else
 				i++;
 			if (str[i])
 				ct++;
@@ -105,7 +110,7 @@ void	ft_splitlst(t_args *lstargs, int n)
 		while (lstargs->str[i])
 		{
 			q = ft_quotes(lstargs->str[i], q);
-			if (lstargs->str[i] == ' ' && q == 0)
+			if (q == 0 && lstargs->str[i] == ' ')
 			{
 				while (lstargs->str[i] == ' ')
 					i++;
@@ -122,6 +127,34 @@ void	ft_splitlst(t_args *lstargs, int n)
 	ft_replacestr(lstargs);
 }
 
+void	ft_delspace(t_args *lstargs)
+{
+	int		i;
+	int		j;
+	int		q;
+	char	*dst;
+
+	i = 0;
+	q = 0;
+	while (lstargs->str[i])
+	{
+		q = ft_quotes(lstargs->str[i], q);
+		if (q == 0 && lstargs->str[i] == ' ')
+			break ;
+		i++;
+	}
+	dst = malloc(sizeof(char) * (i + 1));
+	j = 0;
+	while (j < i)
+	{
+		dst[j] = lstargs->str[j];
+		j++;
+	}
+	dst[j] = '\0';
+	free(lstargs->str);
+	lstargs->str = dst;
+}
+
 void	ft_secondsplitlst(t_data *data)
 {
 	int	needsplit;
@@ -132,7 +165,16 @@ void	ft_secondsplitlst(t_data *data)
 		if (needsplit)
 			ft_splitlst(data->lstargs, needsplit);
 		else
+		{
+			ft_delspace(data->lstargs);
 			data->lstargs = data->lstargs->next;
+		}
+	}
+	data->lstargs = data->args_start;
+	while (data->lstargs)
+	{
+		data->lstargs->flag = ft_piperedir_flags(data->lstargs->str);
+		data->lstargs = data->lstargs->next;
 	}
 	data->lstargs = data->args_start;
 }

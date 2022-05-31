@@ -59,9 +59,6 @@ typedef struct s_args
 
 typedef struct s_pipex
 {
-	int		ac;
-	char	**files;
-	char	**env;
 	char	**f_cmd;
 	char	**p_cmd;
 	int		*array;
@@ -131,8 +128,11 @@ char	*ft_cpytopipe(char *str, int q);
 int		ft_lentopipe(char *str, int q);
 int		ft_npipe(char *str);
 void	ft_secondsplitlst(t_data *data);
-
+void	ft_thirdsplitlst(t_data *data);
 void	ft_flag(t_data *data);
+int		ft_piperedir_flags(char *str);
+
+int		ft_parserr(t_data *data);
 
 /****************************************/
 /*-----------------EXEC-----------------*/
