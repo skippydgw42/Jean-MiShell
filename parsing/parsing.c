@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 13:32:20 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/05/31 11:39:09 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/05/31 13:56:47 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,16 @@ int	ft_parsing(t_data *data, char *str)
 		return (0);
 	ft_presplitpipe(&data->lstargs, str);
 	data->args_start = data->lstargs;
+	printf("\n=========SECOND OUT==========\n");
 	ft_secondsplitlst(data);
-	// ft_thirdsplitlst(data);
+	while (data->lstargs)
+	{
+		printf("str: %s.      flag: %d\n",data->lstargs->str, data->lstargs->flag);
+		data->lstargs = data->lstargs->next;
+	}
+	data->lstargs = data->args_start;
 	printf("\n=========THIRD OUT==========\n");
+	ft_thirdsplitlst(data);
 	while (data->lstargs)
 	{
 		printf("str: %s.      flag: %d\n",data->lstargs->str, data->lstargs->flag);
@@ -73,8 +80,8 @@ int	ft_parsing(t_data *data, char *str)
 	}
 	data->lstargs = data->args_start;
 	ft_flag(data);
-	ft_postpars(data);
 	printf("\n=========PARSING OUT==========\n");
+	ft_postpars(data);
 	while (data->lstargs)
 	{
 		printf("str: %s.      flag: %d\n",data->lstargs->str, data->lstargs->flag);

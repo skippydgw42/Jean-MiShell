@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 16:15:40 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/05/30 17:07:55 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/05/31 13:56:21 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,21 @@ int	ft_nredirsplit(char *str)
 	ct = 0;
 	while (str[i])
 	{
-		q = ft_quotes(str[i], q);
 		if (q == 0 && (str[i] == '>' || str[i] == '<'))
+			while (str[i] && (str[i] == '>' || str[i] == '<'))
+				i++;
+		else
+		{
+			while (str[i])
+			{
+				q = ft_quotes(str[i], q);
+				if (q == 0 && (str[i] == '>' || str[i] == '<'))
+					break ;
+				i++;
+			}
+		}
+		if (str[i])
 			ct++;
-		i++;
 	}
 	return (ct);
 }
@@ -34,15 +45,23 @@ int	ft_nredirsplit(char *str)
 int	ft_setnew(t_args *new, char *str)
 {
 	int	i;
+	int	q;
 	int	cpy;
 
 	i = 0;
+	q = 0;
 	cpy = 0;
 	if (str[i] == '>' || str[i] == '<')
-		i++;
-	else
-		while (str[i] && str[i] != '>' && str[i] != '<')
+		while (str[i] == '>' || str[i] == '<')
 			i++;
+	else
+		while (str[i])
+		{
+			q = ft_quotes(str[i], q);
+			if (q == 0 && (str[i] == '>' && str[i] == '<'))
+				break ;
+			i++;
+		}
 	new->str = malloc(sizeof(char) * (i + 1));
 	while (cpy < i)
 	{
@@ -104,15 +123,41 @@ void	ft_splitbyredir(t_args *lstargs, int n)
 	ft_majlstargs(lstargs);
 }
 
+int	ft_needrsplit(t_args *lstargs)
+{
+	int	i;
+	int	q;
+
+	if (lstargs->flag == STR_F)
+	{
+		while (lstargs->str[i])
+		{
+			q = ft_quotes(lstargs->str[i], q);
+			while (q == 0 && (lstargs->str[i] == '>' || lstargs->str[i] == '<'))
+				i++;
+			if (!lstargs->str[i])
+				return (0);
+			while (lstargs->str[i] && lstargs->str[i] != '>' && lstargs->str[i] != '<')
+				i++;
+			if (lstargs->str[i])
+				return (1);
+			else
+				return (0);
+		}
+	}
+	return (0);
+}
+
 void	ft_thirdsplitlst(t_data *data)
 {
 	int	n;
 
 	while (data->lstargs)
 	{
-		if (data->lstargs->flag == STR_F)
+		if (ft_needrsplit(data->lstargs))
 		{
 			n = ft_nredirsplit(data->lstargs->str);
+			printf("n: %d\n", n);
 			if (n)
 				ft_splitbyredir(data->lstargs, n);
 		}
