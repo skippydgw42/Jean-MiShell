@@ -61,9 +61,6 @@ typedef struct s_args
 typedef struct s_pipex
 {
 	// int		ac;
-	// char	**files;
-	// char	**f_cmd;
-	// char	**p_cmd;
 	// int		*array;
 	// int		arr_size;
 	// int		fd;
@@ -72,6 +69,7 @@ typedef struct s_pipex
 	char	**env;
 	char	**path_cmd;
 	char	**flags_cmd;
+	char	**files;
 }	t_pipex;
 
 typedef struct s_data
