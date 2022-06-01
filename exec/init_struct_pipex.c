@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct_pipex.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:20:36 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/01 11:52:33 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/01 18:41:07 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,8 @@ static	char	*ft_take_path(char *cmd, char **env)
 			ft_free_tab_char(list_path);
 			return (path);
 		}
-		i++;
 		free(path);
+		i++;
 	}
 	ft_free_tab_char(list_path);
 	return (NULL);
@@ -122,15 +122,11 @@ char **ft_get_path_cmd(t_data *data, int nb_cmd, char **env)
 	{
 		// FIXME Supprimer start->flags == STR_R car ajout a cause d'un bug dans le parsing
 		// Ce bug avec STR_F peut engendrer des leaks
-		if (start->flag == CMD_F || start->flag == STR_F)
-		// if (start->flag == CMD_F)
-		{
+		// if (start->flag == CMD_F || start->flag == STR_F)
+		if (start->flag == CMD_F)
 			rtn[i] = ft_take_path(start->str, env);
-		}
 		if (start->flag == PIPE_F)
-		{
 			i++;
-		}
 		start = start->next;
 	}
 	return (rtn);
