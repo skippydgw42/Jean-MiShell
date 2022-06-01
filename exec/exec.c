@@ -6,11 +6,13 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 14:50:21 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/05/31 15:24:19 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/31 15:45:03 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclds/JeanMiShell.h"
+
+// SECTION SET_ENV
 
 static int	ft_size_lst_env(t_data *data)
 {
@@ -50,6 +52,10 @@ char **ft_set_env(t_data *data)
 	}
 	return (rtn);
 }
+
+/////////////////////////////////////////////
+
+// SECTION SET_PATH_CMD
 
 static	char	**ft_split_path(char **env)
 {
@@ -128,6 +134,9 @@ char **ft_get_path_cmd(t_data *data, int nb_cmd, char **env)
 	return (rtn);
 }
 
+/////////////////////////////////////////////
+// SECTION SET_FLAGS_CMD
+
 char	**ft_get_flags_cmd(t_data *data, int nb_cmd)
 {
 	int		i;
@@ -151,6 +160,9 @@ char	**ft_get_flags_cmd(t_data *data, int nb_cmd)
 				if (start->flag != STR_F)
 					break ;
 				ptr = rtn[i];
+				rtn[i] = ft_strjoin(rtn[i], " ");
+				free(ptr);
+				ptr = rtn[i];
 				rtn[i] = ft_strjoin(rtn[i], start->str);
 				free(ptr);
 				start = start->next;
@@ -164,6 +176,31 @@ char	**ft_get_flags_cmd(t_data *data, int nb_cmd)
 	}
 	return (rtn);
 }
+
+/////////////////////////////////////////////
+// SECTION SET FILES
+
+char **ft_get_files(t_data *data, int nb_cmd)
+{
+	int		i;
+	char	**rtn;
+	t_args	*start;
+
+	i = 0;
+	rtn = ft_calloc(nb_cmd + 1, sizeof(char *));
+	if (rtn == NULL)
+		return (NULL);
+	start = data->args_start;
+	while (start)
+	{
+		
+		start = start->next;
+	}
+	
+	return (rtn);
+}
+/////////////////////////////////////////////
+
 
 t_pipex *ft_init_struct_pipex(t_data *data)
 {
@@ -201,6 +238,14 @@ t_pipex *ft_init_struct_pipex(t_data *data)
 		return (NULL);
 	}
 
+	// NOTE init les files
+	rtn->files = ft_get_files(data, rtn->nb_pipe + 1);
+	if (rtn->files == NULL)
+	{
+		ft_free_pipex_struct(rtn);
+		return (NULL);
+	}
+
 	return (rtn);
 }
 
@@ -208,12 +253,17 @@ int ft_exec(t_data *data)
 {
 	t_pipex *vars;
 
-	// TODO initialiser la structures
-
+	// NOTE Init la struct
 	vars = ft_init_struct_pipex(data);
 	if (vars == NULL)
 		return (false);
-	ft_free_pipex_struct(vars);
+
+	int	i = 0;
+	while (vars->flags_cmd[i])
+	{
+		printf("\"%s\"\n", vars->flags_cmd[i]);
+		i++;
+	}
 
 	// TODO Initialiser les pipes
 	// ft_init_pipex();
@@ -224,9 +274,9 @@ int ft_exec(t_data *data)
 	// TODO Execution des commandes
 	// TODO Gestion des redirections
 	// ft_pipex();
-
-	// TODO Free de la structure pipex
-	// ft_free_struct();
+	
+	// NOTE Free la struct de Pipex
+	ft_free_pipex_struct(vars);
 
 	return (true);
 }
