@@ -47,7 +47,10 @@ PARSING_WITHOUT_PATH = \
 EXEC_WITHOUT_PATH = \
 					exec.c \
 					free_pipex_struct.c \
-					nb_of_pipe.c
+					nb_of_pipe.c \
+					init_pipe.c \
+					init_struct_pipex.c	\
+					# pipex.c
 
 OBJS_SRCS_WITHOUT_PATH = $(SRCS_WITHOUT_PATH:.c=.o)
 OBJS_BUILTINS_WITHOUT_PATH = $(BUILTINS_WITHOUT_PATH:.c=.o)

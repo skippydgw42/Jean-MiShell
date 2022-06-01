@@ -27,6 +27,7 @@
 # define WHITE "\033[0;37m"
 # define GREEN "\033[0;32m"
 
+// Define for the parsing
 # define PIPE_F 0
 # define CMD_F 1
 # define BUILT_F 2
@@ -34,6 +35,11 @@
 # define HD_F 4
 # define FILE_F 5
 # define STR_F 6
+
+// Define for init_pipex_struct
+# define INPUT_P 1
+# define OUTPUT_P 2
+# define OUTPUT_APPEND_P 3
 
 typedef enum e_boolean
 {
@@ -57,18 +63,28 @@ typedef struct s_args
 	struct s_args	*next;
 }	t_args;
 
+typedef struct s_redic
+{
+	int		input_type;
+	int		output_type;
+	char	*output_file;
+	char	*input_file;
+}	t_redic;
+
 typedef struct s_pipex
 {
 	// int		ac;
-	// int		*array;
 	// int		arr_size;
-	// int		fd;
 	int		i;
 	int		nb_pipe;
 	char	**env;
 	char	**path_cmd;
 	char	**flags_cmd;
-	char	**files;
+	// char	**files;
+	t_redic	*redic_array;
+	int		*pipe_array;
+	int		*heredoc;
+	int		fd;
 }	t_pipex;
 
 typedef struct s_data
@@ -140,8 +156,11 @@ int		ft_parserr(t_data *data);
 /****************************************/
 /*-----------------EXEC-----------------*/
 /****************************************/
+int		ft_pipex(t_pipex *vars);
 int		ft_exec(t_data *data);
 void	ft_free_pipex_struct(t_pipex *src);
 int		ft_nb_of_pipe(t_data *data);
+int		ft_init_pipe(t_pipex *vars);
+t_pipex *ft_init_struct_pipex(t_data *data);
 
 #endif
