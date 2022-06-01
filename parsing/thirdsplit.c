@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 16:15:40 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/05/31 13:56:21 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/01 12:11:05 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void	ft_splitbyredir(t_args *lstargs, int n)
 	else
 		while (lstargs->str[i] != '>' && lstargs->str[i] != '<')
 			i++;
-	while (n)
+	while (n && lstargs->str[i])
 	{
 		new = malloc(sizeof(t_args));
 		i = i + ft_setnew(new, &lstargs->str[i]);
@@ -128,22 +128,21 @@ int	ft_needrsplit(t_args *lstargs)
 	int	i;
 	int	q;
 
-	if (lstargs->flag == STR_F)
+	while (lstargs->str[i])
 	{
-		while (lstargs->str[i])
-		{
-			q = ft_quotes(lstargs->str[i], q);
-			while (q == 0 && (lstargs->str[i] == '>' || lstargs->str[i] == '<'))
-				i++;
-			if (!lstargs->str[i])
-				return (0);
-			while (lstargs->str[i] && lstargs->str[i] != '>' && lstargs->str[i] != '<')
-				i++;
-			if (lstargs->str[i])
-				return (1);
-			else
-				return (0);
-		}
+		q = ft_quotes(lstargs->str[i], q);
+		while (q == 0 && (lstargs->str[i] == '>' || lstargs->str[i] == '<'))
+			i++;
+		if (!lstargs->str[i])
+			return (0);
+		else
+			return (1);
+		while (lstargs->str[i] && lstargs->str[i] != '>' && lstargs->str[i] != '<')
+			i++;
+		if (lstargs->str[i])
+			return (1);
+		else
+			return (0);
 	}
 	return (0);
 }

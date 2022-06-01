@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 13:35:42 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/05/31 11:44:43 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/01 12:22:59 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ int	ft_piperedir_flags(char *str)
 {
 	if (!ft_strcmp(str, "|"))
 		return (PIPE_F);
-	else if (!ft_strcmp(str, "<") || !strcmp(str, ">") || !ft_strcmp(str, ">>"))
-		return (REDIR_F);
 	else if (!ft_strcmp(str, "<<"))
 		return (HD_F);
+	else if (str[0] == '>' || str[0] == '<')	
+		return (REDIR_F);
 	return (STR_F);
 }
 
@@ -53,6 +53,20 @@ t_args	*ft_genericflags(t_args *lstargs, t_args *set)
 	return (lstargs);
 }
 
+t_args	*ft_setcmdflag(t_args *lstargs, t_args *set)
+{
+	while (lstargs && lstargs->flag != PIPE_F)
+	{
+		if (lstargs->flag == STR_F && set->flag != CMD_F)
+		{
+			lstargs->flag = CMD_F;
+			set = lstargs;
+		}
+		lstargs = lstargs->next;
+	}
+	return (lstargs);
+}
+
 void	ft_cmdfileflags(t_args *lstargs)
 {
 	t_args	*set;
@@ -60,29 +74,18 @@ void	ft_cmdfileflags(t_args *lstargs)
 	while (lstargs)
 	{
 		set = lstargs;
-		while (lstargs->next && lstargs->flag != PIPE_F)
+		while (lstargs && lstargs->flag != PIPE_F)
 		{
-			if (set->flag == CMD_F || set->flag == BUILT_F)
-				lstargs = lstargs->next;
-			else if (lstargs->flag == REDIR_F && lstargs->next->flag != REDIR_F)
-			{
+			if (lstargs && lstargs->flag == REDIR_F && lstargs->next->flag == STR_F)
 				lstargs->next->flag = FILE_F;
-				lstargs = set;
-				while (lstargs)
-				{
-					if (lstargs->flag != REDIR_F && lstargs->flag != FILE_F)
-					{
-						lstargs->flag = CMD_F;
-						set = lstargs;
-						break ;
-					}
-					lstargs = lstargs->next;
-				}
-			}
-			else
-				lstargs = lstargs->next;
+			else if (lstargs && lstargs->flag == HD_F)
+				lstargs->next->flag = DELIM_F;
+			lstargs = lstargs->next;
 		}
-		lstargs = lstargs->next;
+		lstargs = set;
+		lstargs = ft_setcmdflag(lstargs, set);
+		if (lstargs)
+			lstargs = lstargs->next;
 	}
 }
 
@@ -90,11 +93,6 @@ void	ft_flag(t_data *data)
 {
 	t_args	*set;
 
-	while (data->lstargs)
-	{
-		set = data->lstargs;
-		data->lstargs = ft_genericflags(data->lstargs, set);
-	}
 	data->lstargs = data->args_start;
 	ft_cmdfileflags(data->lstargs);
 	data->lstargs = data->args_start;
