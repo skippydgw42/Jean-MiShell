@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 16:15:40 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/01 12:11:05 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/01 13:55:12 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,6 @@ void	ft_thirdsplitlst(t_data *data)
 		if (ft_needrsplit(data->lstargs))
 		{
 			n = ft_nredirsplit(data->lstargs->str);
-			printf("n: %d\n", n);
 			if (n)
 				ft_splitbyredir(data->lstargs, n);
 		}

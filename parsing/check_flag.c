@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 13:35:42 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/01 12:22:59 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/01 14:02:47 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,11 @@ void	ft_cmdfileflags(t_args *lstargs)
 		set = lstargs;
 		while (lstargs && lstargs->flag != PIPE_F)
 		{
-			if (lstargs && lstargs->flag == REDIR_F && lstargs->next->flag == STR_F)
-				lstargs->next->flag = FILE_F;
+			if (lstargs && lstargs->flag == REDIR_F)
+			{
+				if (lstargs->next && lstargs->next->flag == STR_F)
+					lstargs->next->flag = FILE_F;
+			}
 			else if (lstargs && lstargs->flag == HD_F)
 				lstargs->next->flag = DELIM_F;
 			lstargs = lstargs->next;

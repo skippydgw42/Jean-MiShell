@@ -31,6 +31,7 @@ ADD_WITHOUT_PATH =	\
 					free_data.c \
 					check_varname.c \
 					signal_handler.c \
+					err.c \
 					exit.c
 
 PARSING_WITHOUT_PATH = \

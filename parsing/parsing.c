@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 13:32:20 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/01 12:25:07 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/01 13:54:54 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,9 @@ int	ft_parsing(t_data *data, char *str)
 		printf("str: \"%s\"      flag: %d\n",data->lstargs->str, data->lstargs->flag);
 		data->lstargs = data->lstargs->next;
 	}
+	data->lstargs = data->args_start;
+	if (!ft_parserr(data))
+		return (0);
 	data->lstargs = data->args_start;
 	return (true);
 }
