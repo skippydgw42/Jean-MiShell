@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 12:04:12 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/05/30 13:47:41 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/01 12:23:47 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 int	ft_redirerr(t_data *data)
 {
-	int	ct;
+	int	i;
 
-	ct = 0;
 	while (data->lstargs)
 	{
-		if (ct == 3)
-			return (0);
-		else if (ct > 0 && data->lstargs->flag != REDIR_F)
-			ct = 0;
 		if (data->lstargs->flag == REDIR_F)
 		{
-			if (!ft_strcmp(data->lstargs->str, ">>"))
-				ct += 2;
-			else
-				ct++;
+			i = 0;
+			if (data->lstargs->next->flag == REDIR_F)
+				return (0);
+			else if (data->lstargs->next->flag == HD_F)
+				return (0);
+			while (data->lstargs->str[i])
+				i++;
+			if (i > 2)
+				return (0);
 		}
 		data->lstargs = data->lstargs->next;
 	}

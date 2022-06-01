@@ -34,6 +34,7 @@
 # define HD_F 4
 # define FILE_F 5
 # define STR_F 6
+# define DELIM_F 7
 
 typedef enum e_boolean
 {

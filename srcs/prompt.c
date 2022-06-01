@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 17:47:24 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/05/31 11:40:04 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/31 14:08:22 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void ft_prompt(t_data *data)
 			printf("exit\n"); // NOTE Gestion de ctrl-d
 			ft_exit(0);
 		}
-		// if (ft_parsing(data, str) == true)
-			// ft_exec(data);
+		if (ft_parsing(data, str) == true)
+			ft_exec(data);
 
 		ft_free_lstargs(data);
 		free(str);

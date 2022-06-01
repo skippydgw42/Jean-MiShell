@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_pipex_struct.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 09:23:25 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/05/31 11:04:15 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/05/31 14:09:30 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
