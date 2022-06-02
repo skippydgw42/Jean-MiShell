@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 11:12:35 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/02 15:10:40 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/02 16:16:07 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,21 +120,29 @@ int ft_files(t_data *data, t_pipex *vars)
 
 int ft_pipex(t_pipex *vars, t_data *data)
 {
-	int pid;
+	int *arr_pid;
 
 	vars->i = 0;
+	arr_pid = malloc(sizeof(int) * vars->nb_pipe);
+
 	while (vars->i <= vars->nb_pipe)
 	{
-		pid = fork();
+		arr_pid[vars->i] = fork();
 		// TODO Meilleure gestions des erreurs
-		if (pid < 0)
+		if (arr_pid[vars->i] < 0)
 			return (false);
-		if (pid == 0)
+		if (arr_pid[vars->i] == 0)
 		{
 			if (ft_files(data, vars) == false)
 				perror("Error:");
 			ft_pipexec(vars);
 		}
+		vars->i++;
+	}
+	vars->i = 0;
+	while (vars->i < vars->nb_pipe)
+	{
+		waitpid(arr_pid[vars->i], NULL, 0);
 		vars->i++;
 	}
 	return (true);
