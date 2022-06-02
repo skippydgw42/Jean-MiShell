@@ -85,7 +85,8 @@ typedef struct s_pipex
 	t_redic	*redic_array;
 	int		*pipe_array;
 	int		*heredoc;
-	int		fd;
+	int		fd_in;
+	int		fd_out;
 }	t_pipex;
 
 typedef struct s_data
@@ -108,6 +109,7 @@ int		ft_check_varname(char *varname);
 void	ft_signal_handler(int sig);
 int		ft_errmsg(t_args *lstargs);
 void	ft_exit(t_data *data);
+int		ft_errdstr(char *str, char **cflags);
 
 /****************************************/
 /*----------------SRCS------------------*/
@@ -158,11 +160,12 @@ int		ft_parserr(t_data *data);
 /****************************************/
 /*-----------------EXEC-----------------*/
 /****************************************/
-int		ft_pipex(t_pipex *vars);
+int		ft_pipex(t_pipex *vars, t_data *data);
 int		ft_exec(t_data *data);
 void	ft_free_pipex_struct(t_pipex *src);
 int		ft_nb_of_pipe(t_data *data);
 int		ft_init_pipe(t_pipex *vars);
 t_pipex *ft_init_struct_pipex(t_data *data);
-
+void	ft_close_pipe(t_pipex *vars);
+char	**ft_get_flags(char *av);
 #endif

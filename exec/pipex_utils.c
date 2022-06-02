@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 11:15:37 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/05/23 11:17:36 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/02 12:10:20 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	ft_close_pipe(t_pipex *vars)
 	int	i;
 
 	i = 0;
-	while (i < vars->arr_size)
+	while (i < vars->nb_pipe)
 	{
-		close(vars->array[i]);
+		close(vars->pipe_array[i]);
 		i++;
 	}
 }
@@ -40,7 +40,7 @@ char	**ft_get_flags(char *av)
 	char	**flags;
 
 	if (ft_strlen(av) == 0)
-		return (cflags_null());
+		return (ft_cflags_null());
 	flags = ft_split(av, ' ');
 	if (!flags)
 		return (NULL);

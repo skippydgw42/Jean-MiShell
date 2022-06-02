@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:20:36 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/02 08:40:41 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/02 11:54:29 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,7 @@ char	**ft_get_flags_cmd(t_data *data, int nb_cmd)
 /////////////////////////////////////////////
 // SECTION SET FILES
 
-int	ft_get_type(char *str, int *input_type, int *output_type)
+static int	ft_get_type(char *str, int *input_type, int *output_type)
 {
 	if (ft_strcmp(str, "<") == 0)
 	{
@@ -217,6 +217,9 @@ t_redic *ft_get_files(t_data *data, int nb_cmd)
 	start = data->args_start;
 	rtn[i].input_type = 0;
 	rtn[i].output_type = 0;
+	rtn[i].input_file = NULL;
+	rtn[i].output_file = NULL;
+	type = 0;
 	while (start)
 	{
 		if (start->flag == REDIR_F || start->flag == HD_F)
@@ -247,6 +250,8 @@ t_redic *ft_get_files(t_data *data, int nb_cmd)
 			i++;
 			rtn[i].input_type = 0;
 			rtn[i].output_type = 0;
+			rtn[i].input_file = NULL;
+			rtn[i].output_file = NULL;
 		}
 		start = start->next;
 	}
@@ -390,11 +395,15 @@ t_pipex *ft_init_struct_pipex(t_data *data)
 	}
 
 	// NOTE Init array pour les heredocs
-	// rtn->heredoc = ft_init_heredoc(data, rtn->nb_pipe + 1);
-	// if (rtn->heredoc == NULL)
-	// {
-		// ft_free_pipex_struct(rtn);
-	// 	return (NULL);
-	// }
+	rtn->heredoc = ft_init_heredoc(data, rtn->nb_pipe + 1);
+	if (rtn->heredoc == NULL)
+	{
+	ft_free_pipex_struct(rtn);
+		return (NULL);
+	}
+
+	rtn->fd_in = 0;
+	rtn->fd_out = 0;
+	
 	return (rtn);
 }
