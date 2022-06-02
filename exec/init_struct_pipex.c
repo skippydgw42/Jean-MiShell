@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:20:36 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/02 11:54:29 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/02 14:34:24 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -372,19 +372,19 @@ t_pipex *ft_init_struct_pipex(t_data *data)
 		return (NULL);
 	}
 
-	// SECTION TESTEUR pour array_redic
-	int i = 0;
-	while (i < rtn->nb_pipe + 1)
-	{
-		printf("============ARRAY REDIC===========\n");
-		printf("INPUT:\n");
-		printf("	type : %d\n", rtn->redic_array->input_type);
-		printf("	file : %s\n", rtn->redic_array->input_file);
-		printf("OUTPUT:\n");
-		printf("	type : %d\n", rtn->redic_array->output_type);
-		printf("	file : %s\n", rtn->redic_array->output_file);
-		i++;
-	}
+	// // SECTION TESTEUR pour array_redic
+	// int i = 0;
+	// while (i < rtn->nb_pipe + 1)
+	// {
+	// 	printf("============ARRAY REDIC===========\n");
+	// 	printf("INPUT:\n");
+	// 	printf("	type : %d\n", rtn->redic_array->input_type);
+	// 	printf("	file : %s\n", rtn->redic_array->input_file);
+	// 	printf("OUTPUT:\n");
+	// 	printf("	type : %d\n", rtn->redic_array->output_type);
+	// 	printf("	file : %s\n", rtn->redic_array->output_file);
+	// 	i++;
+	// }
 
 	// NOTE Init array pour les pipes
 	rtn->pipe_array = ft_init_pipe_array(data, rtn->nb_pipe);

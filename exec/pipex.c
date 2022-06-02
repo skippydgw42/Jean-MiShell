@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 11:12:35 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/02 12:16:18 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/02 15:10:40 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,29 +31,24 @@ int	ft_pipexec(t_pipex *vars)
 {
 	int	pid;
 
-	if (vars->redic_array->input_type != 0)
-	{
-		dup2(vars->fd_in, STDIN_FILENO);
-		dup2(vars->pipe_array[vars->i * 2 + 1], STDOUT_FILENO);
-		close(vars->fd_in);
-	}
-	if (vars->redic_array->output_type != 0)
-	{
-		pid = fork();
-		if (pid == 0)
-		{
-			dup2(vars->fd_out, STDOUT_FILENO);
-			close(vars->fd_out);
-		}
-		else
-		{
-			dup2(vars->pipe_array[vars->i * 2 - 2], STDIN_FILENO);
-		}
-	}
-	if (vars->redic_array->input_type == 0 && vars->redic_array->output_type == 0)
+	dprintf(2, "%s        ", vars->path_cmd[vars->i]);
+	dprintf(2, "in: %d out: %d\n", vars->redic_array[vars->i].input_type,vars->redic_array[vars->i].output_type );
+	if (vars->redic_array[vars->i].input_type == 0 && vars->redic_array[vars->i].output_type == 0)
 	{
 		dup2(vars->pipe_array[vars->i * 2 - 2], STDIN_FILENO);
 		dup2(vars->pipe_array[vars->i * 2 + 1], STDOUT_FILENO);
+	}
+	if (vars->redic_array[vars->i].input_type != 0)
+	{
+		dup2(vars->fd_in, STDIN_FILENO);
+		close(vars->fd_in);
+	}
+	if (vars->redic_array[vars->i].output_type == 0)
+		dup2(vars->pipe_array[vars->i * 2 + 1], STDOUT_FILENO);
+	else if (vars->redic_array[vars->i].output_type != 0)
+	{
+		dup2(vars->fd_out, STDOUT_FILENO);
+		close(vars->fd_out);
 	}
 	ft_close_pipe(vars);
 	ft_exec_process(vars);
@@ -136,14 +131,9 @@ int ft_pipex(t_pipex *vars, t_data *data)
 			return (false);
 		if (pid == 0)
 		{
-			printf("Childs\n");
-			if (ft_files(data, vars) == false )
+			if (ft_files(data, vars) == false)
 				perror("Error:");
 			ft_pipexec(vars);
-		}
-		else
-		{
-			wait(NULL);
 		}
 		vars->i++;
 	}
