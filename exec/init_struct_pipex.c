@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:20:36 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/01 11:52:33 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/01 16:02:41 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,10 +120,7 @@ char **ft_get_path_cmd(t_data *data, int nb_cmd, char **env)
 	start = data->args_start;
 	while (start)
 	{
-		// FIXME Supprimer start->flags == STR_R car ajout a cause d'un bug dans le parsing
-		// Ce bug avec STR_F peut engendrer des leaks
-		if (start->flag == CMD_F || start->flag == STR_F)
-		// if (start->flag == CMD_F)
+		if (start->flag == CMD_F)
 		{
 			rtn[i] = ft_take_path(start->str, env);
 		}
@@ -185,10 +182,15 @@ char	**ft_get_flags_cmd(t_data *data, int nb_cmd)
 int	ft_get_type(char *str, int *input_type, int *output_type)
 {
 	if (ft_strcmp(str, "<") == 0)
-	 {
+	{
 		*input_type = INPUT_P;
 		return (INPUT_P);
-	 }
+	}
+	if (ft_strcmp(str, "<<") == 0)
+	{
+		*input_type = HEREDOC_P;
+		return (HEREDOC_P);
+	}
 	if (ft_strcmp(str, ">") == 0)
 	{
 		*output_type = OUTPUT_P;
@@ -204,89 +206,54 @@ int	ft_get_type(char *str, int *input_type, int *output_type)
 
 t_redic *ft_get_files(t_data *data, int nb_cmd)
 {
-	int		i;
-	t_redic	*rtn;
-	t_args	*start;
-	t_args	*prev;
-	char	*ptr;
-	// FIXME Too many vars
-	int		type;
+	int i;
+	t_redic *rtn;
+	t_args *start;
+	char *ptr;
+	int type;
 
 	i = 0;
 	rtn = ft_calloc(nb_cmd + 1, sizeof(t_redic));
 	if (rtn == NULL)
 		return (NULL);
 	start = data->args_start;
+	rtn[i].input_type = 0;
+	rtn[i].output_type = 0;
 	while (start)
 	{
-		rtn[i].input_type = 0;
-		rtn[i].output_type = 0;
-		if (start->flag == REDIR_F)
+		if (start->flag == REDIR_F || start->flag == HD_F)
 		{
 			type = ft_get_type(start->str, &rtn[i].input_type, &rtn[i].output_type);
-			while (start)
-			{
-				if (start->flag != REDIR_F && start->flag != FILE_F)
-					break;
-				prev = start;
-				start = start->next;
-			}
-			if (type == INPUT_P)
-			{
-				ptr = rtn[i].input_file;
-				rtn[i].input_file = ft_strdup(prev->str);
-				free(ptr);
-			}
-			if (type == OUTPUT_P || type == OUTPUT_APPEND_P)
-			{
-				ptr = rtn[i].output_file;
-				rtn[i].output_file = ft_strdup(prev->str);
-				free(ptr);
-			}
+			start = start->next;
 		}
-		if (!start)
-			break;
+		if (type == INPUT_P)
+		{
+			ptr = rtn[i].input_file;
+			rtn[i].input_file = ft_strdup(start->str);
+			free(ptr);
+		}
+		if (type == HEREDOC_P)
+		{
+			ptr = rtn[i].input_file;
+			rtn[i].input_file = NULL;
+			free(ptr);
+		}
+		if (type == OUTPUT_P || type == OUTPUT_APPEND_P)
+		{
+			ptr = rtn[i].output_file;
+			rtn[i].output_file = ft_strdup(start->str);
+			free(ptr);
+		}
 		if (start->flag == PIPE_F)
+		{
 			i++;
+			rtn[i].input_type = 0;
+			rtn[i].output_type = 0;
+		}
 		start = start->next;
 	}
 	return (rtn);
 }
-
-// OLD_VERSION
-// char **ft_get_files(t_data *data, int nb_cmd)
-// {
-// 	int		i;
-// 	char	**rtn;
-// 	t_args	*start;
-// 	t_args	*prev;
-
-// 	i = 0;
-// 	rtn = ft_calloc(nb_cmd + 1, sizeof(char *));
-// 	if (rtn == NULL)
-// 		return (NULL);
-// 	start = data->args_start;
-// 	while (start)
-// 	{
-// 		if (start->flag == REDIR_F)
-// 		{
-// 			while (start)
-// 			{
-// 				if (start->flag != REDIR_F && start->flag != FILE_F)
-// 					break;
-// 				prev = start;
-// 				start = start->next;
-// 			}
-// 			rtn[i] = ft_strdup(prev->str);
-// 		}
-// 		if (!start)
-// 			break ;
-// 		if (start->flag == PIPE_F)
-// 			i++;
-// 		start = start->next;
-// 	}
-// 	return (rtn);
-// }
 
 /////////////////////////////////////////////
 // SECTION Init la tableau pour les pipes
@@ -360,6 +327,8 @@ t_pipex *ft_init_struct_pipex(t_data *data)
 {
 	t_pipex *rtn;
 
+	t_args *start;
+
 	// NOTE Allocation de la memoire pour la struct
 	rtn = malloc(sizeof(t_pipex));
 	if (rtn == NULL)
@@ -426,7 +395,7 @@ t_pipex *ft_init_struct_pipex(t_data *data)
 	// rtn->heredoc = ft_init_heredoc(data, rtn->nb_pipe + 1);
 	// if (rtn->heredoc == NULL)
 	// {
-	// 	ft_free_pipex_struct(rtn);
+		// ft_free_pipex_struct(rtn);
 	// 	return (NULL);
 	// }
 	return (rtn);

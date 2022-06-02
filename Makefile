@@ -51,7 +51,7 @@ EXEC_WITHOUT_PATH = \
 					nb_of_pipe.c \
 					init_pipe.c \
 					init_struct_pipex.c	\
-					# pipex.c
+					pipex.c
 
 OBJS_SRCS_WITHOUT_PATH = $(SRCS_WITHOUT_PATH:.c=.o)
 OBJS_BUILTINS_WITHOUT_PATH = $(BUILTINS_WITHOUT_PATH:.c=.o)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 13:32:20 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/01 13:54:54 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/01 15:51:53 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,5 @@ int	ft_parsing(t_data *data, char *str)
 	data->lstargs = data->args_start;
 	if (!ft_parserr(data))
 		return (0);
-	data->lstargs = data->args_start;
 	return (true);
 }

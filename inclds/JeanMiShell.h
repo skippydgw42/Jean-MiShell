@@ -39,8 +39,9 @@
 
 // Define for init_pipex_struct
 # define INPUT_P 1
-# define OUTPUT_P 2
-# define OUTPUT_APPEND_P 3
+# define HEREDOC_P 2
+# define OUTPUT_P 3
+# define OUTPUT_APPEND_P 4
 
 typedef enum e_boolean
 {
@@ -81,7 +82,6 @@ typedef struct s_pipex
 	char	**env;
 	char	**path_cmd;
 	char	**flags_cmd;
-	// char	**files;
 	t_redic	*redic_array;
 	int		*pipe_array;
 	int		*heredoc;
