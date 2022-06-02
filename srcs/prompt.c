@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 17:47:24 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/01 16:44:12 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/02 08:38:54 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void ft_prompt(t_data *data)
 		if (ft_strlen(str))
 		{
 			add_history(str);
-			ft_parsing(data, str);
-			ft_exec(data);
+			if (ft_parsing(data, str) == true)
+				ft_exec(data);
 			ft_free_lstargs(data);
 		}
 		else if (str == NULL)

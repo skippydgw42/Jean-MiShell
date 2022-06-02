@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:20:36 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/01 16:02:41 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/02 08:40:41 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,8 @@ static	char	*ft_take_path(char *cmd, char **env)
 			ft_free_tab_char(list_path);
 			return (path);
 		}
-		i++;
 		free(path);
+		i++;
 	}
 	ft_free_tab_char(list_path);
 	return (NULL);
@@ -125,9 +125,7 @@ char **ft_get_path_cmd(t_data *data, int nb_cmd, char **env)
 			rtn[i] = ft_take_path(start->str, env);
 		}
 		if (start->flag == PIPE_F)
-		{
 			i++;
-		}
 		start = start->next;
 	}
 	return (rtn);

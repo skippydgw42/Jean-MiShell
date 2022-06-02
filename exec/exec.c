@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 14:50:21 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/01 16:44:52 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/02 08:42:11 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,11 @@ int ft_exec(t_data *data)
 	vars = ft_init_struct_pipex(data);
 	if (vars == NULL)
 		return (false);
-
 	// NOTE Initialiser les pipes
 	ft_init_pipe(vars);
 
 	// TODO Execution des commandes
-	ft_pipex(vars);
+	// ft_pipex(vars);
 
 	// NOTE Free la struct de Pipex
 	ft_free_pipex_struct(vars);
