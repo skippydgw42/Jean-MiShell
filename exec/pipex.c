@@ -6,12 +6,13 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 11:12:35 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/02 16:16:07 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/03 14:04:18 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclds/JeanMiShell.h"
 
+//void	et initialiser var globale dan l'exec
 int	ft_exec_process(t_pipex *vars)
 {
 	char	**cflags;
@@ -29,31 +30,39 @@ int	ft_exec_process(t_pipex *vars)
 
 int	ft_pipexec(t_pipex *vars)
 {
-	int	pid;
-
-	dprintf(2, "%s        ", vars->path_cmd[vars->i]);
-	dprintf(2, "in: %d out: %d\n", vars->redic_array[vars->i].input_type,vars->redic_array[vars->i].output_type );
-	if (vars->redic_array[vars->i].input_type == 0 && vars->redic_array[vars->i].output_type == 0)
+	if (vars->redic_array[vars->i].input_type == 0) //pas d'input file
 	{
-		dup2(vars->pipe_array[vars->i * 2 - 2], STDIN_FILENO);
-		dup2(vars->pipe_array[vars->i * 2 + 1], STDOUT_FILENO);
+		if (vars->i > 0)
+		{
+			dup2(vars->pipe_array[vars->i * 2 - 2], STDIN_FILENO);
+			close(vars->pipe_array[vars->i * 2 - 1]);
+		}
 	}
-	if (vars->redic_array[vars->i].input_type != 0)
+	else if (vars->redic_array[vars->i].input_type != 0) //input file
 	{
 		dup2(vars->fd_in, STDIN_FILENO);
 		close(vars->fd_in);
 	}
-	if (vars->redic_array[vars->i].output_type == 0)
-		dup2(vars->pipe_array[vars->i * 2 + 1], STDOUT_FILENO);
-	else if (vars->redic_array[vars->i].output_type != 0)
+	if (vars->redic_array[vars->i].output_type == 0) // pas d'outfile
+	{
+		if (vars->i != vars->nb_pipe)
+		{
+			dup2(vars->pipe_array[vars->i * 2 + 1], STDOUT_FILENO);
+			close(vars->pipe_array[vars->i * 2]);
+		}
+	}
+	else if (vars->redic_array[vars->i].output_type != 0) // outfile
 	{
 		dup2(vars->fd_out, STDOUT_FILENO);
 		close(vars->fd_out);
 	}
-	ft_close_pipe(vars);
+	// ft_close_pipe(vars);
 	ft_exec_process(vars);
 	return (1);
 }
+
+// pb quqnd 1 seule commande sans |
+
 
 static int ft_get_type(char *str)
 {
@@ -125,7 +134,7 @@ int ft_pipex(t_pipex *vars, t_data *data)
 	vars->i = 0;
 	arr_pid = malloc(sizeof(int) * vars->nb_pipe);
 
-	while (vars->i <= vars->nb_pipe)
+	while (vars->i < vars->nb_pipe + 1)
 	{
 		arr_pid[vars->i] = fork();
 		// TODO Meilleure gestions des erreurs
@@ -136,6 +145,11 @@ int ft_pipex(t_pipex *vars, t_data *data)
 			if (ft_files(data, vars) == false)
 				perror("Error:");
 			ft_pipexec(vars);
+		}
+		else if (vars->i > 0)
+		{
+			close(vars->pipe_array[vars->i * 2 - 2]);
+			close (vars->pipe_array[vars->i * 2 - 1]);
 		}
 		vars->i++;
 	}

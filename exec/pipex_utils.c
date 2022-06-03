@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 11:15:37 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/02 12:10:20 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/03 13:51:01 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_close_pipe(t_pipex *vars)
 	int	i;
 
 	i = 0;
-	while (i < vars->nb_pipe)
+	while (i <= vars->nb_pipe)
 	{
 		close(vars->pipe_array[i]);
 		i++;
