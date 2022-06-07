@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 11:12:35 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/03 14:04:18 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/07 09:22:15 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,17 @@ int	ft_pipexec(t_pipex *vars)
 		dup2(vars->fd_out, STDOUT_FILENO);
 		close(vars->fd_out);
 	}
-	// ft_close_pipe(vars);
+	// ft_close_pipe(vars); // REVIEW Voir avec martin si c'est normal
 	ft_exec_process(vars);
 	return (1);
 }
-
-// pb quqnd 1 seule commande sans |
-
 
 static int ft_get_type(char *str)
 {
 	if (ft_strcmp(str, "<") == 0)
 		return (INPUT_P);
+	if (ft_strcmp(str, "<<") == 0)
+		return (HEREDOC_P);
 	if (ft_strcmp(str, ">") == 0)
 		return (OUTPUT_P);
 	if (ft_strcmp(str, ">>") == 0)
@@ -91,7 +90,7 @@ int ft_files(t_data *data, t_pipex *vars)
 	}
 	while (start)
 	{
-		if (start->flag == REDIR_F)
+		if (start->flag == REDIR_F || start->flag == HD_F)
 		{
 			type = ft_get_type(start->str);
 			start = start->next;
@@ -102,6 +101,12 @@ int ft_files(t_data *data, t_pipex *vars)
 				vars->fd_in = open(start->str, O_RDONLY);
 				if (vars->fd_in < 0)
 					return (false);
+			}
+			if (type == HEREDOC_P)
+			{
+				if (vars->fd_in != 0)
+					close(vars->fd_in);
+				vars->fd_in = vars->heredoc[vars->i];
 			}
 			if (type == OUTPUT_P)
 			{
@@ -143,7 +148,10 @@ int ft_pipex(t_pipex *vars, t_data *data)
 		if (arr_pid[vars->i] == 0)
 		{
 			if (ft_files(data, vars) == false)
+			 {
 				perror("Error:");
+				exit(0);
+			 }
 			ft_pipexec(vars);
 		}
 		else if (vars->i > 0)
@@ -154,7 +162,7 @@ int ft_pipex(t_pipex *vars, t_data *data)
 		vars->i++;
 	}
 	vars->i = 0;
-	while (vars->i < vars->nb_pipe)
+	while (vars->i <= vars->nb_pipe)
 	{
 		waitpid(arr_pid[vars->i], NULL, 0);
 		vars->i++;
