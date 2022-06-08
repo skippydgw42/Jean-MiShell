@@ -67,9 +67,9 @@ t_args	*ft_setcmdflag(t_args *lstargs, t_args *set)
 {
 	while (lstargs && lstargs->flag != PIPE_F)
 	{
-		if (lstargs->flag == STR_F && set->flag != CMD_F)
+		if (lstargs->flag == STR_F && set->flag != CMD_F && set->flag != BUILT_F)
 		{
-			lstargs->flag = CMD_F;
+			lstargs->flag = ft_cmdbuilt_flags(lstargs->str);
 			set = lstargs;
 		}
 		lstargs = lstargs->next;

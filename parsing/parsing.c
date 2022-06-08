@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 13:32:20 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/08 15:38:02 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/08 16:56:45 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,13 @@ int	ft_parsing(t_data *data, char *str)
 	ft_thirdsplitlst(data);
 	ft_flag(data);
 	ft_postpars(data);
+	printf("\n=========PARSING OUT==========\n");
+	while (data->lstargs)
+	{
+		printf("str: \"%s\"      flag: %d\n",data->lstargs->str, data->lstargs->flag);
+		data->lstargs = data->lstargs->next;
+	}
+	data->lstargs = data->args_start;
 	if (!ft_parserr(data))
 		return (0);
 	// printf("\n=========PARSING OUT==========\n");
