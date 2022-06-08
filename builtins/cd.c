@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 11:57:11 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/05/05 16:51:23 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/08 11:34:47 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ char	*ft_cpyold_path(t_env *lstenv)
 
 void	ft_cd(char *str, t_env *lstenv)
 {
+	if (!str)
+		return ;
 	if (chdir(str) == -1)
 		perror(str);
 	else

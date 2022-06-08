@@ -42,6 +42,14 @@
 # define HEREDOC_P 2
 # define OUTPUT_P 3
 # define OUTPUT_APPEND_P 4
+# define CMD_P 5
+# define BUILT_ECHO_P 6
+# define BUILT_CD_P 7
+# define BUILT_PWD_P 8
+# define BUILT_EXPORT_P 9
+# define BUILT_UNSET_P 10
+# define BUILT_ENV_P 11
+# define BUILT_EXIT_P 12
 
 typedef enum e_boolean
 {
@@ -73,18 +81,26 @@ typedef struct s_redic
 	char	*input_file;
 }	t_redic;
 
+typedef struct s_cmd
+{
+	int	*type;
+	char	**path_cmd;
+	char	**flags_cmd;
+}	t_cmd;
+
 typedef struct s_pipex
 {
 	// int		ac;
 	// int		arr_size;
+	// char	**path_cmd;
+	// char	**flags_cmd;
 	int		i;
 	int		nb_pipe;
 	char	**env;
-	char	**path_cmd;
-	char	**flags_cmd;
+	t_cmd	*cmd_array;
 	t_redic	*redic_array;
 	int		*pipe_array;
-	int		*heredoc;
+	int		*heredoc_array;
 	int		fd_in;
 	int		fd_out;
 }	t_pipex;

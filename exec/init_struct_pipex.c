@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct_pipex.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:20:36 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/02 16:56:10 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/08 14:02:58 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ static	char	*ft_take_path(char *cmd, char **env)
 	return (NULL);
 }
 
-char **ft_get_path_cmd(t_data *data, int nb_cmd, char **env)
+char **ft_get_path_cmd(t_data *data, int nb_cmd, char **env, int *type)
 {
 	int		i;
 	char	**rtn;
@@ -122,7 +122,25 @@ char **ft_get_path_cmd(t_data *data, int nb_cmd, char **env)
 	{
 		if (start->flag == CMD_F)
 		{
+			type[i] = CMD_P;
 			rtn[i] = ft_take_path(start->str, env);
+		}
+		if (start->flag == BUILT_F)
+		{
+			if (ft_strcmp(start->str, "echo") == 0)
+				type[i] = BUILT_ECHO_P;
+			if (ft_strcmp(start->str, "cd") == 0)
+				type[i] = BUILT_CD_P;
+			if (ft_strcmp(start->str, "pwd") == 0)
+				type[i] = BUILT_PWD_P;
+			if (ft_strcmp(start->str, "export") == 0)
+				type[i] = BUILT_EXPORT_P;
+			if (ft_strcmp(start->str, "unset") == 0)
+				type[i] = BUILT_UNSET_P;
+			if (ft_strcmp(start->str, "env") == 0)
+				type[i] = BUILT_ENV_P;
+			if (ft_strcmp(start->str, "exit") == 0)
+				type[i] = BUILT_EXIT_P;
 		}
 		if (start->flag == PIPE_F)
 			i++;
@@ -134,7 +152,7 @@ char **ft_get_path_cmd(t_data *data, int nb_cmd, char **env)
 /////////////////////////////////////////////
 // SECTION SET_FLAGS_CMD
 
-char	**ft_get_flags_cmd(t_data *data, int nb_cmd)
+char	**ft_get_flags_cmd(t_data *data, int nb_cmd, int *type)
 {
 	int		i;
 	char	**rtn;
@@ -165,8 +183,33 @@ char	**ft_get_flags_cmd(t_data *data, int nb_cmd)
 				start = start->next;
 			}
 		}
+		else if (start->flag == BUILT_F)
+		{
+			if (type[i] == BUILT_CD_P)
+			{
+				start = start->next;
+				if (start)
+					rtn[i] = ft_strdup(start->str);
+			}
+			else
+			{
+				start = start->next;
+				while (start)
+				{
+					if (start->flag != STR_F)
+						break;
+					ptr = rtn[i];
+					rtn[i] = ft_strjoin(rtn[i], start->str);
+					free(ptr);
+					ptr = rtn[i];
+					rtn[i] = ft_strjoin(rtn[i], " ");
+					free(ptr);
+					start = start->next;
+				}
+			}
+		}
 		if (!start)
-			break ;
+			break;
 		if (start->flag == PIPE_F)
 			i++;
 		start = start->next;
@@ -177,7 +220,7 @@ char	**ft_get_flags_cmd(t_data *data, int nb_cmd)
 /////////////////////////////////////////////
 // SECTION SET FILES
 
-static int	ft_get_type(char *str, int *input_type, int *output_type)
+static int ft_get_type(char *str, int *input_type, int *output_type)
 {
 	if (ft_strcmp(str, "<") == 0)
 	{
@@ -349,16 +392,29 @@ t_pipex *ft_init_struct_pipex(t_data *data)
 	rtn->nb_pipe = ft_nb_of_pipe(data);
 
 	// NOTE	Init les paths vers les commandes
-	rtn->path_cmd = ft_get_path_cmd(data, rtn->nb_pipe + 1, rtn->env);
-	if (rtn->path_cmd == NULL)
+	rtn->cmd_array = malloc(sizeof(t_cmd));
+	if (rtn->cmd_array == NULL)
+	{
+		ft_free_pipex_struct(rtn);
+		return (NULL);
+	}
+	rtn->cmd_array->type = ft_calloc(rtn->nb_pipe, sizeof(int));
+	if (rtn->cmd_array->type == NULL)
+	{
+		ft_free_pipex_struct(rtn);
+		return (NULL);
+	}
+
+	rtn->cmd_array->path_cmd = ft_get_path_cmd(data, rtn->nb_pipe + 1, rtn->env, rtn->cmd_array->type);
+	if (rtn->cmd_array->path_cmd == NULL)
 	{
 		ft_free_pipex_struct(rtn);
 		return (NULL);
 	}
 
 	// NOTE Init les flags des commandes
-	rtn->flags_cmd = ft_get_flags_cmd(data, rtn->nb_pipe + 1);
-	if (rtn->flags_cmd == NULL)
+	rtn->cmd_array->flags_cmd = ft_get_flags_cmd(data, rtn->nb_pipe + 1, rtn->cmd_array->type);
+	if (rtn->cmd_array->flags_cmd == NULL)
 	{
 		ft_free_pipex_struct(rtn);
 		return (NULL);
@@ -395,15 +451,15 @@ t_pipex *ft_init_struct_pipex(t_data *data)
 	}
 
 	// NOTE Init array pour les heredocs
-	rtn->heredoc = ft_init_heredoc(data, rtn->nb_pipe + 1);
-	if (rtn->heredoc == NULL)
+	rtn->heredoc_array = ft_init_heredoc(data, rtn->nb_pipe + 1);
+	if (rtn->heredoc_array == NULL)
 	{
-	ft_free_pipex_struct(rtn);
+		ft_free_pipex_struct(rtn);
 		return (NULL);
 	}
 
 	rtn->fd_in = 0;
 	rtn->fd_out = 0;
-	
+
 	return (rtn);
 }
