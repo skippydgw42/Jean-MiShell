@@ -67,6 +67,11 @@ int	ft_parsing(t_data *data, char *str)
 	ft_thirdsplitlst(data);
 	ft_flag(data);
 	ft_postpars(data);
+	if (!ft_parserr(data))
+		return (0);
+	return (true);
+}
+
 	// printf("\n=========PARSING OUT==========\n");
 	// while (data->lstargs)
 	// {
@@ -74,7 +79,3 @@ int	ft_parsing(t_data *data, char *str)
 	// 	data->lstargs = data->lstargs->next;
 	// }
 	// data->lstargs = data->args_start;
-	if (!ft_parserr(data))
-		return (0);
-	return (true);
-}
