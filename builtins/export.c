@@ -148,7 +148,7 @@ void	ft_add_back(char *varname, char *value, t_data *data)
 	if (!new)
 	{
 		perror("Error:");
-		ft_exit(data);
+		exit(0);
 	}
 	new->varname = ft_strdup(varname);
 	free(varname);
@@ -168,7 +168,7 @@ int	ft_export_str(char *str, t_data *data)
 	if (ft_check_varname(varname) == false)
 	{
 		printf("Jean_MiShell: export: `%s': not a valid identifier", varname);
-		ft_exit(data);
+		exit(0);
 	}
 	value = ft_get_value(str);
 	if (ft_already_export(varname, value, data) == true)

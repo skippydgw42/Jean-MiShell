@@ -32,7 +32,7 @@ ADD_WITHOUT_PATH =	\
 					check_varname.c \
 					signal_handler.c \
 					err.c \
-					exit.c
+					init_tty_setting.c
 
 PARSING_WITHOUT_PATH = \
 					prepars_utils.c \
