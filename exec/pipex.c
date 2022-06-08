@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 11:12:35 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/08 13:59:40 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/08 16:55:44 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_exec_process(t_pipex *vars, t_data *data)
 	i = 0;
 	str = NULL;
 	// FIXME A supprimer une fois le parsing fix
-	vars->cmd_array->type[vars->i] = BUILT_ECHO_P;
+	// vars->cmd_array->type[vars->i] = BUILT_ECHO_P;
 	cflags = ft_get_flags(vars->cmd_array->flags_cmd[vars->i]);
 	if (!cflags)
 		return (ft_errdstr("Flag Error\n", cflags));
@@ -32,6 +32,7 @@ int	ft_exec_process(t_pipex *vars, t_data *data)
 		cflags = ft_get_flags(vars->cmd_array->flags_cmd[vars->i]);
 		if (!cflags)
 			return (ft_errdstr("Flag Error\n", cflags));
+		printf("%s\n", vars->cmd_array->path_cmd[vars->i]);
 		if (execve(vars->cmd_array->path_cmd[vars->i], cflags, vars->env) == -1)
 		{
 			ft_free_dstr(cflags);
@@ -108,8 +109,8 @@ int ft_pipexec(t_pipex *vars, t_data *data)
 		dup2(vars->fd_out, STDOUT_FILENO);
 		close(vars->fd_out);
 	}
-	ft_close_pipe(vars);
 	ft_exec_process(vars, data);
+	ft_close_pipe(vars);
 	return (1);
 }
 

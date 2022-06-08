@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:20:36 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/08 14:02:58 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/08 16:38:13 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,12 @@ char **ft_get_path_cmd(t_data *data, int nb_cmd, char **env, int *type)
 		{
 			type[i] = CMD_P;
 			rtn[i] = ft_take_path(start->str, env);
+			if (rtn[i] == NULL)
+			{
+				if (open(start->str, O_EXCL) < 0)
+					perror("Error");
+				rtn[i] = ft_strdup(start->str);
+			}
 		}
 		if (start->flag == BUILT_F)
 		{
@@ -332,7 +338,6 @@ void ft_read(int fd)
 			exit(errno);
 		}
 		buff[i] = 0;
-		printf("%s", buff);
 	}
 }
 

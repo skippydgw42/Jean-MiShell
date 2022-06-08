@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 13:32:20 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/08 14:55:47 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/08 15:38:02 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,6 @@ int	ft_parsing(t_data *data, char *str)
 	ft_postpars(data);
 	if (!ft_parserr(data))
 		return (0);
-	return (true);
-}
-
 	// printf("\n=========PARSING OUT==========\n");
 	// while (data->lstargs)
 	// {
@@ -79,3 +76,6 @@ int	ft_parsing(t_data *data, char *str)
 	// 	data->lstargs = data->lstargs->next;
 	// }
 	// data->lstargs = data->args_start;
+	return (true);
+}
+
