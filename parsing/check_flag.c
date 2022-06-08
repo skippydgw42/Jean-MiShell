@@ -69,7 +69,7 @@ t_args	*ft_setcmdflag(t_args *lstargs, t_args *set)
 	{
 		if (lstargs->flag == STR_F && set->flag != CMD_F)
 		{
-			lstargs->flag = CMD_F;
+			lstargs->flag = ft_cmdbuilt_flags(lstargs->str);
 			set = lstargs;
 		}
 		lstargs = lstargs->next;
@@ -112,5 +112,11 @@ void	ft_flag(t_data *data)
 
 	data->lstargs = data->args_start;
 	ft_cmdfileflags(data->lstargs);
+	data->lstargs = data->args_start;
+	while (data->lstargs)
+	{
+		printf("str: \"%s\"      flag: %d\n",data->lstargs->str, data->lstargs->flag);
+		data->lstargs = data->lstargs->next;
+	}
 	data->lstargs = data->args_start;
 }
