@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 15:58:28 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/05/16 11:34:12 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/07 15:40:40 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_unset(char **varnames, t_data *data)
 		{
 			printf("Jean_MiShell: export: `%s': not a valid identifier",
 					varnames[i]);
-			ft_exit(data);
+			exit(0);
 		}
 		ft_unset_str(varnames[i], data);
 		i++;

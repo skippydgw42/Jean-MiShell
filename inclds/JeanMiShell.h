@@ -108,8 +108,9 @@ int		ft_free_lstargs(t_data *data);
 int		ft_check_varname(char *varname);
 void	ft_signal_handler(int sig);
 int		ft_errmsg(t_args *lstargs);
-void	ft_exit(t_data *data);
 int		ft_errdstr(char *str, char **cflags);
+void	ft_init_tty_setting(t_data *data);
+void	ft_restore_tty_setting(t_data *data);
 
 /****************************************/
 /*----------------SRCS------------------*/

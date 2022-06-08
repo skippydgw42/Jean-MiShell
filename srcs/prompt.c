@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 17:47:24 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/02 08:49:23 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/07 15:39:58 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ void ft_prompt(t_data *data)
 
 	while (1)
 	{
+		ft_init_tty_setting(data);
 		str = readline(BLUE "Jean" WHITE "_Mi" RED "Shell>> " WHITE);
+		ft_restore_tty_setting(data);
 		if (ft_strlen(str))
 		{
 			add_history(str);
@@ -29,7 +31,7 @@ void ft_prompt(t_data *data)
 		else if (str == NULL)
 		{
 			printf("exit\n"); // NOTE Gestion de ctrl-d
-			ft_exit(0);
+			exit(0);
 		}
 		free(str);
 	}
