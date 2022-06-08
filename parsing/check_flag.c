@@ -27,6 +27,16 @@ int	ft_cmdbuilt_flags(char *str)
 {
 	if (!ft_strcmp(str, "echo"))
 		return (BUILT_F);
+	else if (!ft_strcmp(str, "cd"))
+		return (BUILT_F);
+	else if (!ft_strcmp(str, "pwd"))
+		return (BUILT_F);
+	else if (!ft_strcmp(str, "env"))
+		return (BUILT_F);
+	else if (!ft_strcmp(str, "export"))
+		return (BUILT_F);
+	else if (!ft_strcmp(str, "unset"))
+		return (BUILT_F);
 	return (CMD_F);
 }
 
@@ -82,7 +92,10 @@ void	ft_cmdfileflags(t_args *lstargs)
 					lstargs->next->flag = FILE_F;
 			}
 			else if (lstargs && lstargs->flag == HD_F)
-				lstargs->next->flag = DELIM_F;
+			{
+				if (lstargs->next && lstargs->next->flag == STR_F)
+					lstargs->next->flag = DELIM_F;
+			}
 			lstargs = lstargs->next;
 		}
 		lstargs = set;
@@ -90,6 +103,7 @@ void	ft_cmdfileflags(t_args *lstargs)
 		if (lstargs)
 			lstargs = lstargs->next;
 	}
+	
 }
 
 void	ft_flag(t_data *data)

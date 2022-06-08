@@ -12,13 +12,31 @@
 
 #include "../inclds/JeanMiShell.h"
 
+int	ft_syntaxerr(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	data->lstargs = data->args_start;
+	while (data->lstargs)
+	{
+		data->lstargs = data->lstargs->next;
+		i++;
+	}
+	data->lstargs = data->args_start;
+	if (i == 1 && (data->lstargs->flag != CMD_F 
+				&& data->lstargs->flag != BUILT_F))
+		return (0);
+	return (1);
+}
+
 int	ft_redirerr(t_data *data)
 {
 	int	i;
 
 	while (data->lstargs)
 	{
-		if (data->lstargs->flag == REDIR_F)
+		if (data->lstargs->flag == REDIR_F || data->lstargs->flag == HD_F)
 		{
 			i = 0;
 			if (data->lstargs->next && data->lstargs->next->flag == REDIR_F)
@@ -50,6 +68,8 @@ int	ft_parserr(t_data *data)
 		data->lstargs = data->lstargs->next;
 	}
 	if (data->lstargs->flag == PIPE_F || data->lstargs->flag == REDIR_F)
+		return (ft_errmsg(data->lstargs));
+	if (!ft_syntaxerr(data))
 		return (ft_errmsg(data->lstargs));
 	return (1);
 }
