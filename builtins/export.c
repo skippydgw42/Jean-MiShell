@@ -184,11 +184,11 @@ int	ft_export(char **str, t_data *data)
 	int	i;
 
 	i = 0;
-	if (str)
+	if (ft_strlen(str[i]) != 0)
 	{
 		while (str[i])
 		{
-			printf("exp: %s\n", str[i]);
+			// printf("exp: %s\n", str[i]);
 			ft_export_str(str[i], data);
 			i++;
 		}

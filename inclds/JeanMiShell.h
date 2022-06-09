@@ -50,6 +50,9 @@
 # define BUILT_UNSET_P 10
 # define BUILT_ENV_P 11
 # define BUILT_EXIT_P 12
+# define EXEC_P 13
+
+int	val_rtn;
 
 typedef enum e_boolean
 {
@@ -122,11 +125,14 @@ int		ft_free_dstr(char **str);
 int		ft_free_data(t_data *data);
 int		ft_free_lstargs(t_data *data);
 int		ft_check_varname(char *varname);
-void	ft_signal_handler(int sig);
 int		ft_errmsg(t_args *lstargs);
 int		ft_errdstr(char *str, char **cflags);
 void	ft_init_tty_setting(t_data *data);
 void	ft_restore_tty_setting(t_data *data);
+void	ft_signal_handler(int sig);
+void	ft_set_signal_prompt(void);
+void	ft_set_signal_parent(void);
+void	ft_set_signal_child(void);
 
 /****************************************/
 /*----------------SRCS------------------*/
@@ -144,6 +150,7 @@ void	ft_pwd(void);
 int		ft_env(t_data *data);
 int		ft_export(char **str, t_data *data);
 void	ft_unset(char **str, t_data *data);
+int		ft_call_builtins(t_pipex *vars, t_data *data, char **cflags);
 
 /****************************************/
 /*---------------PARSING----------------*/

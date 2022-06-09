@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:20:36 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/08 16:38:13 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/09 10:05:48 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,17 @@ char **ft_set_env(t_data *data)
 /////////////////////////////////////////////
 
 // SECTION SET_PATH_CMD
+
+static	int	ft_is_file(char *str)
+{
+	if (strncmp(str, "./", 2) == 0)
+		return (true);
+	if (strncmp(str, "../", 3) == 0)
+		return (true);
+	if (strncmp(str, "/", 1) == 0)
+		return (true);
+	return (false);
+}
 
 static	char	**ft_split_path(char **env)
 {
@@ -126,9 +137,13 @@ char **ft_get_path_cmd(t_data *data, int nb_cmd, char **env, int *type)
 			rtn[i] = ft_take_path(start->str, env);
 			if (rtn[i] == NULL)
 			{
-				if (open(start->str, O_EXCL) < 0)
-					perror("Error");
-				rtn[i] = ft_strdup(start->str);
+				if (ft_is_file(start->str) == true)
+				{
+					if (open(start->str, O_EXCL) < 0)
+						perror("Error");
+					rtn[i] = ft_strdup(start->str);
+					type[i] = EXEC_P;
+				}
 			}
 		}
 		if (start->flag == BUILT_F)
@@ -158,12 +173,12 @@ char **ft_get_path_cmd(t_data *data, int nb_cmd, char **env, int *type)
 /////////////////////////////////////////////
 // SECTION SET_FLAGS_CMD
 
-char	**ft_get_flags_cmd(t_data *data, int nb_cmd, int *type)
+char **ft_get_flags_cmd(t_data *data, int nb_cmd, int *type)
 {
-	int		i;
-	char	**rtn;
-	char	*ptr;
-	t_args	*start;
+	int i;
+	char **rtn;
+	char *ptr;
+	t_args *start;
 
 	i = 0;
 	rtn = ft_calloc(nb_cmd + 1, sizeof(char *));
@@ -179,7 +194,7 @@ char	**ft_get_flags_cmd(t_data *data, int nb_cmd, int *type)
 			while (start)
 			{
 				if (start->flag != STR_F)
-					break ;
+					break;
 				ptr = rtn[i];
 				rtn[i] = ft_strjoin(rtn[i], " ");
 				free(ptr);
@@ -191,27 +206,18 @@ char	**ft_get_flags_cmd(t_data *data, int nb_cmd, int *type)
 		}
 		else if (start->flag == BUILT_F)
 		{
-			if (type[i] == BUILT_CD_P)
+			start = start->next;
+			while (start)
 			{
+				if (start->flag != STR_F)
+					break;
+				ptr = rtn[i];
+				rtn[i] = ft_strjoin(rtn[i], start->str);
+				free(ptr);
+				ptr = rtn[i];
+				rtn[i] = ft_strjoin(rtn[i], " ");
+				free(ptr);
 				start = start->next;
-				if (start)
-					rtn[i] = ft_strdup(start->str);
-			}
-			else
-			{
-				start = start->next;
-				while (start)
-				{
-					if (start->flag != STR_F)
-						break;
-					ptr = rtn[i];
-					rtn[i] = ft_strjoin(rtn[i], start->str);
-					free(ptr);
-					ptr = rtn[i];
-					rtn[i] = ft_strjoin(rtn[i], " ");
-					free(ptr);
-					start = start->next;
-				}
 			}
 		}
 		if (!start)

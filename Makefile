@@ -24,13 +24,14 @@ BUILTINS_WITHOUT_PATH = \
 					pwd.c \
 					env.c \
 					export.c \
-					unset.c
+					unset.c \
+					call_builtins.c
 
 ADD_WITHOUT_PATH =	\
 					free_dstr.c \
 					free_data.c \
 					check_varname.c \
-					signal_handler.c \
+					signal.c \
 					err.c \
 					init_tty_setting.c
 

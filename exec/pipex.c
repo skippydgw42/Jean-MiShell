@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 11:12:35 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/08 16:55:44 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/09 10:28:17 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,74 +16,32 @@
 int	ft_exec_process(t_pipex *vars, t_data *data)
 {
 	char	**cflags;
-	char	*ptr;
-	char	*str;
-	int		i;
 	
-	i = 0;
-	str = NULL;
-	// FIXME A supprimer une fois le parsing fix
-	// vars->cmd_array->type[vars->i] = BUILT_ECHO_P;
 	cflags = ft_get_flags(vars->cmd_array->flags_cmd[vars->i]);
 	if (!cflags)
 		return (ft_errdstr("Flag Error\n", cflags));
-	if (vars->cmd_array->type[vars->i] == CMD_P)
+	if (vars->cmd_array->type[vars->i] == CMD_P || vars->cmd_array->type[vars->i] == EXEC_P)
 	{
-		cflags = ft_get_flags(vars->cmd_array->flags_cmd[vars->i]);
-		if (!cflags)
-			return (ft_errdstr("Flag Error\n", cflags));
-		printf("%s\n", vars->cmd_array->path_cmd[vars->i]);
 		if (execve(vars->cmd_array->path_cmd[vars->i], cflags, vars->env) == -1)
 		{
 			ft_free_dstr(cflags);
+			if (vars->cmd_array->type[vars->i] == CMD_P)
 			exit(ft_errdstr("C_Process: Command not found", NULL));
+			else
+				exit(0);
 		}
 	}
-	else if (vars->cmd_array->type[vars->i] == BUILT_ECHO_P)
+	else
 	{
-		// FIXME Cest quoi le flag ?
-		ft_echo(vars->cmd_array->flags_cmd[vars->i], 0);
-		exit(0);
+		ft_call_builtins(vars, data, cflags);
 	}
-	else if (vars->cmd_array->type[vars->i] == BUILT_CD_P)
-	{
-		if (vars->nb_pipe == 0)
-			ft_cd(vars->cmd_array->flags_cmd[vars->i], data->lstenv);
-		exit(0);
-	}
-	else if (vars->cmd_array->type[vars->i] == BUILT_PWD_P)
-	{
-		ft_pwd();
-		exit(0);
-	}
-	else if (vars->cmd_array->type[vars->i] == BUILT_EXPORT_P)
-	{
-		if (vars->nb_pipe == 0)
-			ft_export(cflags, data);
-		exit(0);
-	}
-	else if (vars->cmd_array->type[vars->i] == BUILT_UNSET_P)
-	{
-		if (vars->nb_pipe == 0)
-			ft_unset(cflags, data);
-		exit(0);
-	}
-	else if (vars->cmd_array->type[vars->i] == BUILT_ENV_P)
-	{
-		if (vars->nb_pipe == 0)
-			ft_env(data);
-		exit(0);
-	}
-	else if (vars->cmd_array->type[vars->i] == BUILT_EXIT_P)
-	{
-		exit(0);
-	}
+	exit(0);
 	return (1);
 }
 
 int ft_pipexec(t_pipex *vars, t_data *data)
 {
-	if (vars->redic_array[vars->i].input_type == 0) // pas d'input file
+	if (vars->redic_array[vars->i].input_type == 0)
 	{
 		if (vars->i > 0)
 		{
@@ -91,12 +49,12 @@ int ft_pipexec(t_pipex *vars, t_data *data)
 			close(vars->pipe_array[vars->i * 2 - 1]);
 		}
 	}
-	else if (vars->redic_array[vars->i].input_type != 0) // input file
+	else if (vars->redic_array[vars->i].input_type != 0)
 	{
 		dup2(vars->fd_in, STDIN_FILENO);
 		close(vars->fd_in);
 	}
-	if (vars->redic_array[vars->i].output_type == 0) // pas d'outfile
+	if (vars->redic_array[vars->i].output_type == 0)
 	{
 		if (vars->i != vars->nb_pipe)
 		{
@@ -104,7 +62,7 @@ int ft_pipexec(t_pipex *vars, t_data *data)
 			close(vars->pipe_array[vars->i * 2]);
 		}
 	}
-	else if (vars->redic_array[vars->i].output_type != 0) // outfile
+	else if (vars->redic_array[vars->i].output_type != 0)
 	{
 		dup2(vars->fd_out, STDOUT_FILENO);
 		close(vars->fd_out);
@@ -189,6 +147,7 @@ int ft_pipex(t_pipex *vars, t_data *data)
 {
 	int *arr_pid;
 
+	ft_set_signal_parent();
 	vars->i = 0;
 	arr_pid = malloc(sizeof(int) * vars->nb_pipe);
 
@@ -204,6 +163,7 @@ int ft_pipex(t_pipex *vars, t_data *data)
 				perror("Error:");
 				exit(0);
 			}
+			ft_set_signal_child();
 			ft_pipexec(vars, data);
 		}
 		else if (vars->i > 0)
