@@ -17,7 +17,7 @@ int	ft_call_builtins(t_pipex *vars, t_data *data, char **cflags)
 	if (vars->cmd_array->type[vars->i] == BUILT_ECHO_P)
 	{
 		// TODO Gere le flag
-		ft_echo(vars->cmd_array->flags_cmd[vars->i], 0);
+		ft_echo(vars->cmd_array->flags_cmd[vars->i]);
 	}
 	else if (vars->cmd_array->type[vars->i] == BUILT_CD_P)
 	{
