@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:20:36 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/09 10:05:48 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/09 11:56:07 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,25 +187,15 @@ char **ft_get_flags_cmd(t_data *data, int nb_cmd, int *type)
 	start = data->args_start;
 	while (start)
 	{
-		if (start->flag == CMD_F)
+		if (start->flag == CMD_F || start->flag == BUILT_F)
 		{
-			rtn[i] = ft_strdup(start->str);
-			start = start->next;
-			while (start)
+			if (start->flag == CMD_F)
 			{
-				if (start->flag != STR_F)
-					break;
+				rtn[i] = ft_strdup(start->str);
 				ptr = rtn[i];
 				rtn[i] = ft_strjoin(rtn[i], " ");
 				free(ptr);
-				ptr = rtn[i];
-				rtn[i] = ft_strjoin(rtn[i], start->str);
-				free(ptr);
-				start = start->next;
 			}
-		}
-		else if (start->flag == BUILT_F)
-		{
 			start = start->next;
 			while (start)
 			{
@@ -214,9 +204,15 @@ char **ft_get_flags_cmd(t_data *data, int nb_cmd, int *type)
 				ptr = rtn[i];
 				rtn[i] = ft_strjoin(rtn[i], start->str);
 				free(ptr);
-				ptr = rtn[i];
-				rtn[i] = ft_strjoin(rtn[i], " ");
-				free(ptr);
+				if (start->next)
+				{
+					if (start->next->flag == STR_F)
+					{
+						ptr = rtn[i];
+						rtn[i] = ft_strjoin(rtn[i], " ");
+						free(ptr);
+					}
+				}
 				start = start->next;
 			}
 		}
