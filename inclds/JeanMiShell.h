@@ -144,8 +144,8 @@ int		ft_heredoc(char *delimiter);
 /****************************************/
 /*--------------BUILTINS----------------*/
 /****************************************/
-void	ft_echo(char *str, int flag);
-void	ft_cd(char *str, t_env *lstenv);
+void	ft_echo(char *str);
+void	ft_cd(char *str, t_data *data);
 void	ft_pwd(void);
 int		ft_env(t_data *data);
 int		ft_export(char **str, t_data *data);

@@ -12,15 +12,35 @@
 
 #include "../inclds/JeanMiShell.h"
 
-void	ft_echo(char *str, int flag)
+int	ft_check_flag(char *str)
 {
+	int	i;
 
-// -nnnn -nnnnnnn -nnnn : affiche str
-// -nnnn -nnnnnnn -nnnp : affiche -nnnp str
+	i = 1;
+	if (str[0] == '-')
+	{
+		while (str[i] == '-')
+			i++;
+		if (str[i] != 'n')
+			return (0);
+		while (str[i] == 'n')
+			i++;
+		if (str[i] == ' ')
+			return (i);
+	}
+	return (0);
+}
+
+void	ft_echo(char *str)
+{
+	int	i;
+
+	i = 0;
 	if (str)
 	{
-		printf("%s", str);
-		if (!flag)
+		i = ft_check_flag(str);
+		printf("%s", &str[i]);
+		if (!i)
 			printf("\n");
 	}
 	else

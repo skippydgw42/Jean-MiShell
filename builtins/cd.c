@@ -12,17 +12,52 @@
 
 #include "../inclds/JeanMiShell.h"
 
-char	*ft_cpyold_path(t_env *lstenv)
+char	*ft_cpyold_path(t_data *data)
 {
 	char	*ret;
 
-	while (ft_strcmp(lstenv->varname, "PWD") != 0)
-		lstenv = lstenv->next;
-	ret = ft_strdup(lstenv->value);
+	while (data->lstenv && ft_strcmp(data->lstenv->varname, "PWD") != 0)
+		data->lstenv = data->lstenv->next;
+	ret = ft_strdup(data->lstenv->value);
+	data->lstenv = data->env_start;
 	return (ret);
 }
 
-void	ft_cd(char *str, t_env *lstenv)
+int	ft_check_pwd(t_data *data, char *str)
+{
+	while (data->lstenv)
+	{
+		if (ft_strcmp(data->lstenv->varname, str) == 0)
+		{	
+			data->lstenv = data->env_start;
+			return (1);
+		}
+		data->lstenv = data->lstenv->next;
+	}
+	data->lstenv = data->env_start;
+	return (0);
+}
+
+void	ft_setpwd(t_data *data, char *varname, int x)
+{
+	char	**str;
+	char	*tmp;
+
+	str = malloc(sizeof(char *) * 2);
+	tmp = str[0];
+	str[0] = ft_strjoin(varname, "=");
+	free(tmp);
+	tmp = str[0];
+	if (x == 0)
+		str[0] = ft_strjoin(str[0], ft_cpyold_path(data));
+	else
+		str[0] = ft_strjoin(str[0], getcwd(NULL, 0));
+	free(tmp);
+	str[1] = 0;
+	ft_export(str, data);
+}
+
+void	ft_cd(char *str, t_data *data)
 {
 	if (!str)
 		return ;
@@ -31,16 +66,17 @@ void	ft_cd(char *str, t_env *lstenv)
 	else
 	{
 		// FIXME Petit segfault lors de "cd .." au lancement du programme
-		while (ft_strcmp(lstenv->varname, "OLDPWD") != 0)
-			lstenv = lstenv->next;
-		if (lstenv->value)
-			free(lstenv->value);
-		lstenv->value = ft_cpyold_path(lstenv);
-		while (ft_strcmp(lstenv->varname, "PWD") != 0)
-			lstenv = lstenv->next;
-		if (lstenv->value)
-			free(lstenv->value);
-		lstenv->value = getcwd(NULL, 0);
+		if (ft_check_pwd(data, "PWD"))
+		{
+			ft_setpwd(data, "OLDPWD", 0);
+			while (ft_strcmp(data->lstenv->varname, "PWD") != 0)
+				data->lstenv = data->lstenv->next;
+			if (data->lstenv->value)
+				free(data->lstenv->value);
+			data->lstenv->value = getcwd(NULL, 0);
+		}
+		else
+			ft_setpwd(data, "PWD", 1);
 	}
 }
 /*          cd nature         */
