@@ -14,9 +14,9 @@
 
 void	ft_presplitpipe(t_args **lstargs, char *str)
 {
-	int	q;
-	int	i;
-	int	n;
+	int		q;
+	int		i;
+	int		n;
 	t_args	*new;
 	t_args	*prev;
 
@@ -69,13 +69,5 @@ int	ft_parsing(t_data *data, char *str)
 	ft_postpars(data);
 	if (!ft_parserr(data))
 		return (0);
-	// printf("\n=========PARSING OUT==========\n");
-	// while (data->lstargs)
-	// {
-	// 	printf("str: \"%s\"      flag: %d\n",data->lstargs->str, data->lstargs->flag);
-	// 	data->lstargs = data->lstargs->next;
-	// }
-	// data->lstargs = data->args_start;
 	return (true);
 }
-

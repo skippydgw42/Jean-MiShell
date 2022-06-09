@@ -24,8 +24,8 @@ int	ft_syntaxerr(t_data *data)
 		i++;
 	}
 	data->lstargs = data->args_start;
-	if (i == 1 && (data->lstargs->flag != CMD_F 
-				&& data->lstargs->flag != BUILT_F))
+	if (i == 1 && (data->lstargs->flag != CMD_F
+			&& data->lstargs->flag != BUILT_F))
 		return (0);
 	return (1);
 }

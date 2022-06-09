@@ -12,9 +12,9 @@
 
 #include "../inclds/JeanMiShell.h"
 
-void ft_prompt(t_data *data)
+void	ft_prompt(t_data *data)
 {
-	char *str;
+	char	*str;
 
 	while (1)
 	{

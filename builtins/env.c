@@ -19,7 +19,7 @@ int	ft_env(t_data *data)
 		if (data->lstenv->is_export == true)
 		{
 			if (data->lstenv->value)
-			printf("%s=%s\n", data->lstenv->varname, data->lstenv->value);
+				printf("%s=%s\n", data->lstenv->varname, data->lstenv->value);
 		}
 		data->lstenv = data->lstenv->next;
 	}

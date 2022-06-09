@@ -12,7 +12,7 @@
 
 #include "../inclds/JeanMiShell.h"
 
-void	ft_pwd()
+void	ft_pwd(void)
 {
 	char	*pwd;
 

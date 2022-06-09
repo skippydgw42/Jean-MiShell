@@ -55,6 +55,7 @@ int	ft_setnew(t_args *new, char *str)
 		while (str[i] == '>' || str[i] == '<')
 			i++;
 	else
+	{
 		while (str[i])
 		{
 			q = ft_quotes(str[i], q);
@@ -62,6 +63,7 @@ int	ft_setnew(t_args *new, char *str)
 				break ;
 			i++;
 		}
+	}
 	new->str = malloc(sizeof(char) * (i + 1));
 	while (cpy < i)
 	{

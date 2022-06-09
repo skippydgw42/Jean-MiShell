@@ -16,7 +16,7 @@
 // NOTE La fonction retourne -2 dans le cas du ctrl-c
 // NOTE La fonction retourne le fd du heredoc si tout est OK
 
-static void ft_exit_signal(int sig)
+static void	ft_exit_signal(int sig)
 {
 	if (sig == SIGINT)
 	{
@@ -26,20 +26,20 @@ static void ft_exit_signal(int sig)
 	}
 }
 
-static int ft_reset_settings_signal(void)
+static int	ft_reset_settings_signal(void)
 {
 	perror("Error");
 	signal(SIGINT, ft_signal_handler);
 	return (-1);
 }
 
-int ft_heredoc(char *delimiter)
+int	ft_heredoc(char *delimiter)
 {
-	int fd_pipe[2];
-	int pid;
-	int dad;
-	int rtn;
-	char *str;
+	int		fd_pipe[2];
+	int		pid;
+	int		dad;
+	int		rtn;
+	char	*str;
 
 	// NOTE Securite
 	if (!delimiter || ft_strlen(delimiter) == 0)
@@ -47,7 +47,6 @@ int ft_heredoc(char *delimiter)
 		ft_putstr_fd("Jean-MiShell: syntax error near unexpected token `newline'\n", STDOUT_FILENO);
 		return (-1);
 	}
-
 	signal(SIGINT, SIG_IGN);
 	rtn = 0;
 	if (pipe(fd_pipe) == -1)

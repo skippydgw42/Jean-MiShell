@@ -12,7 +12,7 @@
 
 #include "../inclds/JeanMiShell.h"
 
-t_env *ft_set_lstenv(char **env)
+t_env	*ft_set_lstenv(char **env)
 {
 	char	**split;
 	int		i;

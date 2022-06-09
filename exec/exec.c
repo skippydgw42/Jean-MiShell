@@ -12,9 +12,9 @@
 
 #include "../inclds/JeanMiShell.h"
 
-int ft_exec(t_data *data)
+int	ft_exec(t_data *data)
 {
-	t_pipex *vars;
+	t_pipex	*vars;
 	char	**cflags;
 
 	// NOTE Init la struct + init des heredocs
@@ -36,6 +36,5 @@ int ft_exec(t_data *data)
 
 	// NOTE Free la struct de Pipex
 	ft_free_pipex_struct(vars);
-
 	return (true);
 }

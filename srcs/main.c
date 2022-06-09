@@ -12,13 +12,12 @@
 
 #include "../inclds/JeanMiShell.h"
 
-int main(int ac, char **av, char **env)
+int	main(int ac, char **av, char **env)
 {
-	t_data *data;
+	t_data	*data;
 
 	(void)ac;
 	(void)av;
-
 	data = malloc(sizeof(t_data));
 	if (!data)
 	{
@@ -27,9 +26,7 @@ int main(int ac, char **av, char **env)
 	}
 	data->lstenv = ft_set_lstenv(env);
 	data->env_start = data->lstenv;
-
 	ft_prompt(data);
-
 	ft_free_data(data);
 	return (0);
 }

@@ -190,8 +190,10 @@ int	ft_export(char **str, t_data *data)
 		{
 			// printf("exp: %s\n", str[i]);
 			ft_export_str(str[i], data);
+			free(str[i]);
 			i++;
 		}
+		free(str);
 	}
 	else
 		ft_print_export(data);

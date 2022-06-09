@@ -16,6 +16,7 @@ char	*ft_cpyold_path(t_data *data)
 {
 	char	*ret;
 
+	//free(OLDPWD) ?
 	while (data->lstenv && ft_strcmp(data->lstenv->varname, "PWD") != 0)
 		data->lstenv = data->lstenv->next;
 	ret = ft_strdup(data->lstenv->value);
@@ -44,14 +45,14 @@ void	ft_setpwd(t_data *data, char *varname, int x)
 	char	*tmp;
 
 	str = malloc(sizeof(char *) * 2);
-	tmp = str[0];
 	str[0] = ft_strjoin(varname, "=");
-	free(tmp);
 	tmp = str[0];
 	if (x == 0)
-		str[0] = ft_strjoin(str[0], ft_cpyold_path(data));
+		str[1] = ft_cpyold_path(data);
 	else
-		str[0] = ft_strjoin(str[0], getcwd(NULL, 0));
+		str[1] = getcwd(NULL, 0);
+	str[0] = ft_strjoin(str[0], str[1]);
+	free(str[1]);
 	free(tmp);
 	str[1] = 0;
 	ft_export(str, data);
@@ -65,7 +66,6 @@ void	ft_cd(char *str, t_data *data)
 		perror(str);
 	else
 	{
-		// FIXME Petit segfault lors de "cd .." au lancement du programme
 		if (ft_check_pwd(data, "PWD"))
 		{
 			ft_setpwd(data, "OLDPWD", 0);
@@ -78,13 +78,5 @@ void	ft_cd(char *str, t_data *data)
 		else
 			ft_setpwd(data, "PWD", 1);
 	}
+	data->lstenv = data->env_start;
 }
-/*          cd nature         */
-	// char	*path;
-
-	// if (!str)
-	// {
-	// 	path = getenv("HOME");
-	// 	chdir(path);
-	// }
-	

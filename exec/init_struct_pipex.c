@@ -29,7 +29,7 @@ static int	ft_size_lst_env(t_data *data)
 	return (i);
 }
 
-char **ft_set_env(t_data *data)
+char	**ft_set_env(t_data *data)
 {
 	char	**rtn;
 	char	*ptr;
@@ -118,7 +118,7 @@ static	char	*ft_take_path(char *cmd, char **env)
 	return (NULL);
 }
 
-char **ft_get_path_cmd(t_data *data, int nb_cmd, char **env, int *type)
+char	**ft_get_path_cmd(t_data *data, int nb_cmd, char **env, int *type)
 {
 	int		i;
 	char	**rtn;
@@ -173,12 +173,12 @@ char **ft_get_path_cmd(t_data *data, int nb_cmd, char **env, int *type)
 /////////////////////////////////////////////
 // SECTION SET_FLAGS_CMD
 
-char **ft_get_flags_cmd(t_data *data, int nb_cmd, int *type)
+char	**ft_get_flags_cmd(t_data *data, int nb_cmd, int *type)
 {
-	int i;
-	char **rtn;
-	char *ptr;
-	t_args *start;
+	int		i;
+	char	**rtn;
+	char	*ptr;
+	t_args	*start;
 
 	i = 0;
 	rtn = ft_calloc(nb_cmd + 1, sizeof(char *));
@@ -200,7 +200,7 @@ char **ft_get_flags_cmd(t_data *data, int nb_cmd, int *type)
 			while (start)
 			{
 				if (start->flag != STR_F)
-					break;
+					break ;
 				ptr = rtn[i];
 				rtn[i] = ft_strjoin(rtn[i], start->str);
 				free(ptr);
@@ -217,7 +217,7 @@ char **ft_get_flags_cmd(t_data *data, int nb_cmd, int *type)
 			}
 		}
 		if (!start)
-			break;
+			break ;
 		if (start->flag == PIPE_F)
 			i++;
 		start = start->next;
@@ -228,7 +228,7 @@ char **ft_get_flags_cmd(t_data *data, int nb_cmd, int *type)
 /////////////////////////////////////////////
 // SECTION SET FILES
 
-static int ft_get_type(char *str, int *input_type, int *output_type)
+static int	ft_get_type(char *str, int *input_type, int *output_type)
 {
 	if (ft_strcmp(str, "<") == 0)
 	{
@@ -253,13 +253,13 @@ static int ft_get_type(char *str, int *input_type, int *output_type)
 	return (false);
 }
 
-t_redic *ft_get_files(t_data *data, int nb_cmd)
+t_redic	*ft_get_files(t_data *data, int nb_cmd)
 {
-	int i;
-	t_redic *rtn;
-	t_args *start;
-	char *ptr;
-	int type;
+	int		i;
+	t_redic	*rtn;
+	t_args	*start;
+	char	*ptr;
+	int		type;
 
 	i = 0;
 	rtn = ft_calloc(nb_cmd + 1, sizeof(t_redic));
@@ -312,10 +312,10 @@ t_redic *ft_get_files(t_data *data, int nb_cmd)
 /////////////////////////////////////////////
 // SECTION Init la tableau pour les pipes
 
-int *ft_init_pipe_array(t_data *data, int nb_pipe)
+int	*ft_init_pipe_array(t_data *data, int nb_pipe)
 {
-	int *rtn;
-	int array_size;
+	int	*rtn;
+	int	array_size;
 
 	array_size = nb_pipe * 2;
 	rtn = ft_calloc(sizeof(int), nb_pipe);
@@ -326,10 +326,11 @@ int *ft_init_pipe_array(t_data *data, int nb_pipe)
 // SECTION Init les heredocs
 
 #define BUFFER_SIZE 42
-void ft_read(int fd)
+
+void	ft_read(int fd)
 {
-	char buff[BUFFER_SIZE + 1];
-	int i;
+	char	buff[BUFFER_SIZE + 1];
+	int		i;
 
 	i = 1;
 	while (i)
@@ -343,11 +344,11 @@ void ft_read(int fd)
 	}
 }
 
-int *ft_init_heredoc(t_data *data, int nb_cmd)
+int	*ft_init_heredoc(t_data *data, int nb_cmd)
 {
-	int i;
-	int *rtn;
-	t_args *start;
+	int		i;
+	int		*rtn;
+	t_args	*start;
 
 	i = 0;
 	rtn = ft_calloc(sizeof(int), nb_cmd);
@@ -366,7 +367,7 @@ int *ft_init_heredoc(t_data *data, int nb_cmd)
 				return (NULL);
 		}
 		if (start == NULL)
-			break;
+			break ;
 		if (start->flag == PIPE_F)
 			i++;
 		start = start->next;
@@ -376,17 +377,15 @@ int *ft_init_heredoc(t_data *data, int nb_cmd)
 
 /////////////////////////////////////////////
 
-t_pipex *ft_init_struct_pipex(t_data *data)
+t_pipex	*ft_init_struct_pipex(t_data *data)
 {
-	t_pipex *rtn;
-
-	t_args *start;
+	t_pipex	*rtn;
+	t_args	*start;
 
 	// NOTE Allocation de la memoire pour la struct
 	rtn = malloc(sizeof(t_pipex));
 	if (rtn == NULL)
 		return (rtn);
-
 	// NOTE Init les var d'env
 	rtn->env = ft_set_env(data);
 	if (rtn->env == NULL)
@@ -394,10 +393,8 @@ t_pipex *ft_init_struct_pipex(t_data *data)
 		ft_free_pipex_struct(rtn);
 		return (NULL);
 	}
-
 	// NOTE Init le nombre de pipe
 	rtn->nb_pipe = ft_nb_of_pipe(data);
-
 	// NOTE	Init les paths vers les commandes
 	rtn->cmd_array = malloc(sizeof(t_cmd));
 	if (rtn->cmd_array == NULL)
@@ -411,14 +408,12 @@ t_pipex *ft_init_struct_pipex(t_data *data)
 		ft_free_pipex_struct(rtn);
 		return (NULL);
 	}
-
 	rtn->cmd_array->path_cmd = ft_get_path_cmd(data, rtn->nb_pipe + 1, rtn->env, rtn->cmd_array->type);
 	if (rtn->cmd_array->path_cmd == NULL)
 	{
 		ft_free_pipex_struct(rtn);
 		return (NULL);
 	}
-
 	// NOTE Init les flags des commandes
 	rtn->cmd_array->flags_cmd = ft_get_flags_cmd(data, rtn->nb_pipe + 1, rtn->cmd_array->type);
 	if (rtn->cmd_array->flags_cmd == NULL)
@@ -426,7 +421,6 @@ t_pipex *ft_init_struct_pipex(t_data *data)
 		ft_free_pipex_struct(rtn);
 		return (NULL);
 	}
-
 	// NOTE init les files et redirecion
 	rtn->redic_array = ft_get_files(data, rtn->nb_pipe + 1);
 	if (rtn->redic_array == NULL)
@@ -434,7 +428,6 @@ t_pipex *ft_init_struct_pipex(t_data *data)
 		ft_free_pipex_struct(rtn);
 		return (NULL);
 	}
-
 	// // SECTION TESTEUR pour array_redic
 	// int i = 0;
 	// while (i < rtn->nb_pipe + 1)
@@ -456,7 +449,6 @@ t_pipex *ft_init_struct_pipex(t_data *data)
 		ft_free_pipex_struct(rtn);
 		return (NULL);
 	}
-
 	// NOTE Init array pour les heredocs
 	rtn->heredoc_array = ft_init_heredoc(data, rtn->nb_pipe + 1);
 	if (rtn->heredoc_array == NULL)
@@ -464,9 +456,7 @@ t_pipex *ft_init_struct_pipex(t_data *data)
 		ft_free_pipex_struct(rtn);
 		return (NULL);
 	}
-
 	rtn->fd_in = 0;
 	rtn->fd_out = 0;
-
 	return (rtn);
 }

@@ -25,7 +25,7 @@ void	ft_signal_handler(int sig)
 
 static void	ft_signal_handler_fork(int sig)
 {
-		printf("\n");
+	printf("\n");
 }
 
 void	ft_set_signal_prompt(void)

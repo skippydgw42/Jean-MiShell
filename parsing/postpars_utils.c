@@ -12,9 +12,9 @@
 
 #include "../inclds/JeanMiShell.h"
 
+//fonction inutilisée ??
 int	ft_needreplace(char *str)
 {
-	//fonction inutilisée ??
 	int	i;
 	int	q;
 
@@ -67,9 +67,9 @@ char	*ft_find_varname(char *str, int q)
 
 int	ft_finddellen(char *str)
 {
-	int	i;
-	int	q;
-	int	del;
+	int		i;
+	int		q;
+	int		del;
 	char	*temp;
 
 	i = 0;

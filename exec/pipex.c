@@ -16,7 +16,7 @@
 int	ft_exec_process(t_pipex *vars, t_data *data)
 {
 	char	**cflags;
-	
+
 	cflags = ft_get_flags(vars->cmd_array->flags_cmd[vars->i]);
 	if (!cflags)
 		return (ft_errdstr("Flag Error\n", cflags));
@@ -26,7 +26,7 @@ int	ft_exec_process(t_pipex *vars, t_data *data)
 		{
 			ft_free_dstr(cflags);
 			if (vars->cmd_array->type[vars->i] == CMD_P)
-			exit(ft_errdstr("C_Process: Command not found", NULL));
+				exit(ft_errdstr("C_Process: Command not found", NULL));
 			else
 				exit(0);
 		}
@@ -39,7 +39,7 @@ int	ft_exec_process(t_pipex *vars, t_data *data)
 	return (1);
 }
 
-int ft_pipexec(t_pipex *vars, t_data *data)
+int	ft_pipexec(t_pipex *vars, t_data *data)
 {
 	if (vars->redic_array[vars->i].input_type == 0)
 	{
@@ -72,7 +72,7 @@ int ft_pipexec(t_pipex *vars, t_data *data)
 	return (1);
 }
 
-static int ft_get_type(char *str)
+static int	ft_get_type(char *str)
 {
 	if (ft_strcmp(str, "<") == 0)
 		return (INPUT_P);
@@ -85,11 +85,11 @@ static int ft_get_type(char *str)
 	return (false);
 }
 
-int ft_files(t_data *data, t_pipex *vars)
+int	ft_files(t_data *data, t_pipex *vars)
 {
-	int i;
-	int type;
-	t_args *start;
+	int		i;
+	int		type;
+	t_args	*start;
 
 	i = 0;
 	start = data->args_start;
@@ -138,14 +138,14 @@ int ft_files(t_data *data, t_pipex *vars)
 		}
 		start = start->next;
 		if (!start || start->flag == PIPE_F)
-			break;
+			break ;
 	}
 	return (true);
 }
 
-int ft_pipex(t_pipex *vars, t_data *data)
+int	ft_pipex(t_pipex *vars, t_data *data)
 {
-	int *arr_pid;
+	int	*arr_pid;
 
 	ft_set_signal_parent();
 	vars->i = 0;

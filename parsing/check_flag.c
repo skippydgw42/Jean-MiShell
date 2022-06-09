@@ -18,7 +18,7 @@ int	ft_piperedir_flags(char *str)
 		return (PIPE_F);
 	else if (!ft_strcmp(str, "<<"))
 		return (HD_F);
-	else if (str[0] == '>' || str[0] == '<')	
+	else if (str[0] == '>' || str[0] == '<')
 		return (REDIR_F);
 	return (STR_F);
 }
@@ -105,7 +105,6 @@ void	ft_cmdfileflags(t_args *lstargs)
 		if (lstargs)
 			lstargs = lstargs->next;
 	}
-	
 }
 
 void	ft_flag(t_data *data)

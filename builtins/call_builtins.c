@@ -44,5 +44,6 @@ int	ft_call_builtins(t_pipex *vars, t_data *data, char **cflags)
 	{
 		exit(0);
 	}
+	ft_free_dstr(cflags);
 	return (1);
 }

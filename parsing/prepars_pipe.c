@@ -59,12 +59,12 @@ int	ft_lentopipe(char *str, int q)
 	return (i);
 }
 
-char *ft_cpytopipe(char *str, int q)
+char	*ft_cpytopipe(char *str, int q)
 {
 	int		i;
 	int		len;
 	char	*dst;
-	
+
 	i = 0;
 	if (str[i] != '|')
 		len = ft_lentopipe(str, q);

@@ -52,7 +52,7 @@
 # define BUILT_EXIT_P 12
 # define EXEC_P 13
 
-int	val_rtn;
+int	g_val_rtn;
 
 typedef enum e_boolean
 {
@@ -86,7 +86,7 @@ typedef struct s_redic
 
 typedef struct s_cmd
 {
-	int	*type;
+	int		*type;
 	char	**path_cmd;
 	char	**flags_cmd;
 }	t_cmd;
@@ -189,7 +189,7 @@ int		ft_exec(t_data *data);
 void	ft_free_pipex_struct(t_pipex *src);
 int		ft_nb_of_pipe(t_data *data);
 int		ft_init_pipe(t_pipex *vars);
-t_pipex *ft_init_struct_pipex(t_data *data);
+t_pipex	*ft_init_struct_pipex(t_data *data);
 void	ft_close_pipe(t_pipex *vars);
 char	**ft_get_flags(char *av);
 #endif
