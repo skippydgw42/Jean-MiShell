@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 13:35:42 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/09 08:44:27 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/09 16:19:36 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,6 @@ void	ft_cmdfileflags(t_args *lstargs)
 
 void	ft_flag(t_data *data)
 {
-	t_args	*set;
-
 	data->lstargs = data->args_start;
 	ft_cmdfileflags(data->lstargs);
 	data->lstargs = data->args_start;

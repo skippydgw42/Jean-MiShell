@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:55:35 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/06/09 11:31:35 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/09 16:19:09 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	ft_signal_handler(int sig)
 
 static void	ft_signal_handler_fork(int sig)
 {
-	printf("\n");
+	if (sig == SIGINT)
+		printf("\n");
 }
 
 void	ft_set_signal_prompt(void)

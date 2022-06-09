@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:20:36 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/09 11:56:07 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/09 14:19:58 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,28 @@ static	int	ft_is_file(char *str)
 	return (false);
 }
 
+static int	ft_check_path_exist(char **env)
+{
+	int	i;
+
+	i = 0;
+	while(env[i])
+	{
+		if (ft_strnstr(env[i],"PATH=", ft_strlen(env[i])))
+			return (true);
+		i++;
+	}
+	return (false);
+}
+
 static	char	**ft_split_path(char **env)
 {
 	char	**list_path;
 	int		i;
 
 	i = 0;
+	if (ft_check_path_exist(env) == false)
+		return (NULL);
 	while (env[i])
 	{
 		if (ft_strnstr(env[i], "PATH=", ft_strlen(env[i])))

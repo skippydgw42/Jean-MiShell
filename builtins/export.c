@@ -168,7 +168,6 @@ int	ft_export_str(char *str, t_data *data)
 	if (ft_check_varname(varname) == false)
 	{
 		printf("Jean_MiShell: export: `%s': not a valid identifier\n", varname);
-		exit(0);
 	}
 	value = ft_get_value(str);
 	if (ft_already_export(varname, value, data) == true)
@@ -184,11 +183,10 @@ int	ft_export(char **str, t_data *data)
 	int	i;
 
 	i = 0;
-	if (ft_strlen(str[i]) != 0)
+	if (str[i])
 	{
 		while (str[i])
 		{
-			// printf("exp: %s\n", str[i]);
 			ft_export_str(str[i], data);
 			free(str[i]);
 			i++;
