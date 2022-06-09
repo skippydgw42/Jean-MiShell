@@ -167,7 +167,7 @@ int	ft_export_str(char *str, t_data *data)
 	varname = ft_get_varname(str);
 	if (ft_check_varname(varname) == false)
 	{
-		printf("Jean_MiShell: export: `%s': not a valid identifier", varname);
+		printf("Jean_MiShell: export: `%s': not a valid identifier\n", varname);
 		exit(0);
 	}
 	value = ft_get_value(str);
