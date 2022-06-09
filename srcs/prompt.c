@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 17:47:24 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/08 16:31:13 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/09 10:22:10 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void ft_prompt(t_data *data)
 	while (1)
 	{
 		ft_init_tty_setting(data);
+		ft_set_signal_prompt();
 		str = readline(BLUE "Jean" WHITE "_Mi" RED "Shell>> " WHITE);
 		ft_restore_tty_setting(data);
 		if (ft_strlen(str))

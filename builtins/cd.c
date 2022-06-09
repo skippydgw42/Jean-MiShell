@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 11:57:11 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/08 11:34:47 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/09 09:13:55 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	ft_cd(char *str, t_env *lstenv)
 		perror(str);
 	else
 	{
+		// FIXME Petit segfault lors de "cd .." au lancement du programme
 		while (ft_strcmp(lstenv->varname, "OLDPWD") != 0)
 			lstenv = lstenv->next;
 		if (lstenv->value)

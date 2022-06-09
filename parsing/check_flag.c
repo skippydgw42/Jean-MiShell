@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_flag.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 13:35:42 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/01 14:02:47 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/09 08:44:27 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,13 @@ int	ft_cmdbuilt_flags(char *str)
 		return (BUILT_F);
 	else if (!ft_strcmp(str, "pwd"))
 		return (BUILT_F);
-	else if (!ft_strcmp(str, "env"))
-		return (BUILT_F);
 	else if (!ft_strcmp(str, "export"))
 		return (BUILT_F);
 	else if (!ft_strcmp(str, "unset"))
+		return (BUILT_F);
+	else if (!ft_strcmp(str, "env"))
+		return (BUILT_F);
+	else if (!ft_strcmp(str, "exit"))
 		return (BUILT_F);
 	return (CMD_F);
 }

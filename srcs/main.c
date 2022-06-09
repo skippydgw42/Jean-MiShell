@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:58:35 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/06/08 16:27:45 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/09 11:31:01 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,6 @@ int main(int ac, char **av, char **env)
 
 	(void)ac;
 	(void)av;
-
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, ft_signal_handler);
 
 	data = malloc(sizeof(t_data));
 	if (!data)
