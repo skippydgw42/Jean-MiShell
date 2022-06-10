@@ -1,1 +1,12 @@
-Segfault avec "export"
+echo -n -n
+echo '"test"'
+echo "'"
+echo "'$PATH'"
+echo '"$PATH"'
+echo $OLDPWD
+export test
+cat > 1 Makefile
+
+env -i + cd .. > segfautl
+les redirections ne fonction pas avec les builtins
+2 heresdocs cat << mot1 << mot2

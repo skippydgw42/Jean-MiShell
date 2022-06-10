@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 09:23:25 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/06/08 11:06:09 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/10 14:23:55 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ void	ft_free_pipex_struct(t_pipex *src)
 	ft_free_redic_array(src->redic_array, src->nb_pipe + 2);
 	free(src->pipe_array);
 	free(src->heredoc_array);
+	free(src->cmd_array->type);
 	free(src);
 }
