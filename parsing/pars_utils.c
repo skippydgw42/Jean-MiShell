@@ -25,18 +25,18 @@ int	ft_quotes(char c, int q)
 	{
 		if (c == '\'')
 			q = 0;
-		else if (c == '\"')
-			q = 2;
 	}
 	else if (q == 2)
 	{
 		if (c == '\"')
 			q = 0;
-		else if (c == '\'')
-			q = 1;
 	}
 	return (q);
 }
+		// else if (c == '\"')
+			// q = 2;
+		// else if (c == '\'')
+			// q = 1;
 
 int	ft_is_close(char *str)
 {
