@@ -50,14 +50,8 @@ void	ft_unset(char **varnames, t_data *data)
 	{
 		if (ft_check_varname(varnames[i]) == false)
 		{
-<<<<<<< HEAD
-			printf("Jean_MiShell: export: `%s': not a valid identifier",
-				varnames[i]);
-			exit(0);
-=======
 			printf("Jean_MiShell: unset: `%s': not a valid identifier\n",
-					varnames[i]);
->>>>>>> d5f1175821574004a22ae3c8819125d4db6dc226
+				varnames[i]);
 		}
 		ft_unset_str(varnames[i], data);
 		i++;

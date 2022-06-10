@@ -26,7 +26,7 @@ int	ft_exec_process(t_pipex *vars, t_data *data)
 		{
 			ft_free_dstr(cflags);
 			if (vars->cmd_array->type[vars->i] == CMD_P)
-				exit(ft_errdstr("C_Process: Command not found", NULL));
+				exit(ft_errdstr("J.Mishell: Command not found", NULL));
 			else
 				exit(0);
 		}

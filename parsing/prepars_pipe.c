@@ -35,7 +35,8 @@ int	ft_npipe(char *str)
 		if (q == 0 && str[i] == '|')
 			ct = ct + x + 1;
 		x = i;
-		i++;
+		// if (str[i]) ==> si on l enleve->overflow
+			i++;
 		while (str[i] && (str[i] == ' ' && ft_quotes(str[i], q) == 0))
 			i++;
 	}

@@ -189,7 +189,7 @@ char	**ft_get_path_cmd(t_data *data, int nb_cmd, char **env, int *type)
 /////////////////////////////////////////////
 // SECTION SET_FLAGS_CMD
 
-char	**ft_get_flags_cmd(t_data *data, int nb_cmd, int *type)
+char	**ft_get_flags_cmd(t_data *data, int nb_cmd)
 {
 	int		i;
 	char	**rtn;
@@ -328,7 +328,7 @@ t_redic	*ft_get_files(t_data *data, int nb_cmd)
 /////////////////////////////////////////////
 // SECTION Init la tableau pour les pipes
 
-int	*ft_init_pipe_array(t_data *data, int nb_pipe)
+int	*ft_init_pipe_array(int nb_pipe)
 {
 	int	*rtn;
 	int	array_size;
@@ -396,7 +396,6 @@ int	*ft_init_heredoc(t_data *data, int nb_cmd)
 t_pipex	*ft_init_struct_pipex(t_data *data)
 {
 	t_pipex	*rtn;
-	t_args	*start;
 
 	// NOTE Allocation de la memoire pour la struct
 	rtn = malloc(sizeof(t_pipex));
@@ -431,7 +430,7 @@ t_pipex	*ft_init_struct_pipex(t_data *data)
 		return (NULL);
 	}
 	// NOTE Init les flags des commandes
-	rtn->cmd_array->flags_cmd = ft_get_flags_cmd(data, rtn->nb_pipe + 1, rtn->cmd_array->type);
+	rtn->cmd_array->flags_cmd = ft_get_flags_cmd(data, rtn->nb_pipe + 1);
 	if (rtn->cmd_array->flags_cmd == NULL)
 	{
 		ft_free_pipex_struct(rtn);
@@ -459,7 +458,7 @@ t_pipex	*ft_init_struct_pipex(t_data *data)
 	// }
 
 	// NOTE Init array pour les pipes
-	rtn->pipe_array = ft_init_pipe_array(data, rtn->nb_pipe);
+	rtn->pipe_array = ft_init_pipe_array(rtn->nb_pipe);
 	if (rtn->pipe_array == NULL)
 	{
 		ft_free_pipex_struct(rtn);

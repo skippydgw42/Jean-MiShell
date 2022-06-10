@@ -130,6 +130,8 @@ int	ft_needrsplit(t_args *lstargs)
 	int	i;
 	int	q;
 
+	i = 0;
+	q = 0;
 	while (lstargs->str[i])
 	{
 		q = ft_quotes(lstargs->str[i], q);

@@ -40,7 +40,7 @@ void	ft_echo(char *str)
 	{
 		i = ft_check_flag(str);
 		printf("%s", &str[i]);
-		if (!i)
+		if (i == 0)
 			printf("\n");
 	}
 	else
