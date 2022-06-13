@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 11:57:11 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/09 09:13:55 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/13 11:10:14 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ void	ft_setpwd(t_data *data, char *varname, int x)
 
 void	ft_cd(char *str, t_data *data)
 {
-	char	*oldpwd;
-
 	if (!str)
 		return ;
 	if (chdir(str) == -1)
