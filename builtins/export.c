@@ -188,10 +188,10 @@ int	ft_export(char **str, t_data *data)
 		while (str[i])
 		{
 			ft_export_str(str[i], data);
-			free(str[i]);
+			// free(str[i]);
 			i++;
 		}
-		free(str);
+		// free(str);
 	}
 	else
 		ft_print_export(data);

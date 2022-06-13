@@ -18,6 +18,12 @@ int	ft_errmsg(t_args *lstargs)
 	return (0);
 }
 
+int	ft_errquotes(void)
+{
+	printf("Quotes error '\n");
+	return (0);
+}
+
 int	ft_errdstr(char *str, char **cflags)
 {
 	printf("%s\n", str);

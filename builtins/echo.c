@@ -15,18 +15,24 @@
 int	ft_check_flag(char *str)
 {
 	int	i;
+	int	x;
 
-	i = 1;
-	if (str[0] == '-')
+	i = 0;
+	while (str[i] && str[0] == '-')
 	{
+		x = i;
 		while (str[i] == '-')
 			i++;
 		if (str[i] != 'n')
-			return (0);
+			return (x);
 		while (str[i] == 'n')
 			i++;
-		if (str[i] == ' ')
+		if (!str[i])
 			return (i);
+		if (str[i] != ' ')
+			return (x);
+		while (str[i] == ' ')
+			i++;
 	}
 	return (0);
 }
@@ -39,7 +45,8 @@ void	ft_echo(char *str)
 	if (str)
 	{
 		i = ft_check_flag(str);
-		printf("%s", &str[i]);
+		if (str[i])
+			printf("%s", &str[i]);
 		if (i == 0)
 			printf("\n");
 	}

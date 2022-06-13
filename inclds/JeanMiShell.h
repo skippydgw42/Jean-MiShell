@@ -122,6 +122,7 @@ void	ft_free_tstr(char ***src);
 int		ft_free_data(t_data *data);
 int		ft_free_lstargs(t_data *data);
 int		ft_check_varname(char *varname);
+int		ft_errquotes(void);
 int		ft_errmsg(t_args *lstargs);
 int		ft_errdstr(char *str, char **cflags);
 void	ft_init_tty_setting(t_data *data);
