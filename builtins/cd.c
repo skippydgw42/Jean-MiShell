@@ -60,8 +60,6 @@ void	ft_setpwd(t_data *data, char *varname, int x)
 
 void	ft_cd(char *str, t_data *data)
 {
-	char	*oldpwd;
-
 	if (!str)
 		return ;
 	if (chdir(str) == -1)
