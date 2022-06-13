@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 11:12:35 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/09 10:28:17 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/13 11:03:05 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,27 @@
 //void	et initialiser var globale dan l'exec
 int	ft_exec_process(t_pipex *vars, t_data *data)
 {
-	char	**cflags;
-
-	cflags = ft_get_flags(vars->cmd_array->flags_cmd[vars->i]);
-	if (!cflags)
-		return (ft_errdstr("Flag Error\n", cflags));
-	if (vars->cmd_array->type[vars->i] == CMD_P || vars->cmd_array->type[vars->i] == EXEC_P)
+	exit(0);
+	if (vars->cmd_array->type[vars->i] == CMD_P
+		|| vars->cmd_array->type[vars->i] == EXEC_P)
 	{
-		if (execve(vars->cmd_array->path_cmd[vars->i], cflags, vars->env) == -1)
+		if (execve(vars->cmd_array->path_cmd[vars->i],
+					vars->cmd_array->flags_cmd[vars->i],
+					vars->env) == -1)
 		{
-			ft_free_dstr(cflags);
 			if (vars->cmd_array->type[vars->i] == CMD_P)
+			{
 				exit(ft_errdstr("J.Mishell: Command not found", NULL));
+			}
 			else
-				exit(0);
+			{
+				exit(ft_errdstr("J.Mishell: File not found", NULL));
+			}
 		}
 	}
 	else
 	{
-		ft_call_builtins(vars, data, cflags);
+		ft_call_builtins(vars, data, vars->cmd_array->flags_cmd[vars->i]);
 	}
 	exit(0);
 	return (1);
@@ -49,7 +51,7 @@ int	ft_pipexec(t_pipex *vars, t_data *data)
 			close(vars->pipe_array[vars->i * 2 - 1]);
 		}
 	}
-	else if (vars->redic_array[vars->i].input_type != 0)
+	if (vars->redic_array[vars->i].input_type != 0)
 	{
 		dup2(vars->fd_in, STDIN_FILENO);
 		close(vars->fd_in);
@@ -62,7 +64,7 @@ int	ft_pipexec(t_pipex *vars, t_data *data)
 			close(vars->pipe_array[vars->i * 2]);
 		}
 	}
-	else if (vars->redic_array[vars->i].output_type != 0)
+	if (vars->redic_array[vars->i].output_type != 0)
 	{
 		dup2(vars->fd_out, STDOUT_FILENO);
 		close(vars->fd_out);
@@ -115,15 +117,14 @@ int	ft_files(t_data *data, t_pipex *vars)
 			}
 			if (type == HEREDOC_P)
 			{
-				if (vars->fd_in != 0)
-					close(vars->fd_in);
 				vars->fd_in = vars->heredoc_array[vars->i];
 			}
 			if (type == OUTPUT_P)
 			{
 				if (vars->fd_out != 0)
 					close(vars->fd_out);
-				vars->fd_out = open(start->str, O_TRUNC | O_WRONLY | O_CREAT, 0666);
+				vars->fd_out = open(start->str, O_TRUNC | O_WRONLY | O_CREAT,
+						0666);
 				if (vars->fd_out < 0)
 					return (false);
 			}
@@ -131,7 +132,8 @@ int	ft_files(t_data *data, t_pipex *vars)
 			{
 				if (vars->fd_out != 0)
 					close(vars->fd_out);
-				vars->fd_out = open(start->str, O_APPEND | O_WRONLY | O_CREAT, 0666);
+				vars->fd_out = open(start->str, O_APPEND | O_WRONLY | O_CREAT,
+						0666);
 				if (vars->fd_out < 0)
 					return (false);
 			}
@@ -150,7 +152,6 @@ int	ft_pipex(t_pipex *vars, t_data *data)
 	ft_set_signal_parent();
 	vars->i = 0;
 	arr_pid = malloc(sizeof(int) * vars->nb_pipe);
-
 	while (vars->i < vars->nb_pipe + 1)
 	{
 		arr_pid[vars->i] = fork();
