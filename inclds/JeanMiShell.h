@@ -88,15 +88,11 @@ typedef struct s_cmd
 {
 	int		*type;
 	char	**path_cmd;
-	char	**flags_cmd;
+	char	***flags_cmd;
 }	t_cmd;
 
 typedef struct s_pipex
 {
-	// int		ac;
-	// int		arr_size;
-	// char	**path_cmd;
-	// char	**flags_cmd;
 	int		i;
 	int		nb_pipe;
 	char	**env;
@@ -122,6 +118,7 @@ typedef struct s_data
 /*-----------------ADD------------------*/
 /****************************************/
 int		ft_free_dstr(char **str);
+void	ft_free_tstr(char ***src);
 int		ft_free_data(t_data *data);
 int		ft_free_lstargs(t_data *data);
 int		ft_check_varname(char *varname);
@@ -192,4 +189,7 @@ int		ft_init_pipe(t_pipex *vars);
 t_pipex	*ft_init_struct_pipex(t_data *data);
 void	ft_close_pipe(t_pipex *vars);
 char	**ft_get_flags(char *av);
+
+void	ft_read(int fd);
+
 #endif
