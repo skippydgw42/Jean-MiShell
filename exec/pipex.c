@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 11:12:35 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/14 09:26:54 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/14 14:54:26 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 //void	et initialiser var globale dan l'exec
 int	ft_exec_process(t_pipex *vars, t_data *data)
 {
-	printf("path %s \n flags %s \n type %d\n", vars->cmd_array->path_cmd[vars->i], vars->cmd_array->flags_cmd[vars->i][0], vars->cmd_array->type[vars->i]);
-	printf("%p\n", vars->cmd_array->flags_cmd[vars->i]);
 	if (vars->cmd_array->type[vars->i] == CMD_P
 		|| vars->cmd_array->type[vars->i] == EXEC_P)
 	{
@@ -24,16 +22,11 @@ int	ft_exec_process(t_pipex *vars, t_data *data)
 					vars->cmd_array->flags_cmd[vars->i],
 					vars->env) == -1)
 		{
-			// if (vars->cmd_array->type[vars->i] == CMD_P || vars)
-			// {
-				// exit(0);
-				// exit(ft_errdstr("J.Mishell: Command not found", NULL));
-			// }
-			// else
-			// {
-				// exit(0);
-				// exit(ft_errdstr("J.Mishell: File not found", NULL));
-			// }
+			if (vars->cmd_array->type[vars->i] == CMD_P || vars)
+			{
+				puts("J.Mishell: Command not found");
+				exit(0);
+			}
 		}
 	}
 	else
@@ -175,11 +168,8 @@ int	ft_pipex(t_pipex *vars, t_data *data)
 		}
 		else if (arr_pid[vars->i] > 0)
 		{
-			printf ("%i\n", arr_pid[vars->i]);
 			if (vars->i > 0 && vars->pipe_array[vars->i * 2 - 2] > 2)
 			{
-				printf ("in %d\n", vars->pipe_array[vars->i * 2 - 2]);
-				printf ("out %d\n", vars->pipe_array[vars->i * 2 - 1]);
 				close(vars->pipe_array[vars->i * 2 - 2]);
 				close(vars->pipe_array[vars->i * 2 - 1]);
 			}
