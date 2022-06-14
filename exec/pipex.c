@@ -15,7 +15,7 @@
 //void	et initialiser var globale dan l'exec
 int	ft_exec_process(t_pipex *vars, t_data *data)
 {
-	exit(0);
+	g_val_rtn = 0;
 	if (vars->cmd_array->type[vars->i] == CMD_P
 		|| vars->cmd_array->type[vars->i] == EXEC_P)
 	{
