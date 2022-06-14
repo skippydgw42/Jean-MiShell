@@ -16,7 +16,7 @@ int	ft_separator(char c)
 {
 	if ((c >= 48 && c <= 57) || c == '_')
 		return (0);
-	else if (c >= 65 && c <= 90)
+	else if ((c >= 65 && c <= 90) || c == '?')
 		return (0);
 	else if (c >= 97 && c <= 122)
 		return (0);
@@ -30,6 +30,11 @@ int	ft_rollst(t_env **lst, char *str, int q)
 	if (q != 1)
 	{
 		to_find = ft_find_varname(str, q);
+		if (!ft_strcmp(to_find, "?"))
+		{
+			free(to_find);
+			return (2);
+		}
 		while (*lst)
 		{
 			if (!ft_strcmp(to_find, (*lst)->varname))
@@ -48,13 +53,23 @@ int	ft_paralcpy(t_data *data, char *str, char *dst, int q)
 {
 	int	i;
 	int	j;
+	int	roll;
+	char	*g_var;
 
 	i = 0;
 	j = 0;
-	if (ft_rollst(&data->lstenv, str, q))
+	roll = ft_rollst(&data->lstenv, str, q);
+	if (roll == 1)
 	{
 		while (data->lstenv->value[j])
 			dst[i++] = data->lstenv->value[j++];
+	}
+	else if (roll == 2)
+	{
+		g_var = ft_itoa(g_val_rtn);
+		while (g_var[j])
+			dst[i++] = g_var[j++];
+		free(g_var);
 	}
 	data->lstenv = data->env_start;
 	return (i);

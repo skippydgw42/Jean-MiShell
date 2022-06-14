@@ -52,6 +52,8 @@ char	*ft_find_varname(char *str, int q)
 		i++;
 	}
 	var = malloc(sizeof(char) * (i - cp));
+	if (!var)
+		return (0);
 	if (q == 2)
 		i--;
 	j = 0;
@@ -102,6 +104,7 @@ int	ft_findaddlen(t_data *data, char *str)
 	int	i;
 	int	q;
 	int	add;
+	char	*g_var;
 
 	i = 0;
 	q = 0;
@@ -111,8 +114,14 @@ int	ft_findaddlen(t_data *data, char *str)
 		q = ft_quotes(str[i], q);
 		if (str[i] == '$')
 		{
-			if (ft_rollst(&data->lstenv, &str[i], q))
+			if (ft_rollst(&data->lstenv, &str[i], q) == 1)
 				add = add + ft_strlen(data->lstenv->value);
+			else if (ft_rollst(&data->lstenv, &str[i], q) == 2)
+			{	
+				g_var = ft_itoa(g_val_rtn);
+				add = add + ft_strlen(g_var);
+				free(g_var);
+			}
 			data->lstenv = data->env_start;
 		}
 		i++;
