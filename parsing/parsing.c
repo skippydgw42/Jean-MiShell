@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 13:32:20 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/09 08:52:08 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/14 09:35:19 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,6 @@ void	ft_presplitpipe(t_args **lstargs, char *str)
 
 void	ft_postpars(t_data *data)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
 	while (data->lstargs)
 	{
 		ft_replace(data, data->lstargs);

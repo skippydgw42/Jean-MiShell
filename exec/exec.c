@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 14:50:21 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/13 11:07:12 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/13 17:16:17 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	ft_exec(t_data *data)
 
 	if (vars->nb_pipe == 0 && data->args_start->flag == BUILT_F)
 	{
+		vars->i = 0;
 		ft_call_builtins(vars, data, vars->cmd_array->flags_cmd[vars->i]);
 	}
 	else if (ft_pipex(vars, data) == false)
