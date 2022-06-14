@@ -1,5 +1,5 @@
 //
-	/* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   init_struct_pipex.c                                :+:      :+:    :+:   */
@@ -58,17 +58,6 @@ char	**ft_set_env(t_data *data)
 
 // SECTION SET_PATH_CMD
 
-static int	ft_is_file(char *str)
-{
-	if (strncmp(str, "./", 2) == 0)
-		return (true);
-	if (strncmp(str, "../", 3) == 0)
-		return (true);
-	if (strncmp(str, "/", 1) == 0)
-		return (true);
-	return (false);
-}
-
 static int	ft_check_path_exist(char **env)
 {
 	int	i;
@@ -114,6 +103,9 @@ static char	*ft_take_path(char *cmd, char **env)
 	char	*ptr;
 
 	i = 0;
+	if (ft_strchr(cmd, '/'))
+		return (NULL);
+	path = NULL;
 	list_path = ft_split_path(env);
 	if (list_path == NULL)
 		return (NULL);
@@ -125,13 +117,13 @@ static char	*ft_take_path(char *cmd, char **env)
 		free(ptr);
 		if (access(path, X_OK) == 0)
 		{
-			ft_free_tab_char(list_path);
+			ft_free_dstr(list_path);
 			return (path);
 		}
 		free(path);
 		i++;
 	}
-	ft_free_tab_char(list_path);
+	ft_free_dstr(list_path);
 	return (NULL);
 }
 
@@ -154,13 +146,11 @@ char	**ft_get_path_cmd(t_data *data, int nb_cmd, char **env, int *type)
 			rtn[i] = ft_take_path(start->str, env);
 			if (rtn[i] == NULL)
 			{
-				if (ft_is_file(start->str) == true)
-				{
-					if (open(start->str, O_EXCL) < 0)
-						perror("Error");
-					rtn[i] = ft_strdup(start->str);
-					type[i] = EXEC_P;
-				}
+				if (access(start->str, O_EXCL) == -1)
+					perror("Error");
+				rtn[i] = ft_strdup(start->str);
+
+				type[i] = EXEC_P;
 			}
 		}
 		if (start->flag == BUILT_F)
@@ -359,7 +349,7 @@ int	*ft_init_pipe_array(int nb_pipe)
 	int	array_size;
 
 	array_size = nb_pipe * 2;
-	rtn = ft_calloc(sizeof(int), nb_pipe);
+	rtn = ft_calloc(sizeof(int), array_size + 2);
 	return (rtn);
 }
 
@@ -446,7 +436,7 @@ t_pipex	*ft_init_struct_pipex(t_data *data)
 		ft_free_pipex_struct(rtn);
 		return (NULL);
 	}
-	rtn->cmd_array->type = ft_calloc(rtn->nb_pipe, sizeof(int));
+	rtn->cmd_array->type = ft_calloc(rtn->nb_pipe + 1, sizeof(int));
 	if (rtn->cmd_array->type == NULL)
 	{
 		ft_free_pipex_struct(rtn);

@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 11:12:35 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/13 11:03:05 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/14 09:26:54 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 //void	et initialiser var globale dan l'exec
 int	ft_exec_process(t_pipex *vars, t_data *data)
 {
-	exit(0);
+	printf("path %s \n flags %s \n type %d\n", vars->cmd_array->path_cmd[vars->i], vars->cmd_array->flags_cmd[vars->i][0], vars->cmd_array->type[vars->i]);
+	printf("%p\n", vars->cmd_array->flags_cmd[vars->i]);
 	if (vars->cmd_array->type[vars->i] == CMD_P
 		|| vars->cmd_array->type[vars->i] == EXEC_P)
 	{
@@ -23,14 +24,16 @@ int	ft_exec_process(t_pipex *vars, t_data *data)
 					vars->cmd_array->flags_cmd[vars->i],
 					vars->env) == -1)
 		{
-			if (vars->cmd_array->type[vars->i] == CMD_P)
-			{
-				exit(ft_errdstr("J.Mishell: Command not found", NULL));
-			}
-			else
-			{
-				exit(ft_errdstr("J.Mishell: File not found", NULL));
-			}
+			// if (vars->cmd_array->type[vars->i] == CMD_P || vars)
+			// {
+				// exit(0);
+				// exit(ft_errdstr("J.Mishell: Command not found", NULL));
+			// }
+			// else
+			// {
+				// exit(0);
+				// exit(ft_errdstr("J.Mishell: File not found", NULL));
+			// }
 		}
 	}
 	else
@@ -147,16 +150,19 @@ int	ft_files(t_data *data, t_pipex *vars)
 
 int	ft_pipex(t_pipex *vars, t_data *data)
 {
-	int	*arr_pid;
+	pid_t	*arr_pid;
 
 	ft_set_signal_parent();
 	vars->i = 0;
-	arr_pid = malloc(sizeof(int) * vars->nb_pipe);
+	arr_pid = malloc(sizeof(pid_t) * (vars->nb_pipe + 1));
 	while (vars->i < vars->nb_pipe + 1)
 	{
 		arr_pid[vars->i] = fork();
 		if (arr_pid[vars->i] < 0)
+		{
+			free(arr_pid);
 			return (false);
+		}
 		if (arr_pid[vars->i] == 0)
 		{
 			if (ft_files(data, vars) == false)
@@ -167,10 +173,16 @@ int	ft_pipex(t_pipex *vars, t_data *data)
 			ft_set_signal_child();
 			ft_pipexec(vars, data);
 		}
-		else if (vars->i > 0)
+		else if (arr_pid[vars->i] > 0)
 		{
-			close(vars->pipe_array[vars->i * 2 - 2]);
-			close(vars->pipe_array[vars->i * 2 - 1]);
+			printf ("%i\n", arr_pid[vars->i]);
+			if (vars->i > 0 && vars->pipe_array[vars->i * 2 - 2] > 2)
+			{
+				printf ("in %d\n", vars->pipe_array[vars->i * 2 - 2]);
+				printf ("out %d\n", vars->pipe_array[vars->i * 2 - 1]);
+				close(vars->pipe_array[vars->i * 2 - 2]);
+				close(vars->pipe_array[vars->i * 2 - 1]);
+			}
 		}
 		vars->i++;
 	}
@@ -180,5 +192,6 @@ int	ft_pipex(t_pipex *vars, t_data *data)
 		waitpid(arr_pid[vars->i], NULL, 0);
 		vars->i++;
 	}
+	free(arr_pid);
 	return (true);
 }
