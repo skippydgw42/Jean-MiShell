@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 11:12:35 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/15 11:13:46 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/15 14:40:25 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ int	ft_exec_process(t_pipex *vars, t_data *data)
 		{
 			if (vars->cmd_array->type[vars->i] == CMD_P)
 			{
-				printf("J.Mishell: Command not found\n");
+				printf("J.Mishell: %s: Command not found\n", vars->cmd_array->path_cmd[vars->i]);
 				exit(127);
 			}
 			if (vars->cmd_array->type[vars->i] == EXEC_P)
 			{
-				printf("J.Mishell: No such file or directory\n");
+				printf("J.Mishell: %s: No such file or directory\n", vars->cmd_array->path_cmd[vars->i]);
 				exit(127);
 			}
 		}
@@ -115,7 +115,15 @@ int	ft_pipex(t_pipex *vars, t_data *data)
 	while (vars->i <= vars->nb_pipe)
 	{
 		waitpid(arr_pid[vars->i], &status, 0);
-		g_val_rtn = WEXITSTATUS(status);
+		if (WIFSIGNALED(status))
+		{
+			if (g_val_rtn == 131)
+				printf("Quit: 3\n");
+			if (g_val_rtn == 130)
+				printf("\n");
+		}
+		else
+			g_val_rtn = WEXITSTATUS(status);
 		if (vars->heredoc_array[vars->i] != 0)
 			close(vars->heredoc_array[vars->i]);
 		vars->i++;

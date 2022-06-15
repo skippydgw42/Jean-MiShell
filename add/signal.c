@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:55:35 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/06/15 11:16:48 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/15 11:53:08 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@ void	ft_signal_handler(int sig)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
+		g_val_rtn = 1;
 	}
 }
 
 static void	ft_signal_handler_fork(int sig)
 {
 	if (sig == SIGINT)
-		printf("\n");
+		g_val_rtn = 130;
 	if (sig == SIGQUIT)
-		printf("Quite: 3\n");
-	g_val_rtn = 130;
+		g_val_rtn = 131;
 }
 
 void	ft_set_signal_prompt(void)

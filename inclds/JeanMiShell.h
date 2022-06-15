@@ -133,6 +133,11 @@ void	ft_set_signal_prompt(void);
 void	ft_set_signal_parent(void);
 void	ft_set_signal_child(void);
 int		ft_files(t_data *data, t_pipex *vars);
+char	*ft_get_varname(char *str);
+char	*ft_get_value(char *str);
+int		ft_already_export(char *varname, char *value, t_data *data);
+void	ft_add_back(char *varname, char *value, t_data *data);
+void	ft_print_export(t_data *data);
 
 /****************************************/
 /*----------------SRCS------------------*/
