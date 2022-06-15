@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 18:07:35 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/14 15:09:40 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/14 16:25:46 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ int	ft_npipe(char *str)
 		// if (str[i]) ==> si on l enleve->overflow
 		i++;
 		// NOTE Truc bizarre que je tente
-		// if (i < size)
-		// {
+		if (i < size)
+		{
 			while (str[i] && (str[i] == ' ' && ft_quotes(str[i], q) == 0))
 				i++;
-		// }
-		// if (i >= size)
-			// break ;
+		}
+		if (i >= size)
+			break ;
 	}
 	if (x == i - 1 && str[x] != '|')
 		ct++;

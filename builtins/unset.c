@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 15:58:28 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/06/10 14:25:08 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/15 09:51:47 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static void	ft_unset_str(char *varname, t_data *data)
 
 	previous = NULL;
 	env = data->lstenv;
+	if (env == NULL)
+		return ;
 	while (env)
 	{
 		if (env->is_export == 1 && ft_strcmp(varname, env->varname) == 0)

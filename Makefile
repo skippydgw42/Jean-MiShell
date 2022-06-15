@@ -6,7 +6,7 @@
 #    By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/26 15:59:40 by ltrinchi          #+#    #+#              #
-#    Updated: 2022/06/14 14:48:24 by ltrinchi         ###   ########lyon.fr    #
+#    Updated: 2022/06/15 10:18:45 by ltrinchi         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,8 @@ ADD_WITHOUT_PATH =	\
 					check_varname.c \
 					signal.c \
 					err.c \
-					init_tty_setting.c
+					init_tty_setting.c \
+					files.c
 
 PARSING_WITHOUT_PATH = \
 					prepars_utils.c \
@@ -152,7 +153,7 @@ $(OBJS_EXEC):$(PATH_TO_OBJS)%.o	: $(PATH_TO_EXEC)%.c Makefile $(HEADER) $(LIBFT_
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_A) $(READLINE_LIB) $(READLINE_HOMEBREW_LIB) -o $(NAME)
-	# printf "\n$(GREEN)✅ $(NAME) has been build 👍$(WHITE)\n"
+	printf "\n$(GREEN)✅ $(NAME) has been build 👍$(WHITE)\n"
 	# printf "$(BLUE)"
 	# echo ""
 	# echo "               _                        __  __ _ ____  _          _ _                  "

@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 11:12:35 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/14 14:54:26 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/14 17:02:09 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,80 +70,10 @@ int	ft_pipexec(t_pipex *vars, t_data *data)
 	return (1);
 }
 
-static int	ft_get_type(char *str)
-{
-	if (ft_strcmp(str, "<") == 0)
-		return (INPUT_P);
-	if (ft_strcmp(str, "<<") == 0)
-		return (HEREDOC_P);
-	if (ft_strcmp(str, ">") == 0)
-		return (OUTPUT_P);
-	if (ft_strcmp(str, ">>") == 0)
-		return (OUTPUT_APPEND_P);
-	return (false);
-}
-
-int	ft_files(t_data *data, t_pipex *vars)
-{
-	int		i;
-	int		type;
-	t_args	*start;
-
-	i = 0;
-	start = data->args_start;
-	while (i < vars->i)
-	{
-		start = start->next;
-		if (start->flag == PIPE_F)
-			i++;
-	}
-	while (start)
-	{
-		if (start->flag == REDIR_F || start->flag == HD_F)
-		{
-			type = ft_get_type(start->str);
-			start = start->next;
-			if (type == INPUT_P)
-			{
-				if (vars->fd_in != 0)
-					close(vars->fd_in);
-				vars->fd_in = open(start->str, O_RDONLY);
-				if (vars->fd_in < 0)
-					return (false);
-			}
-			if (type == HEREDOC_P)
-			{
-				vars->fd_in = vars->heredoc_array[vars->i];
-			}
-			if (type == OUTPUT_P)
-			{
-				if (vars->fd_out != 0)
-					close(vars->fd_out);
-				vars->fd_out = open(start->str, O_TRUNC | O_WRONLY | O_CREAT,
-						0666);
-				if (vars->fd_out < 0)
-					return (false);
-			}
-			if (type == OUTPUT_APPEND_P)
-			{
-				if (vars->fd_out != 0)
-					close(vars->fd_out);
-				vars->fd_out = open(start->str, O_APPEND | O_WRONLY | O_CREAT,
-						0666);
-				if (vars->fd_out < 0)
-					return (false);
-			}
-		}
-		start = start->next;
-		if (!start || start->flag == PIPE_F)
-			break ;
-	}
-	return (true);
-}
-
 int	ft_pipex(t_pipex *vars, t_data *data)
 {
 	pid_t	*arr_pid;
+	int		status;
 
 	ft_set_signal_parent();
 	vars->i = 0;
@@ -160,7 +90,7 @@ int	ft_pipex(t_pipex *vars, t_data *data)
 		{
 			if (ft_files(data, vars) == false)
 			{
-				perror("Error:");
+				perror("Error");
 				exit(0);
 			}
 			ft_set_signal_child();
@@ -179,7 +109,10 @@ int	ft_pipex(t_pipex *vars, t_data *data)
 	vars->i = 0;
 	while (vars->i <= vars->nb_pipe)
 	{
-		waitpid(arr_pid[vars->i], NULL, 0);
+		waitpid(arr_pid[vars->i], &status, 0);
+		g_val_rtn = WEXITSTATUS(status);
+		if (vars->heredoc_array[vars->i] != 0)
+			close(vars->heredoc_array[vars->i]);
 		vars->i++;
 	}
 	free(arr_pid);

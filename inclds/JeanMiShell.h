@@ -131,6 +131,7 @@ void	ft_signal_handler(int sig);
 void	ft_set_signal_prompt(void);
 void	ft_set_signal_parent(void);
 void	ft_set_signal_child(void);
+int		ft_files(t_data *data, t_pipex *vars);
 
 /****************************************/
 /*----------------SRCS------------------*/

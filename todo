@@ -3,4 +3,3 @@ cat > 1 Makefile
 
 exit builtin
 env -i + cd .. > segfautl
-les redirections ne fonction pas avec les builtins
