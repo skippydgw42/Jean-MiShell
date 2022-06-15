@@ -3,14 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   prepars_pipe.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 18:07:35 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/14 16:25:46 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/15 18:14:04 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclds/JeanMiShell.h"
+
+void	ft_npipe_help(char *str, int *i, int *x, int *q)
+{
+	while (str[*i] && str[*i] != '|')
+	{
+		*q = ft_quotes(str[*i], *q);
+		if (str[*i] != ' ')
+			*x = 1;
+		*i += 1;
+	}
+}
+
+int	ft_npipe_hlp(char *str, int *i, int size, int q)
+{
+	if (*i < size)
+	{
+		while (str[*i] && (str[*i] == ' ' && ft_quotes(str[*i], q) == 0))
+			*i += 1;
+	}
+	if (*i >= size)
+		return (0);
+	return (1);
+}
 
 int	ft_npipe(char *str)
 {
@@ -27,25 +50,12 @@ int	ft_npipe(char *str)
 	while (str[i])
 	{
 		x = 0;
-		while (str[i] && str[i] != '|')
-		{
-			q = ft_quotes(str[i], q);
-			if (str[i] != ' ')
-				x = 1;
-			i++;
-		}
+		ft_npipe_help(str, &i, &x, &q);
 		if (q == 0 && str[i] == '|')
 			ct = ct + x + 1;
 		x = i;
-		// if (str[i]) ==> si on l enleve->overflow
 		i++;
-		// NOTE Truc bizarre que je tente
-		if (i < size)
-		{
-			while (str[i] && (str[i] == ' ' && ft_quotes(str[i], q) == 0))
-				i++;
-		}
-		if (i >= size)
+		if (!ft_npipe_hlp(str, &i, size, q))
 			break ;
 	}
 	if (x == i - 1 && str[x] != '|')

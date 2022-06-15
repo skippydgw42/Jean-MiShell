@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 14:22:36 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/05/23 10:37:47 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/15 17:21:00 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ int	ft_rollst(t_env **lst, char *str, int q)
 
 int	ft_paralcpy(t_data *data, char *str, char *dst, int q)
 {
-	int	i;
-	int	j;
-	int	roll;
+	int		i;
+	int		j;
+	int		roll;
 	char	*g_var;
 
 	i = 0;

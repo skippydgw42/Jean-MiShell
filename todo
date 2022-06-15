@@ -1,2 +1,2 @@
 Petit pb avec les signaux
-echo "'test' test'test'" marche pas bien
+probleme lors de l'appel d'une variable inexistante ($abc) => parsing

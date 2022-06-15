@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/26 15:59:40 by ltrinchi          #+#    #+#              #
-#    Updated: 2022/06/15 16:26:34 by ltrinchi         ###   ########lyon.fr    #
+#    Updated: 2022/06/15 18:39:20 by mdegraeu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,14 +42,17 @@ ADD_WITHOUT_PATH =	\
 
 PARSING_WITHOUT_PATH = \
 					prepars_utils.c \
+					prepars_utils_help.c \
 					pars_utils.c \
 					prepars_pipe.c \
 					postpars_utils.c \
 					parsing.c \
 					postpars.c \
 					check_flag.c \
+					check_flag_utils.c \
 					pars_err.c \
 					thirdsplit.c \
+					thirdsplit_utils.c \
 					fourthsplit.c
 
 EXEC_WITHOUT_PATH = \

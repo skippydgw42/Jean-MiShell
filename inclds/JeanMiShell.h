@@ -156,13 +156,16 @@ int		ft_env(t_data *data);
 int		ft_export(char **str, t_data *data);
 void	ft_unset(char **str, t_data *data);
 int		ft_call_builtins(t_pipex *vars, t_data *data, char **cflags);
-void    ft_exit(char **cflags);
+void	ft_exit(char **cflags);
 
 /****************************************/
 /*---------------PARSING----------------*/
 /****************************************/
 int		ft_quotes(char c, int q);
 void	ft_subcpy(t_args *new, char *str);
+void	ft_replacestr(t_args *lstargs);
+void	ft_delspace(t_args *lstargs);
+int		ft_sublen(char *str);
 int		ft_nargs(char *str);
 int		ft_is_close(char *str);
 void	ft_preparsing(t_args **lstargs, char *str);
@@ -184,9 +187,12 @@ int		ft_needsplit(char *str);
 void	ft_splitlst(t_args *lstargs, int n);
 void	ft_secondsplitlst(t_data *data);
 void	ft_thirdsplitlst(t_data *data);
-void    ft_fourthsplitlst(t_data *data);
-void 	ft_needsplitvar(t_args *lstargs);
+int		ft_nredirsplit(char *str);
+int		ft_setnew(t_args *new, char *str);
+void	ft_fourthsplitlst(t_data *data);
+void	ft_needsplitvar(t_args *lstargs);
 void	ft_flag(t_data *data);
+int		ft_cmdbuilt_flags(char *str);
 int		ft_piperedir_flags(char *str);
 
 int		ft_parserr(t_data *data);
