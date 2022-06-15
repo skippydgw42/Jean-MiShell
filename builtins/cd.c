@@ -6,17 +6,16 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 11:57:11 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/15 11:09:23 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/15 15:55:23 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclds/JeanMiShell.h"
 
-char	*ft_cpyold_path(t_data *data)
+static char	*ft_cpyold_path(t_data *data)
 {
 	char	*ret;
 
-	//free(OLDPWD) ?
 	while (data->lstenv && ft_strcmp(data->lstenv->varname, "PWD") != 0)
 		data->lstenv = data->lstenv->next;
 	ret = ft_strdup(data->lstenv->value);
@@ -24,12 +23,11 @@ char	*ft_cpyold_path(t_data *data)
 	return (ret);
 }
 
-int	ft_check_pwd(t_data *data, char *str)
+static int	ft_check_pwd(t_data *data, char *str)
 {
 	t_env	*ptr;
 
 	ptr = data->env_start;
-	
 	if (ptr == NULL)
 		return (0);
 	while (ptr)
@@ -41,7 +39,7 @@ int	ft_check_pwd(t_data *data, char *str)
 	return (0);
 }
 
-void	ft_setpwd(t_data *data, char *varname, int x)
+static void	ft_setpwd(t_data *data, char *varname, int x)
 {
 	char	**str;
 	char	*tmp;
@@ -60,42 +58,28 @@ void	ft_setpwd(t_data *data, char *varname, int x)
 	ft_export(str, data);
 }
 
-
-int	ft_check_dstr(char **str)
+static int	ft_check_dstr(char **str)
 {
 	int	i;
 
 	i = 0;
 	while (str[i])
 		i++;
-	// if (i >= 3)
-	// {
-	// 	printf("cd : too many arguments\n");
-	// 	return (0);
-	// }
-	// if (i == 2)
-	// {
-	// 	printf("string not in pwd\n");
-	// 	return (0);
-	// }
 	return (i);
 }
 
 void	ft_cd(char **str, t_data *data)
 {
-	int	i;
-
-	i = 0;
 	if (!str)
 		return ;
 	if (!ft_check_dstr(str))
 		return ;
 	if (chdir(str[0]) == -1)
-	 {
+	{
 		perror(str[0]);
 		g_val_rtn = 1;
-	 }
-	else //if (data->lstenv)
+	}
+	else
 	{
 		if (ft_check_pwd(data, "PWD"))
 		{
@@ -107,33 +91,8 @@ void	ft_cd(char **str, t_data *data)
 			data->lstenv->value = getcwd(NULL, 0);
 		}
 		else
-		 {
 			ft_setpwd(data, "PWD", 1);
-		 }
 	}
 	data->lstenv = data->env_start;
 	g_val_rtn = 0;
 }
-
-// void	ft_cd(char *str, t_data *data)
-// {
-// 	if (!str)
-// 		return ;
-// 	if (chdir(str) == -1)
-// 		perror(str);
-// 	else //if (data->lstenv)
-// 	{
-// 		if (ft_check_pwd(data, "PWD"))
-// 		{
-// 			ft_setpwd(data, "OLDPWD", 0);
-// 			while (ft_strcmp(data->lstenv->varname, "PWD") != 0)
-// 				data->lstenv = data->lstenv->next;
-// 			if (data->lstenv->value)
-// 				free(data->lstenv->value);
-// 			data->lstenv->value = getcwd(NULL, 0);
-// 		}
-// 		else
-// 			ft_setpwd(data, "PWD", 1);
-// 	}
-// 	data->lstenv = data->env_start;
-// }

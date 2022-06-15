@@ -6,7 +6,7 @@
 #    By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/26 15:59:40 by ltrinchi          #+#    #+#              #
-#    Updated: 2022/06/15 14:18:12 by ltrinchi         ###   ########lyon.fr    #
+#    Updated: 2022/06/15 16:26:34 by ltrinchi         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,8 @@ BUILTINS_WITHOUT_PATH = \
 					pwd.c \
 					env.c \
 					export.c \
+					export_tools_1.c \
+					export_tools_2.c \
 					unset.c \
 					call_builtins.c \
 					exit.c
@@ -97,7 +99,6 @@ HEADER = $(addprefix $(PATH_TO_HEADER), $(HEADER_WITHOUT_PATH))
 
 	##### COMMANDS ######
 CC = gcc
-# CFLAGS = -Wall -Wextra -Werror -g
 CFLAGS = -Wall -Wextra -Werror -g
 RM = rm -rf
 	#####################
