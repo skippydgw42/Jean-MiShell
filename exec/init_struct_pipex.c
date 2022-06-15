@@ -146,10 +146,7 @@ char	**ft_get_path_cmd(t_data *data, int nb_cmd, char **env, int *type)
 			rtn[i] = ft_take_path(start->str, env);
 			if (rtn[i] == NULL)
 			{
-				if (access(start->str, O_EXCL) == -1)
-					perror("Error");
 				rtn[i] = ft_strdup(start->str);
-
 				type[i] = EXEC_P;
 			}
 		}

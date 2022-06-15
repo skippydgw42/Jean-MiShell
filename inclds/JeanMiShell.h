@@ -131,6 +131,7 @@ void	ft_signal_handler(int sig);
 void	ft_set_signal_prompt(void);
 void	ft_set_signal_parent(void);
 void	ft_set_signal_child(void);
+int		ft_files(t_data *data, t_pipex *vars);
 
 /****************************************/
 /*----------------SRCS------------------*/
@@ -149,6 +150,7 @@ int		ft_env(t_data *data);
 int		ft_export(char **str, t_data *data);
 void	ft_unset(char **str, t_data *data);
 int		ft_call_builtins(t_pipex *vars, t_data *data, char **cflags);
+void    ft_exit(char **cflags);
 
 /****************************************/
 /*---------------PARSING----------------*/

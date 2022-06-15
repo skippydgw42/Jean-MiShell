@@ -65,6 +65,10 @@ static void	ft_print_export(t_data *data)
 	while (nb_print < size_lst)
 	{
 		buff = NULL;
+		if (data->lstenv == NULL)
+			{
+				return ;
+			}
 		while (data->lstenv)
 		{
 			if (ft_strcmp(buff, data->lstenv->varname) >= 0)
@@ -85,7 +89,6 @@ static void	ft_print_export(t_data *data)
 		data->lstenv = data->env_start;
 		nb_print++;
 	}
-	free(was_print);
 }
 
 static int	ft_already_export(char *varname, char *value, t_data *data)
@@ -93,6 +96,8 @@ static int	ft_already_export(char *varname, char *value, t_data *data)
 	t_env	*env;
 
 	env = data->env_start;
+	if (env == NULL)
+		return (false);
 	while (env)
 	{
 		if (ft_strcmp(varname, env->varname) == 0)
@@ -148,7 +153,6 @@ void	ft_add_back(char *varname, char *value, t_data *data)
 	if (!new)
 	{
 		perror("Error:");
-		exit(0);
 	}
 	new->varname = ft_strdup(varname);
 	free(varname);
@@ -156,7 +160,13 @@ void	ft_add_back(char *varname, char *value, t_data *data)
 	free(value);
 	new->next = NULL;
 	new->is_export = true;
-	buff->next = new;
+	if (buff != NULL)
+		buff->next = new;
+	else
+	 {
+		data->env_start = new;
+		data->lstenv = new;
+	 }
 }
 
 int	ft_export_str(char *str, t_data *data)
@@ -168,6 +178,7 @@ int	ft_export_str(char *str, t_data *data)
 	if (ft_check_varname(varname) == false)
 	{
 		printf("Jean_MiShell: export: `%s': not a valid identifier\n", varname);
+		g_val_rtn = 1;
 	}
 	value = ft_get_value(str);
 	if (ft_already_export(varname, value, data) == true)
@@ -175,6 +186,7 @@ int	ft_export_str(char *str, t_data *data)
 		return (EXIT_SUCCESS);
 	}
 	ft_add_back(varname, value, data);
+	g_val_rtn = 0;
 	return (EXIT_SUCCESS);
 }
 

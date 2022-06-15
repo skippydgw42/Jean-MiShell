@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 08:45:05 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/06/13 11:06:47 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/15 11:07:31 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ int	ft_call_builtins(t_pipex *vars, t_data *data, char **cflags)
 	}
 	else if (vars->cmd_array->type[vars->i] == BUILT_CD_P)
 	{
-		// TODO Modifier pour quil prenne char **flags_cmd
-		ft_cd(vars->cmd_array->flags_cmd[vars->i][0], data);
+		ft_cd(vars->cmd_array->flags_cmd[vars->i], data);
 	}
 	else if (vars->cmd_array->type[vars->i] == BUILT_PWD_P)
 	{
@@ -44,7 +43,7 @@ int	ft_call_builtins(t_pipex *vars, t_data *data, char **cflags)
 	}
 	else if (vars->cmd_array->type[vars->i] == BUILT_EXIT_P)
 	{
-		exit(0);
+		ft_exit(cflags);
 	}
 	// ft_free_dstr(cflags);
 	return (1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 13:21:15 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/04/20 19:05:54 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/15 11:09:55 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,5 @@ void	ft_echo(char **str)
 	}
 	if (i == 0 || n == 0)
 		printf("\n");
+	g_val_rtn = 0;
 }

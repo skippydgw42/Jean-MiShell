@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:24:42 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/05/05 16:51:15 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/15 09:27:40 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_env	*ft_set_lstenv(char **env)
 
 	i = 0;
 	buff = NULL;
+	start = NULL;
 	while (env[i])
 	{
 		split = ft_split(env[i], '=');
