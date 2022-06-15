@@ -150,6 +150,7 @@ int		ft_env(t_data *data);
 int		ft_export(char **str, t_data *data);
 void	ft_unset(char **str, t_data *data);
 int		ft_call_builtins(t_pipex *vars, t_data *data, char **cflags);
+void    ft_exit(char **cflags);
 
 /****************************************/
 /*---------------PARSING----------------*/

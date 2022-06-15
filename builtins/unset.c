@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 15:58:28 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/06/15 09:51:47 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/15 11:00:21 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,5 @@ void	ft_unset(char **varnames, t_data *data)
 		ft_unset_str(varnames[i], data);
 		i++;
 	}
+	g_val_rtn = 0;
 }

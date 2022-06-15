@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 16:34:19 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/04/21 13:31:22 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/15 10:58:44 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,4 +19,5 @@ void	ft_pwd(void)
 	pwd = getcwd(NULL, 0);
 	printf("%s\n", pwd);
 	free(pwd);
+	g_val_rtn = 0;
 }

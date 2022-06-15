@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 11:57:11 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/15 09:33:33 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/15 11:09:23 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,17 +68,17 @@ int	ft_check_dstr(char **str)
 	i = 0;
 	while (str[i])
 		i++;
-	if (i >= 3)
-	{
-		printf("cd : too many arguments\n");
-		return (0);
-	}
-	else if (i == 2)
-	{
-		printf("string not in pwd\n");
-		return (0);
-	}
-	return (1);
+	// if (i >= 3)
+	// {
+	// 	printf("cd : too many arguments\n");
+	// 	return (0);
+	// }
+	// if (i == 2)
+	// {
+	// 	printf("string not in pwd\n");
+	// 	return (0);
+	// }
+	return (i);
 }
 
 void	ft_cd(char **str, t_data *data)
@@ -91,7 +91,10 @@ void	ft_cd(char **str, t_data *data)
 	if (!ft_check_dstr(str))
 		return ;
 	if (chdir(str[0]) == -1)
+	 {
 		perror(str[0]);
+		g_val_rtn = 1;
+	 }
 	else //if (data->lstenv)
 	{
 		if (ft_check_pwd(data, "PWD"))
@@ -109,6 +112,7 @@ void	ft_cd(char **str, t_data *data)
 		 }
 	}
 	data->lstenv = data->env_start;
+	g_val_rtn = 0;
 }
 
 // void	ft_cd(char *str, t_data *data)

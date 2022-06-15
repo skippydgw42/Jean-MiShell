@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 11:12:35 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/14 17:02:09 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/15 11:13:46 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,15 @@ int	ft_exec_process(t_pipex *vars, t_data *data)
 					vars->cmd_array->flags_cmd[vars->i],
 					vars->env) == -1)
 		{
-			if (vars->cmd_array->type[vars->i] == CMD_P || vars)
+			if (vars->cmd_array->type[vars->i] == CMD_P)
 			{
-				puts("J.Mishell: Command not found");
-				exit(0);
+				printf("J.Mishell: Command not found\n");
+				exit(127);
+			}
+			if (vars->cmd_array->type[vars->i] == EXEC_P)
+			{
+				printf("J.Mishell: No such file or directory\n");
+				exit(127);
 			}
 		}
 	}
@@ -33,7 +38,7 @@ int	ft_exec_process(t_pipex *vars, t_data *data)
 	{
 		ft_call_builtins(vars, data, vars->cmd_array->flags_cmd[vars->i]);
 	}
-	exit(0);
+	exit(g_val_rtn);
 	return (1);
 }
 

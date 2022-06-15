@@ -1,4 +1,1 @@
-echo $OLDPWD
-
-exit builtin
-env -i + cd .. > segfautl
+Petit pb avec les signaux

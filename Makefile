@@ -6,7 +6,7 @@
 #    By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/26 15:59:40 by ltrinchi          #+#    #+#              #
-#    Updated: 2022/06/15 10:18:45 by ltrinchi         ###   ########lyon.fr    #
+#    Updated: 2022/06/15 10:23:28 by ltrinchi         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ BUILTINS_WITHOUT_PATH = \
 					env.c \
 					export.c \
 					unset.c \
-					call_builtins.c
+					call_builtins.c \
+					exit.c
 
 ADD_WITHOUT_PATH =	\
 					free_dstr.c \
