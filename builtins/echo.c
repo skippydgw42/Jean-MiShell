@@ -37,19 +37,25 @@ int	ft_check_flag(char *str)
 	return (0);
 }
 
-void	ft_echo(char *str)
+void	ft_echo(char **str)
 {
 	int	i;
+	int	n;
 
 	i = 0;
-	if (str)
+	n = 0;
+	while (str[i])
 	{
-		i = ft_check_flag(str);
-		if (str[i])
-			printf("%s", &str[i]);
-		if (i == 0)
-			printf("\n");
+		if (i > 0 && n != i)
+			printf(" ");
+		if (!ft_strcmp(str[i], "$?"))
+			printf("%s", ft_itoa(g_val_rtn));
+		else if (ft_check_flag(str[i]) && n == i)
+			n++;
+		else
+			printf("%s", str[i]);
+		i++;
 	}
-	else
+	if (i == 0 || n == 0)
 		printf("\n");
 }

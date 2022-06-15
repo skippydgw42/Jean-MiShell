@@ -18,6 +18,7 @@ int	main(int ac, char **av, char **env)
 
 	(void)ac;
 	(void)av;
+	g_val_rtn = 0;
 	data = malloc(sizeof(t_data));
 	if (!data)
 	{

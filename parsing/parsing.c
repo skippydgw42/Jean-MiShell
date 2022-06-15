@@ -55,7 +55,10 @@ int	ft_parsing(t_data *data, char *str)
 {
 	data->lstargs = NULL;
 	if (ft_is_close(str))
+	{
+		g_val_rtn = 258;
 		return (ft_errquotes());
+	}
 	ft_presplitpipe(&data->lstargs, str);
 	data->args_start = data->lstargs;
 	ft_secondsplitlst(data);
@@ -63,6 +66,9 @@ int	ft_parsing(t_data *data, char *str)
 	ft_flag(data);
 	ft_postpars(data);
 	if (!ft_parserr(data))
+	{
+		g_val_rtn = 258;
 		return (0);
+	}
 	return (true);
 }

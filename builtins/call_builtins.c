@@ -18,13 +18,12 @@ int	ft_call_builtins(t_pipex *vars, t_data *data, char **cflags)
 {
 	if (vars->cmd_array->type[vars->i] == BUILT_ECHO_P)
 	{
-		// TODO Modifier pour quil prenne char **flags_cmd
-		ft_echo(vars->cmd_array->flags_cmd[vars->i][0]);
+		ft_echo(vars->cmd_array->flags_cmd[vars->i]);
 	}
 	else if (vars->cmd_array->type[vars->i] == BUILT_CD_P)
 	{
 		// TODO Modifier pour quil prenne char **flags_cmd
-		ft_cd(vars->cmd_array->flags_cmd[vars->i][0], data);
+		ft_cd(vars->cmd_array->flags_cmd[vars->i], data);
 	}
 	else if (vars->cmd_array->type[vars->i] == BUILT_PWD_P)
 	{
