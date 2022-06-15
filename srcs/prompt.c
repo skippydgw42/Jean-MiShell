@@ -6,11 +6,28 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 17:47:24 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/15 16:50:12 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/15 17:05:30 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclds/JeanMiShell.h"
+
+size_t	ft_checkwspace(char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == 32)
+			i++;
+		else if (str[i] >= 9 && str[i] <= 13)
+			i++;
+		else
+			break ;
+	}
+	return (i);
+}
 
 void	ft_prompt(t_data *data)
 {
@@ -25,9 +42,12 @@ void	ft_prompt(t_data *data)
 		if (ft_strlen(str))
 		{
 			add_history(str);
-			if (ft_parsing(data, str) == true)
-				ft_exec(data);
-			ft_free_lstargs(data);
+			if (ft_checkwspace(str) < ft_strlen(str))
+			{
+				if (ft_parsing(data, str) == true)
+					ft_exec(data);
+				ft_free_lstargs(data);
+			}
 		}
 		else if (str == NULL)
 		{

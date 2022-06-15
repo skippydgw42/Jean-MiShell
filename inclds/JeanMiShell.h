@@ -36,6 +36,7 @@
 # define FILE_F 5
 # define STR_F 6
 # define DELIM_F 7
+# define VARSPLIT_F 8
 
 // Define for init_pipex_struct
 # define INPUT_P 1
@@ -184,6 +185,7 @@ void	ft_splitlst(t_args *lstargs, int n);
 void	ft_secondsplitlst(t_data *data);
 void	ft_thirdsplitlst(t_data *data);
 void    ft_fourthsplitlst(t_data *data);
+void 	ft_needsplitvar(t_args *lstargs);
 void	ft_flag(t_data *data);
 int		ft_piperedir_flags(char *str);
 

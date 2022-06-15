@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 13:32:20 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/15 14:11:49 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/15 16:51:41 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	ft_presplitpipe(t_args **lstargs, char *str)
 
 void	ft_postpars(t_data *data)
 {
+	ft_needsplitvar(data->lstargs);
 	while (data->lstargs)
 	{
 		ft_replace(data, data->lstargs);
@@ -64,8 +65,8 @@ int	ft_parsing(t_data *data, char *str)
 	ft_secondsplitlst(data);
 	ft_thirdsplitlst(data);
 	ft_postpars(data);
-	ft_flag(data);
 	ft_fourthsplitlst(data);
+	ft_flag(data);
 	if (!ft_parserr(data))
 	{
 		g_val_rtn = 258;
@@ -73,3 +74,11 @@ int	ft_parsing(t_data *data, char *str)
 	}
 	return (true);
 }
+
+	// printf("=======FLAG========\n");
+	// while (data->lstargs)
+	// {
+	// 	printf("f: %d s: %s\n", data->lstargs->flag, data->lstargs->str);
+	// 	data->lstargs = data->lstargs->next;
+	// }
+	// data->lstargs = data->args_start;
