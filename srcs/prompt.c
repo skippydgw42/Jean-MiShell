@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 17:47:24 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/14 15:33:07 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/15 16:50:12 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_prompt(t_data *data)
 		}
 		else if (str == NULL)
 		{
-			printf("exit\n"); // NOTE Gestion de ctrl-d
+			printf("exit\n");
 			exit(0);
 		}
 		free(str);

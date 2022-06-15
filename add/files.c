@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 15:22:04 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/06/15 15:42:40 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/15 16:45:18 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	ft_files_help(t_args *start, t_pipex *vars)
 	{
 		type = ft_get_type(start->str);
 		start = start->next;
-		if (vars->fd_in != 0)
+		if (vars->fd_in != 0 && type != HEREDOC_P)
 			close(vars->fd_in);
 		if (type == INPUT_P)
 			vars->fd_in = open(start->str, O_RDONLY);
