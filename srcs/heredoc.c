@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:38:54 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/06/15 16:49:46 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/15 17:08:50 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,6 @@ int	ft_heredoc(char *delimiter)
 	if (pid == 0)
 		ft_heredoc_child(fd_pipe, delimiter);
 	else
-	{
 		return (ft_heredoc_parent(pid, fd_pipe));
-	}
 	return (0);
 }
