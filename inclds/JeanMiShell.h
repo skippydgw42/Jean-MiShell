@@ -174,8 +174,11 @@ int		ft_separator(char c);
 char	*ft_cpytopipe(char *str, int q);
 int		ft_lentopipe(char *str, int q);
 int		ft_npipe(char *str);
+int		ft_needsplit(char *str);
+void	ft_splitlst(t_args *lstargs, int n);
 void	ft_secondsplitlst(t_data *data);
 void	ft_thirdsplitlst(t_data *data);
+void    ft_fourthsplitlst(t_data *data);
 void	ft_flag(t_data *data);
 int		ft_piperedir_flags(char *str);
 

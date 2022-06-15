@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/26 15:59:40 by ltrinchi          #+#    #+#              #
-#    Updated: 2022/06/15 10:23:28 by ltrinchi         ###   ########lyon.fr    #
+#    Updated: 2022/06/15 14:05:35 by mdegraeu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,8 @@ PARSING_WITHOUT_PATH = \
 					postpars.c \
 					check_flag.c \
 					pars_err.c \
-					thirdsplit.c
+					thirdsplit.c \
+					fourthsplit.c
 
 EXEC_WITHOUT_PATH = \
 					exec.c \
