@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 13:32:20 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/15 16:39:21 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/15 16:51:41 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,13 @@ void	ft_postpars(t_data *data)
 
 int	ft_parsing(t_data *data, char *str)
 {
-	int	i;
-
-	i = 0;
-	while (str[i] == ' ')
-		i++;
 	data->lstargs = NULL;
-	if (ft_is_close(&str[i]))
+	if (ft_is_close(str))
 	{
 		g_val_rtn = 258;
 		return (ft_errquotes());
 	}
-	ft_presplitpipe(&data->lstargs, &str[i]);
+	ft_presplitpipe(&data->lstargs, str);
 	data->args_start = data->lstargs;
 	ft_secondsplitlst(data);
 	ft_thirdsplitlst(data);
