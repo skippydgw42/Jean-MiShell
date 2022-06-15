@@ -6,33 +6,63 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 13:57:36 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/15 14:11:21 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/15 16:40:18 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclds/JeanMiShell.h"
 
+int ft_checkvar(char *str)
+{
+    size_t i;
+    int     q;
+
+    i = 0;
+    q = 0;
+    while (str[i])
+    {
+        q = ft_quotes(str[i], q);
+        if (q == 0 && str[i] == '$' && i < ft_strlen(str))
+            return (1);
+        i++;
+    }
+    return (0);
+}
+
+void ft_needsplitvar(t_args *lstargs)
+{
+    int     built;
+    t_args  *ptr;
+
+    built = 0;
+    ptr = lstargs;
+    while (ptr)
+    {
+        if (ptr->flag == BUILT_F)
+            built = 1;
+        if (ft_checkvar(ptr->str) && built == 0)
+            ptr->flag = VARSPLIT_F;
+        if (ptr->flag == PIPE_F)
+            built = 0;
+        ptr = ptr->next;
+    }
+}
+
 void    ft_fourthsplitlst(t_data *data)
 {
-    int exp;
+    int n;
 
-    exp = 0;
+    n = 0;
     while (data->lstargs)
     {
         if (data->lstargs->flag == PIPE_F && ft_strcmp(data->lstargs->str, "|"))
             data->lstargs->flag = STR_F;
-        if (data->lstargs->flag == BUILT_F)
+        if (data->lstargs->flag == VARSPLIT_F)
         {
-            if (!ft_strcmp(data->lstargs->str, "export"))
-                exp = 1;
-        }
-        if (data->lstargs->flag == PIPE_F)
-            exp = 0;
-        if (exp == 0)
-        {
-            exp = ft_needsplit(data->lstargs->str);
-            if (exp)
-                ft_splitlst(data->lstargs, exp);
+            n = ft_needsplit(data->lstargs->str);
+            if (n)
+                ft_splitlst(data->lstargs, n);
+            data->lstargs->flag = STR_F;
         }
         data->lstargs = data->lstargs->next;
     }
