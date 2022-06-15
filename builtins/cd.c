@@ -87,7 +87,7 @@ void	ft_cd(char **str, t_data *data)
 	if (!str)
 		return ;
 	if (!ft_check_dstr(str))
-		return (0);
+		return ;
 	if (chdir(str[0]) == -1)
 		perror(str[0]);
 	else //if (data->lstenv)

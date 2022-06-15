@@ -23,7 +23,7 @@ int	ft_call_builtins(t_pipex *vars, t_data *data, char **cflags)
 	else if (vars->cmd_array->type[vars->i] == BUILT_CD_P)
 	{
 		// TODO Modifier pour quil prenne char **flags_cmd
-		ft_cd(vars->cmd_array->flags_cmd[vars->i][0], data);
+		ft_cd(vars->cmd_array->flags_cmd[vars->i], data);
 	}
 	else if (vars->cmd_array->type[vars->i] == BUILT_PWD_P)
 	{

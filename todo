@@ -5,5 +5,3 @@ env -i + cd .. > segfautl
 les redirections ne fonction pas avec les builtins
 
 exit code avec les signaux
-exit code erreur commande
-exit code => rien ne marche, t'es nul
