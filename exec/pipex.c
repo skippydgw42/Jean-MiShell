@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 11:12:35 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/15 11:56:46 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/15 14:40:25 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,9 @@ int	ft_pipex(t_pipex *vars, t_data *data)
 		if (WIFSIGNALED(status))
 		{
 			if (g_val_rtn == 131)
-				printf("Quit: 3");
-			printf("\n");
+				printf("Quit: 3\n");
+			if (g_val_rtn == 130)
+				printf("\n");
 		}
 		else
 			g_val_rtn = WEXITSTATUS(status);

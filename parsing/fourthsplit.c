@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fourthsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 13:57:36 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/15 14:11:21 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/15 14:29:35 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void    ft_fourthsplitlst(t_data *data)
             data->lstargs->flag = STR_F;
         if (data->lstargs->flag == BUILT_F)
         {
-            if (!ft_strcmp(data->lstargs->str, "export"))
+            // if (!ft_strcmp(data->lstargs->str, "export"))
                 exp = 1;
         }
         if (data->lstargs->flag == PIPE_F)
