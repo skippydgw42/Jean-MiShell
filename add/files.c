@@ -6,12 +6,11 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 15:22:04 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/06/14 15:23:28 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/15 15:42:40 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclds/JeanMiShell.h"
-
 
 static int	ft_get_type(char *str)
 {
@@ -26,10 +25,34 @@ static int	ft_get_type(char *str)
 	return (false);
 }
 
+static int	ft_files_help(t_args *start, t_pipex *vars)
+{
+	int	type;
+
+	if (start->flag == REDIR_F || start->flag == HD_F)
+	{
+		type = ft_get_type(start->str);
+		start = start->next;
+		if (vars->fd_in != 0)
+			close(vars->fd_in);
+		if (type == INPUT_P)
+			vars->fd_in = open(start->str, O_RDONLY);
+		if (type == HEREDOC_P)
+			vars->fd_in = vars->heredoc_array[vars->i];
+		if (type == OUTPUT_P)
+			vars->fd_out = open(start->str, O_TRUNC | O_WRONLY | O_CREAT, 0666);
+		if (type == OUTPUT_APPEND_P)
+			vars->fd_out = open(start->str, O_APPEND | O_WRONLY | O_CREAT,
+					0666);
+		if (vars->fd_out < 0)
+			return (false);
+	}
+	return (true);
+}
+
 int	ft_files(t_data *data, t_pipex *vars)
 {
 	int		i;
-	int		type;
 	t_args	*start;
 
 	i = 0;
@@ -42,41 +65,8 @@ int	ft_files(t_data *data, t_pipex *vars)
 	}
 	while (start)
 	{
-		if (start->flag == REDIR_F || start->flag == HD_F)
-		{
-			type = ft_get_type(start->str);
-			start = start->next;
-			if (type == INPUT_P)
-			{
-				if (vars->fd_in != 0)
-					close(vars->fd_in);
-				vars->fd_in = open(start->str, O_RDONLY);
-				if (vars->fd_in < 0)
-					return (false);
-			}
-			if (type == HEREDOC_P)
-			{
-				vars->fd_in = vars->heredoc_array[vars->i];
-			}
-			if (type == OUTPUT_P)
-			{
-				if (vars->fd_out != 0)
-					close(vars->fd_out);
-				vars->fd_out = open(start->str, O_TRUNC | O_WRONLY | O_CREAT,
-						0666);
-				if (vars->fd_out < 0)
-					return (false);
-			}
-			if (type == OUTPUT_APPEND_P)
-			{
-				if (vars->fd_out != 0)
-					close(vars->fd_out);
-				vars->fd_out = open(start->str, O_APPEND | O_WRONLY | O_CREAT,
-						0666);
-				if (vars->fd_out < 0)
-					return (false);
-			}
-		}
+		if (ft_files_help(start, vars) == false)
+			return (false);
 		start = start->next;
 		if (!start || start->flag == PIPE_F)
 			break ;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:24:32 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/05/20 15:54:50 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/15 15:48:41 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int	ft_free_lstenv(t_data *data)
 
 int	ft_free_data(t_data *data)
 {
-	// ft_free_lstargs(data);
 	ft_free_lstenv(data);
 	free(data);
 	return (EXIT_SUCCESS);
