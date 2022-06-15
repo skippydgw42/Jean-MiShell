@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 17:47:24 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/15 17:11:54 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/15 17:12:27 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_prompt(t_data *data)
 		}
 		else if (str == NULL)
 		{
-			printf("exit\n"); // NOTE Gestion de ctrl-d
+			printf("exit\n");
 			exit(0);
 		}
 		free(str);
