@@ -6,13 +6,11 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 08:45:05 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/06/15 11:07:31 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/15 14:05:27 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclds/JeanMiShell.h"
-
-// TODO GERE LES REDIRECTIONS DE FICHIER
 
 int	ft_call_builtins(t_pipex *vars, t_data *data, char **cflags)
 {

@@ -103,8 +103,6 @@ static char	*ft_take_path(char *cmd, char **env)
 	char	*ptr;
 
 	i = 0;
-	if (ft_strchr(cmd, '/'))
-		return (NULL);
 	path = NULL;
 	list_path = ft_split_path(env);
 	if (list_path == NULL)
@@ -147,7 +145,8 @@ char	**ft_get_path_cmd(t_data *data, int nb_cmd, char **env, int *type)
 			if (rtn[i] == NULL)
 			{
 				rtn[i] = ft_strdup(start->str);
-				type[i] = EXEC_P;
+				if (ft_strchr(start->str, '/'))
+					type[i] = EXEC_P;
 			}
 		}
 		if (start->flag == BUILT_F)

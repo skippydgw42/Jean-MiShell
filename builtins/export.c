@@ -73,7 +73,7 @@ static void	ft_print_export(t_data *data)
 		{
 			if (ft_strcmp(buff, data->lstenv->varname) >= 0)
 			{
-				if (was_print == NULL || strcmp(was_print,
+				if (was_print == NULL || ft_strcmp(was_print,
 						data->lstenv->varname) < 0)
 				{
 					free(buff);
