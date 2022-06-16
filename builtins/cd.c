@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 11:57:11 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/16 15:47:03 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/16 16:23:09 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	ft_cd(char **str, t_data *data)
 		}
 		else
 			ft_setpwd(data, "PWD", 1);
+		g_val_rtn = 0;
 	}
 	data->lstenv = data->env_start;
-	g_val_rtn = 0;
 }
