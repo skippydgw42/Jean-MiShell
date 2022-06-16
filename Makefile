@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/26 15:59:40 by ltrinchi          #+#    #+#              #
-#    Updated: 2022/06/16 13:12:59 by ltrinchi         ###   ########lyon.fr    #
+#    Updated: 2022/06/16 14:55:54 by mdegraeu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,8 @@ PARSING_WITHOUT_PATH = \
 					pars_err.c \
 					thirdsplit.c \
 					thirdsplit_utils.c \
-					fourthsplit.c
+					fourthsplit.c \
+					delnodes.c
 
 EXEC_WITHOUT_PATH = \
 					exec.c \
@@ -119,8 +120,8 @@ RM = rm -rf
 PATH_TO_LIBFT = ./libft/
 LIBFT_A = $(PATH_TO_LIBFT)libft.a
 READLINE_LIB = -lreadline
-READLINE_HOMEBREW_LIB = -L /opt/homebrew/opt/readline/lib
-READLINE_HOMEBREW_INCLUDE = -I /opt/homebrew/opt/readline/include
+READLINE_HOMEBREW_LIB = -L ~/.brew/opt/readline/lib
+READLINE_HOMEBREW_INCLUDE = -I ~/.brew/opt/readline/include
 	###################
 
 	#################################

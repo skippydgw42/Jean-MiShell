@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   JeanMiShell.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 13:14:47 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/06/16 13:14:48 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/16 15:08:26 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ int		ft_free_dstr(char **str);
 void	ft_free_tstr(char ***src);
 int		ft_free_data(t_data *data);
 int		ft_free_lstargs(t_data *data);
+int		ft_freenode(t_args *lstargs);
 int		ft_check_varname(char *varname);
 int		ft_errquotes(void);
 int		ft_errmsg(t_args *lstargs);
@@ -206,7 +207,7 @@ void	ft_needsplitvar(t_args *lstargs);
 void	ft_flag(t_data *data);
 int		ft_cmdbuilt_flags(char *str);
 int		ft_piperedir_flags(char *str);
-
+int		ft_delnodes(t_data *data);
 int		ft_parserr(t_data *data);
 
 /****************************************/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:24:32 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/15 15:48:41 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/16 15:09:06 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,14 @@ int	ft_free_data(t_data *data)
 {
 	ft_free_lstenv(data);
 	free(data);
+	return (EXIT_SUCCESS);
+}
+
+int	ft_freenode(t_args *lstargs)
+{
+	if (lstargs->str)
+		free(lstargs->str);
+	if (lstargs)
+		free(lstargs);
 	return (EXIT_SUCCESS);
 }
