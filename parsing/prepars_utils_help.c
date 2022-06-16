@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   prepars_utils_help.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 18:17:19 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/16 14:30:34 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/16 17:48:16 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclds/JeanMiShell.h"
 
-int	ft_needsplit_help(char *str, int *i)
+static int	ft_needsplit_help(char *str, int *i)
 {
 	int	ct;
 
@@ -27,6 +27,20 @@ int	ft_needsplit_help(char *str, int *i)
 	if (str[*i])
 		ct++;
 	return (ct);
+}
+
+static void	ft_delspace_help(char *dst, char *str, int i)
+{
+	int	j;
+
+	j = 0;
+	j = 0;
+	while (j < i)
+	{
+		dst[j] = str[j];
+		j++;
+	}
+	dst[j] = '\0';
 }
 
 int	ft_needsplit(char *str)
@@ -69,20 +83,6 @@ int	ft_replacestr(t_args *lstargs)
 	free(lstargs->str);
 	lstargs->str = dst;
 	return (true);
-}
-
-void	ft_delspace_help(char *dst, char *str, int i)
-{
-	int	j;
-
-	j = 0;
-	j = 0;
-	while (j < i)
-	{
-		dst[j] = str[j];
-		j++;
-	}
-	dst[j] = '\0';
 }
 
 int	ft_delspace(t_args *lstargs)

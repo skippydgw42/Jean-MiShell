@@ -6,13 +6,13 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 13:21:15 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/16 16:57:11 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/16 17:37:59 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclds/JeanMiShell.h"
 
-int	ft_check_flag(char *str)
+static int	ft_check_flag(char *str)
 {
 	int	i;
 	int	x;

@@ -6,7 +6,7 @@
 #    By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/26 15:59:40 by ltrinchi          #+#    #+#              #
-#    Updated: 2022/06/16 16:44:56 by ltrinchi         ###   ########lyon.fr    #
+#    Updated: 2022/06/16 17:34:24 by ltrinchi         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -120,8 +120,10 @@ RM = rm -rf
 PATH_TO_LIBFT = ./libft/
 LIBFT_A = $(PATH_TO_LIBFT)libft.a
 READLINE_LIB = -lreadline
-READLINE_HOMEBREW_LIB = -L ~/.brew/opt/readline/lib
-READLINE_HOMEBREW_INCLUDE = -I ~/.brew/opt/readline/include
+# READLINE_HOMEBREW_LIB = -L ~/.brew/opt/readline/lib
+# READLINE_HOMEBREW_INCLUDE = -I ~/.brew/opt/readline/include
+READLINE_HOMEBREW_LIB = -L /opt/homebrew/opt/readline/lib
+READLINE_HOMEBREW_INCLUDE = -I /opt/homebrew/opt/readline/include
 	###################
 
 	#################################

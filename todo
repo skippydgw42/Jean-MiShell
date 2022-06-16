@@ -1,3 +1,2 @@
 echo test "" "" "" test affiche "test test" au lieu de "test    test"
-verifier si les fonctions sont bien dans le header ou en static
 exit affiche un message d'erreur si l'argument depasse int max au lieu de long max

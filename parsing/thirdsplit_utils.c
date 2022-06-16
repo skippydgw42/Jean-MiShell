@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   thirdsplit_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 18:38:59 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/16 14:17:32 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/16 17:50:05 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclds/JeanMiShell.h"
 
-void	ft_nredirsplit_help(char *str, int *i, int *q)
+static void	ft_nredirsplit_help(char *str, int *i, int *q)
 {
 	while (str[*i])
 	{

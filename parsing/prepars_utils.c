@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prepars_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:29:25 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/16 14:30:09 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/16 17:49:44 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	ft_subcpy(t_args *new, char *str)
 	return (true);
 }
 
-void	ft_splitlst_help(t_args *lstargs, int *i, int *q)
+static void	ft_splitlst_help(t_args *lstargs, int *i, int *q)
 {
 	while (lstargs->str[*i])
 	{

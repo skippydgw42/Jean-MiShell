@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 13:32:20 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/16 15:08:06 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/16 17:44:40 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclds/JeanMiShell.h"
 
-int	ft_presplitpipe_help(t_args *new, t_args *prev, char *str, int *i)
+static int	ft_presplitpipe_help(t_args *new, t_args *prev, char *str, int *i)
 {
 	int	q;
 
@@ -27,7 +27,7 @@ int	ft_presplitpipe_help(t_args *new, t_args *prev, char *str, int *i)
 	return (true);
 }
 
-int	ft_presplitpipe(t_args **lstargs, char *str)
+static int	ft_presplitpipe(t_args **lstargs, char *str)
 {
 	int		q;
 	int		i;

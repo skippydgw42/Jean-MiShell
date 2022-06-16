@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_flag_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 17:16:46 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/15 17:17:47 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/16 17:41:53 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 

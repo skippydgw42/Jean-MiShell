@@ -6,13 +6,13 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 13:57:36 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/15 17:10:31 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/16 17:43:49 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclds/JeanMiShell.h"
 
-int	ft_checkvar(char *str)
+static int	ft_checkvar(char *str)
 {
 	size_t	i;
 	int		q;

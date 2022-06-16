@@ -1,4 +1,5 @@
 Jean-MiShell
+Jean-MiShell.d
 libft/objs/*.o
 libft/libft.a
 objs/*

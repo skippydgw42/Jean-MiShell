@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   thirdsplit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 16:15:40 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/16 14:31:25 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/16 17:50:35 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclds/JeanMiShell.h"
 
-int	ft_majlstargs(t_args *lstargs)
+static int	ft_majlstargs(t_args *lstargs)
 {
 	int		i;
 	int		cpy;
@@ -40,7 +40,7 @@ int	ft_majlstargs(t_args *lstargs)
 	return (true);
 }
 
-int	ft_splitbyredir(t_args *lstargs, int n)
+static int	ft_splitbyredir(t_args *lstargs, int n)
 {
 	int		i;
 	t_args	*new;
@@ -69,7 +69,7 @@ int	ft_splitbyredir(t_args *lstargs, int n)
 	return (true);
 }
 
-int	ft_needrsplit(t_args *lstargs)
+static int	ft_needrsplit(t_args *lstargs)
 {
 	int	i;
 	int	q;

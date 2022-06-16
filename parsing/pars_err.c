@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   pars_err.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 12:04:12 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/01 14:05:37 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/16 17:43:57 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclds/JeanMiShell.h"
 
-int	ft_syntaxerr(t_data *data)
+static int	ft_syntaxerr(t_data *data)
 {
 	int	i;
 
@@ -30,7 +30,7 @@ int	ft_syntaxerr(t_data *data)
 	return (1);
 }
 
-int	ft_redirerr(t_data *data)
+static int	ft_redirerr(t_data *data)
 {
 	int	i;
 

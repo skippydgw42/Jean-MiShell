@@ -6,13 +6,13 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 14:50:21 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/16 16:55:51 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/16 17:39:07 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclds/JeanMiShell.h"
 
-int	ft_redic(t_data *data, t_pipex *vars)
+static int	ft_redic(t_data *data, t_pipex *vars)
 {
 	if (ft_files(data, vars) == false)
 	{

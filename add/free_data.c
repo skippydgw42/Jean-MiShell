@@ -3,31 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   free_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 15:24:32 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/16 15:09:06 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/16 17:37:36 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclds/JeanMiShell.h"
 
-int	ft_free_lstargs(t_data *data)
-{
-	t_args	*ptr;
-
-	while (data->lstargs)
-	{
-		ptr = data->lstargs;
-		if (ptr->str)
-			free(ptr->str);
-		data->lstargs = data->lstargs->next;
-		free(ptr);
-	}
-	return (EXIT_SUCCESS);
-}
-
-int	ft_free_lstenv(t_data *data)
+static int	ft_free_lstenv(t_data *data)
 {
 	t_env	*ptr;
 
@@ -39,6 +24,21 @@ int	ft_free_lstenv(t_data *data)
 		if (ptr->value)
 			free(ptr->value);
 		data->lstenv = data->lstenv->next;
+		free(ptr);
+	}
+	return (EXIT_SUCCESS);
+}
+
+int	ft_free_lstargs(t_data *data)
+{
+	t_args	*ptr;
+
+	while (data->lstargs)
+	{
+		ptr = data->lstargs;
+		if (ptr->str)
+			free(ptr->str);
+		data->lstargs = data->lstargs->next;
 		free(ptr);
 	}
 	return (EXIT_SUCCESS);
