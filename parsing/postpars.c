@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 14:22:36 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/15 17:21:00 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/16 14:30:55 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	ft_rcpy(t_data *data, char *str, char *dst, int q)
 	dst[j] = '\0';
 }
 
-void	ft_replace(t_data *data, t_args *args)
+int	ft_replace(t_data *data, t_args *args)
 {
 	int		addlen;
 	int		dellen;
@@ -113,8 +113,11 @@ void	ft_replace(t_data *data, t_args *args)
 	addlen = ft_findaddlen(data, args->str);
 	dellen = ft_finddellen(args->str);
 	dst = malloc(sizeof(char) * (ft_strlen(args->str) - dellen + addlen + 1));
+	if (!dst)
+		return (false);
 	ft_rcpy(data, args->str, dst, 0);
 	free(args->str);
 	args->str = NULL;
 	args->str = dst;
+	return (true);
 }

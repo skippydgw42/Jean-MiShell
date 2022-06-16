@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 18:38:59 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/15 18:48:23 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/16 14:17:32 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ int	ft_setnew(t_args *new, char *str)
 	else
 		ft_nredirsplit_help(str, &i, &q);
 	new->str = malloc(sizeof(char) * (i + 1));
+	if (!new->str)
+		return (0);
 	while (cpy < i)
 	{
 		new->str[cpy] = str[cpy];

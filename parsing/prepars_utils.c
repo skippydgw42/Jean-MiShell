@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 15:29:25 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/15 18:37:56 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/16 14:30:09 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_sublen(char *str)
 	return (i);
 }
 
-void	ft_subcpy(t_args *new, char *str)
+int	ft_subcpy(t_args *new, char *str)
 {
 	int	len;
 	int	i;
@@ -37,12 +37,15 @@ void	ft_subcpy(t_args *new, char *str)
 	i = 0;
 	len = ft_sublen(str);
 	new->str = malloc(sizeof(char) * (len + 1));
+	if (!new->str)
+		return (false);
 	while (i < len)
 	{
 		new->str[i] = str[i];
 		i++;
 	}
 	new->str[i] = '\0';
+	return (true);
 }
 
 void	ft_splitlst_help(t_args *lstargs, int *i, int *q)
@@ -60,7 +63,7 @@ void	ft_splitlst_help(t_args *lstargs, int *i, int *q)
 	}
 }
 
-void	ft_splitlst(t_args *lstargs, int n)
+int	ft_splitlst(t_args *lstargs, int n)
 {
 	int		i;
 	int		q;
@@ -73,6 +76,8 @@ void	ft_splitlst(t_args *lstargs, int n)
 	while (n)
 	{
 		new = malloc(sizeof(t_args));
+		if (!new)
+			return (false);
 		ft_splitlst_help(lstargs, &i, &q);
 		ft_subcpy(new, &lstargs->str[i]);
 		new->next = buff->next;
@@ -81,6 +86,7 @@ void	ft_splitlst(t_args *lstargs, int n)
 		n--;
 	}
 	ft_replacestr(lstargs);
+	return (true);
 }
 
 void	ft_secondsplitlst(t_data *data)

@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 16:42:35 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/05/31 16:11:55 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/16 14:11:53 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,6 @@ int	ft_quotes(char c, int q)
 	}
 	return (q);
 }
-		// else if (c == '\"')
-			// q = 2;
-		// else if (c == '\'')
-			// q = 1;
 
 int	ft_is_close(char *str)
 {
