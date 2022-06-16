@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 09:23:25 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/06/13 11:20:56 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/16 11:53:22 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ static void	ft_free_redic_array(t_redic *src, int size_array)
 	}
 	free(src);
 }
-
-
 
 void	ft_free_pipex_struct(t_pipex *src)
 {

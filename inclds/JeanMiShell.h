@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   JeanMiShell.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/16 13:14:47 by ltrinchi          #+#    #+#             */
+/*   Updated: 2022/06/16 13:14:48 by ltrinchi         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef JEANMISHELL_H
 # define JEANMISHELL_H
 
@@ -208,6 +220,14 @@ int		ft_init_pipe(t_pipex *vars);
 t_pipex	*ft_init_struct_pipex(t_data *data);
 void	ft_close_pipe(t_pipex *vars);
 char	**ft_get_flags(char *av);
+char	**ft_set_env(t_data *data);
+char	**ft_get_path_cmd(t_data *data, int nb_cmd, char **env, int *type);
+char	*ft_take_path(char *cmd, char **env);
+char	**ft_split_path(char **env);
+char	***ft_get_flags_cmd(t_data *data, int nb_cmd);
+t_redic	*ft_get_files(t_data *data, int nb_cmd);
+int		*ft_init_heredoc(t_data *data, int nb_cmd);
+int		ft_pipexec(t_pipex *vars, t_data *data);
 
 void	ft_read(int fd);
 

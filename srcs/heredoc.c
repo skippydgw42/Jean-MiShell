@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:38:54 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/06/15 17:08:50 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/16 11:22:17 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ int	ft_heredoc(char *delimiter)
 {
 	int	fd_pipe[2];
 	int	pid;
-	int	rtn;
 
 	if (!delimiter || ft_strlen(delimiter) == 0)
 	{
@@ -81,7 +80,6 @@ int	ft_heredoc(char *delimiter)
 		return (-1);
 	}
 	signal(SIGINT, SIG_IGN);
-	rtn = 0;
 	if (pipe(fd_pipe) == -1)
 		return (ft_reset_settings_signal());
 	pid = fork();

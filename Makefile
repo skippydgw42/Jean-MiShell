@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+         #
+#    By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/26 15:59:40 by ltrinchi          #+#    #+#              #
-#    Updated: 2022/06/15 18:39:20 by mdegraeu         ###   ########.fr        #
+#    Updated: 2022/06/16 13:12:59 by ltrinchi         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,14 @@ EXEC_WITHOUT_PATH = \
 					init_pipe.c \
 					init_struct_pipex.c	\
 					pipex.c \
-					pipex_utils.c
+					pipex_utils.c \
+					set_env.c \
+					set_path_cmd.c \
+					take_path.c \
+					set_flags_cmd.c \
+					set_files.c \
+					init_heredocs.c \
+					pipexec.c
 
 OBJS_SRCS_WITHOUT_PATH = $(SRCS_WITHOUT_PATH:.c=.o)
 OBJS_BUILTINS_WITHOUT_PATH = $(BUILTINS_WITHOUT_PATH:.c=.o)
@@ -112,8 +119,8 @@ RM = rm -rf
 PATH_TO_LIBFT = ./libft/
 LIBFT_A = $(PATH_TO_LIBFT)libft.a
 READLINE_LIB = -lreadline
-READLINE_HOMEBREW_LIB = -L ~/.brew/opt/readline/lib
-READLINE_HOMEBREW_INCLUDE = -I ~/.brew/opt/readline/include
+READLINE_HOMEBREW_LIB = -L /opt/homebrew/opt/readline/lib
+READLINE_HOMEBREW_INCLUDE = -I /opt/homebrew/opt/readline/include
 	###################
 
 	#################################
