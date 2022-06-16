@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 18:07:35 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/15 18:14:04 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/16 14:13:11 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ char	*ft_cpytopipe(char *str, int q)
 	else
 		len = 1;
 	dst = malloc(sizeof(char) * (len + 1));
+	if (!dst)
+		return (NULL);
 	while (i < len)
 	{
 		dst[i] = str[i];

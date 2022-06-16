@@ -174,9 +174,9 @@ void	ft_exit(char **cflags);
 /*---------------PARSING----------------*/
 /****************************************/
 int		ft_quotes(char c, int q);
-void	ft_subcpy(t_args *new, char *str);
-void	ft_replacestr(t_args *lstargs);
-void	ft_delspace(t_args *lstargs);
+int		ft_subcpy(t_args *new, char *str);
+int		ft_replacestr(t_args *lstargs);
+int		ft_delspace(t_args *lstargs);
 int		ft_sublen(char *str);
 int		ft_nargs(char *str);
 int		ft_is_close(char *str);
@@ -185,7 +185,7 @@ int		ft_parsing(t_data *data, char *str);
 void	ft_postpars(t_data *data);
 
 int		ft_needreplace(char *str);
-void	ft_replace(t_data *data, t_args *args);
+int		ft_replace(t_data *data, t_args *args);
 char	*ft_find_varname(char *str, int q);
 int		ft_finddellen(char *str);
 int		ft_findaddlen(t_data *data, char *str);
@@ -196,7 +196,7 @@ char	*ft_cpytopipe(char *str, int q);
 int		ft_lentopipe(char *str, int q);
 int		ft_npipe(char *str);
 int		ft_needsplit(char *str);
-void	ft_splitlst(t_args *lstargs, int n);
+int		ft_splitlst(t_args *lstargs, int n);
 void	ft_secondsplitlst(t_data *data);
 void	ft_thirdsplitlst(t_data *data);
 int		ft_nredirsplit(char *str);

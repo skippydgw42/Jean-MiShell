@@ -6,13 +6,13 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 16:15:40 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/15 18:41:07 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/16 14:31:25 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclds/JeanMiShell.h"
 
-void	ft_majlstargs(t_args *lstargs)
+int	ft_majlstargs(t_args *lstargs)
 {
 	int		i;
 	int		cpy;
@@ -27,6 +27,8 @@ void	ft_majlstargs(t_args *lstargs)
 		while (lstargs->str[i] != '>' && lstargs->str[i] != '<')
 			i++;
 	dst = malloc(sizeof(char) * (i + 1));
+	if (!dst)
+		return (false);
 	while (cpy < i)
 	{
 		dst[cpy] = lstargs->str[cpy];
@@ -35,9 +37,10 @@ void	ft_majlstargs(t_args *lstargs)
 	dst[cpy] = '\0';
 	free(lstargs->str);
 	lstargs->str = dst;
+	return (true);
 }
 
-void	ft_splitbyredir(t_args *lstargs, int n)
+int	ft_splitbyredir(t_args *lstargs, int n)
 {
 	int		i;
 	t_args	*new;
@@ -54,6 +57,8 @@ void	ft_splitbyredir(t_args *lstargs, int n)
 	while (n && lstargs->str[i])
 	{
 		new = malloc(sizeof(t_args));
+		if (!new)
+			return (false);
 		i = i + ft_setnew(new, &lstargs->str[i]);
 		new->next = buff->next;
 		buff->next = new;
@@ -61,6 +66,7 @@ void	ft_splitbyredir(t_args *lstargs, int n)
 		n--;
 	}
 	ft_majlstargs(lstargs);
+	return (true);
 }
 
 int	ft_needrsplit(t_args *lstargs)

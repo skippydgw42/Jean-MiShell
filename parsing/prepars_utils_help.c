@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 18:17:19 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/15 18:26:35 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/16 14:30:34 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	ft_needsplit(char *str)
 	return (ct);
 }
 
-void	ft_replacestr(t_args *lstargs)
+int	ft_replacestr(t_args *lstargs)
 {
 	int		i;
 	int		len;
@@ -58,6 +58,8 @@ void	ft_replacestr(t_args *lstargs)
 	i = 0;
 	len = ft_sublen(lstargs->str);
 	dst = malloc(sizeof(char) * (len + 1));
+	if (!dst)
+		return (false);
 	while (i < len)
 	{
 		dst[i] = lstargs->str[i];
@@ -66,12 +68,26 @@ void	ft_replacestr(t_args *lstargs)
 	dst[i] = '\0';
 	free(lstargs->str);
 	lstargs->str = dst;
+	return (true);
 }
 
-void	ft_delspace(t_args *lstargs)
+void	ft_delspace_help(char *dst, char *str, int i)
+{
+	int	j;
+
+	j = 0;
+	j = 0;
+	while (j < i)
+	{
+		dst[j] = str[j];
+		j++;
+	}
+	dst[j] = '\0';
+}
+
+int	ft_delspace(t_args *lstargs)
 {
 	int		i;
-	int		j;
 	int		q;
 	char	*dst;
 
@@ -85,13 +101,10 @@ void	ft_delspace(t_args *lstargs)
 		i++;
 	}
 	dst = malloc(sizeof(char) * (i + 1));
-	j = 0;
-	while (j < i)
-	{
-		dst[j] = lstargs->str[j];
-		j++;
-	}
-	dst[j] = '\0';
+	if (!dst)
+		return (false);
+	ft_delspace_help(dst, lstargs->str, i);
 	free(lstargs->str);
 	lstargs->str = dst;
+	return (true);
 }
