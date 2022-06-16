@@ -6,7 +6,7 @@
 #    By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/26 15:59:40 by ltrinchi          #+#    #+#              #
-#    Updated: 2022/06/16 14:55:54 by mdegraeu         ###   ########.fr        #
+#    Updated: 2022/06/16 15:09:53 by mdegraeu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -110,7 +110,7 @@ HEADER = $(addprefix $(PATH_TO_HEADER), $(HEADER_WITHOUT_PATH))
 
 	##### COMMANDS ######
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
 	#####################
 
