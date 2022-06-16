@@ -6,111 +6,41 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 11:12:35 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/15 14:40:25 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/16 13:23:15 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclds/JeanMiShell.h"
 
 //void	et initialiser var globale dan l'exec
-int	ft_exec_process(t_pipex *vars, t_data *data)
+
+static int	ft_pipe_child(t_data *data, t_pipex *vars)
 {
-	if (vars->cmd_array->type[vars->i] == CMD_P
-		|| vars->cmd_array->type[vars->i] == EXEC_P)
+	if (ft_files(data, vars) == false)
 	{
-		if (execve(vars->cmd_array->path_cmd[vars->i],
-					vars->cmd_array->flags_cmd[vars->i],
-					vars->env) == -1)
-		{
-			if (vars->cmd_array->type[vars->i] == CMD_P)
-			{
-				printf("J.Mishell: %s: Command not found\n", vars->cmd_array->path_cmd[vars->i]);
-				exit(127);
-			}
-			if (vars->cmd_array->type[vars->i] == EXEC_P)
-			{
-				printf("J.Mishell: %s: No such file or directory\n", vars->cmd_array->path_cmd[vars->i]);
-				exit(127);
-			}
-		}
+		perror("Error");
+		exit(0);
 	}
-	else
-	{
-		ft_call_builtins(vars, data, vars->cmd_array->flags_cmd[vars->i]);
-	}
-	exit(g_val_rtn);
-	return (1);
+	ft_set_signal_child();
+	ft_pipexec(vars, data);
+	return (true);
 }
 
-int	ft_pipexec(t_pipex *vars, t_data *data)
+static int	ft_pipe_parent(t_pipex *vars)
 {
-	if (vars->redic_array[vars->i].input_type == 0)
+	if (vars->i > 0 && vars->pipe_array[vars->i * 2 - 2] > 2)
 	{
-		if (vars->i > 0)
-		{
-			dup2(vars->pipe_array[vars->i * 2 - 2], STDIN_FILENO);
-			close(vars->pipe_array[vars->i * 2 - 1]);
-		}
+		close(vars->pipe_array[vars->i * 2 - 2]);
+		close(vars->pipe_array[vars->i * 2 - 1]);
 	}
-	if (vars->redic_array[vars->i].input_type != 0)
-	{
-		dup2(vars->fd_in, STDIN_FILENO);
-		close(vars->fd_in);
-	}
-	if (vars->redic_array[vars->i].output_type == 0)
-	{
-		if (vars->i != vars->nb_pipe)
-		{
-			dup2(vars->pipe_array[vars->i * 2 + 1], STDOUT_FILENO);
-			close(vars->pipe_array[vars->i * 2]);
-		}
-	}
-	if (vars->redic_array[vars->i].output_type != 0)
-	{
-		dup2(vars->fd_out, STDOUT_FILENO);
-		close(vars->fd_out);
-	}
-	ft_exec_process(vars, data);
-	ft_close_pipe(vars);
-	return (1);
+	return (true);
 }
 
-int	ft_pipex(t_pipex *vars, t_data *data)
+static void	ft_waitpid(t_pipex *vars, int *arr_pid)
 {
-	pid_t	*arr_pid;
-	int		status;
+	int	status;
 
-	ft_set_signal_parent();
-	vars->i = 0;
-	arr_pid = malloc(sizeof(pid_t) * (vars->nb_pipe + 1));
-	while (vars->i < vars->nb_pipe + 1)
-	{
-		arr_pid[vars->i] = fork();
-		if (arr_pid[vars->i] < 0)
-		{
-			free(arr_pid);
-			return (false);
-		}
-		if (arr_pid[vars->i] == 0)
-		{
-			if (ft_files(data, vars) == false)
-			{
-				perror("Error");
-				exit(0);
-			}
-			ft_set_signal_child();
-			ft_pipexec(vars, data);
-		}
-		else if (arr_pid[vars->i] > 0)
-		{
-			if (vars->i > 0 && vars->pipe_array[vars->i * 2 - 2] > 2)
-			{
-				close(vars->pipe_array[vars->i * 2 - 2]);
-				close(vars->pipe_array[vars->i * 2 - 1]);
-			}
-		}
-		vars->i++;
-	}
+	status = 0;
 	vars->i = 0;
 	while (vars->i <= vars->nb_pipe)
 	{
@@ -128,6 +58,32 @@ int	ft_pipex(t_pipex *vars, t_data *data)
 			close(vars->heredoc_array[vars->i]);
 		vars->i++;
 	}
+}
+
+int	ft_pipex(t_pipex *vars, t_data *data)
+{
+	pid_t	*arr_pid;
+
+	ft_set_signal_parent();
+	vars->i = 0;
+	arr_pid = malloc(sizeof(pid_t) * (vars->nb_pipe + 1));
+	if (arr_pid == NULL)
+		return (false);
+	while (vars->i < vars->nb_pipe + 1)
+	{
+		arr_pid[vars->i] = fork();
+		if (arr_pid[vars->i] < 0)
+		{
+			free(arr_pid);
+			return (false);
+		}
+		if (arr_pid[vars->i] == 0)
+			ft_pipe_child(data, vars);
+		else if (arr_pid[vars->i] > 0)
+			ft_pipe_parent(vars);
+		vars->i++;
+	}
+	ft_waitpid(vars, arr_pid);
 	free(arr_pid);
 	return (true);
 }
