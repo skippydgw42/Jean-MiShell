@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 11:49:32 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/06/16 11:49:48 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/17 15:32:09 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,27 +37,35 @@ static int	ft_get_type(char *str, int *input_type, int *output_type)
 	return (false);
 }
 
-static void	ft_get_files_help_help(t_args *start, int type, t_redic *rtn, int i)
+static void	ft_get_file_help_help(t_args *start, t_redic *rtn, int *i)
 {
+	int		type;
 	char	*ptr;
 
+	type = 0;
+	if (type == HEREDOC_P)
+	{
+		ptr = rtn[*i].input_file;
+		rtn[*i].input_file = NULL;
+		free(ptr);
+	}
 	if (type == OUTPUT_P || type == OUTPUT_APPEND_P)
 	{
-		ptr = rtn[i].output_file;
-		rtn[i].output_file = ft_strdup(start->str);
+		ptr = rtn[*i].output_file;
+		rtn[*i].output_file = ft_strdup(start->str);
 		free(ptr);
 	}
 	if (start->flag == PIPE_F)
 	{
-		i++;
-		rtn[i].input_type = 0;
-		rtn[i].output_type = 0;
-		rtn[i].input_file = NULL;
-		rtn[i].output_file = NULL;
+		(*i)++;
+		rtn[*i].input_type = 0;
+		rtn[*i].output_type = 0;
+		rtn[*i].input_file = NULL;
+		rtn[*i].output_file = NULL;
 	}
 }
 
-static void	ft_get_files_help(t_args *start, t_redic *rtn, int i)
+static void	ft_get_file_help(t_args *start, t_redic *rtn, int *i)
 {
 	int		type;
 	char	*ptr;
@@ -65,22 +73,17 @@ static void	ft_get_files_help(t_args *start, t_redic *rtn, int i)
 	type = 0;
 	if (start->flag == REDIR_F || start->flag == HD_F)
 	{
-		type = ft_get_type(start->str, &rtn[i].input_type, &rtn[i].output_type);
+		type = ft_get_type(start->str, &rtn[*i].input_type,
+				&rtn[*i].output_type);
 		start = start->next;
 	}
 	if (type == INPUT_P)
 	{
-		ptr = rtn[i].input_file;
-		rtn[i].input_file = ft_strdup(start->str);
+		ptr = rtn[*i].input_file;
+		rtn[*i].input_file = ft_strdup(start->str);
 		free(ptr);
 	}
-	if (type == HEREDOC_P)
-	{
-		ptr = rtn[i].input_file;
-		rtn[i].input_file = NULL;
-		free(ptr);
-	}
-	ft_get_files_help_help(start, type, rtn, i);
+	ft_get_file_help_help(start, rtn, i);
 }
 
 t_redic	*ft_get_files(t_data *data, int nb_cmd)
@@ -88,6 +91,7 @@ t_redic	*ft_get_files(t_data *data, int nb_cmd)
 	int		i;
 	t_redic	*rtn;
 	t_args	*start;
+	int		type;
 
 	i = 0;
 	rtn = ft_calloc(nb_cmd + 1, sizeof(t_redic));
@@ -98,9 +102,10 @@ t_redic	*ft_get_files(t_data *data, int nb_cmd)
 	rtn[i].output_type = 0;
 	rtn[i].input_file = NULL;
 	rtn[i].output_file = NULL;
+	type = 0;
 	while (start)
 	{
-		ft_get_files_help(start, rtn, i);
+		ft_get_file_help(start, rtn, &i);
 		start = start->next;
 	}
 	return (rtn);

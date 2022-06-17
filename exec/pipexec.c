@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 13:11:56 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/06/16 13:14:35 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/17 15:15:57 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,9 @@ int	ft_pipexec(t_pipex *vars, t_data *data)
 				vars->pipe_array[vars->i * 2]);
 	}
 	if (vars->redic_array[vars->i].output_type != 0)
+	{
 		ft_dup2_close(vars->fd_out, STDOUT_FILENO, vars->fd_out);
+	}
 	ft_exec_process(vars, data);
 	ft_close_pipe(vars);
 	return (1);
