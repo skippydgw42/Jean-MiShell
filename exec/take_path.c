@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_path_cmd_2.c                                   :+:      :+:    :+:   */
+/*   take_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 11:20:10 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/06/16 11:20:59 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/17 14:31:55 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_take_path(char *cmd, char **env)
 	i = 0;
 	path = NULL;
 	list_path = ft_split_path(env);
-	if (list_path == NULL)
+	if (list_path == NULL || ft_strlen(cmd) == 0)
 		return (NULL);
 	while (list_path[i])
 	{

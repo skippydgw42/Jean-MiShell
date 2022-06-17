@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   postpars_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:54:28 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/17 14:25:20 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/17 14:27:50 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static char	*ft_cpyvarname(char *str, int i, int q, int cp)
 	return (var);
 }
 
-static int	ft_finddellen_help(char c, int *q)
+int	ft_finddellen_help(char c, int *q)
 {
 	if (ft_quotes(c, *q) != *q)
 	{
