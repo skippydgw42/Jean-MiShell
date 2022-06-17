@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 09:14:55 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/02/23 14:16:25 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/17 10:01:09 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	ft_atoi(const char *str)
 {
-	unsigned int	i;
-	int				signe;
-	unsigned int	nb;
+	unsigned int			i;
+	int						signe;
+	unsigned long int		nb;
 
 	i = 0;
 	signe = 1;
@@ -33,9 +33,9 @@ int	ft_atoi(const char *str)
 	{
 		nb = nb * 10 + (str[i] - '0');
 		i++;
-		if (nb > 2147483647 && signe == 1)
+		if (nb > 9223372036854775807 && signe == 1)
 			return (-1);
-		else if (nb > 2147483648 && signe == -1)
+		else if (nb > 9223372036854775807 && signe == -1)
 			return (0);
 	}
 	return (nb * signe);

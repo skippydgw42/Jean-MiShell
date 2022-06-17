@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 10:22:28 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/06/16 19:07:33 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/17 10:05:12 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,24 +40,43 @@ static int	ft_isallnum(char *str)
 	return (true);
 }
 
+static int	ft_check_minus_sign(char *str)
+{
+	int	i;
+	int	nb;
+
+	i = 0;
+	nb = 0;
+	while (str[i])
+	{
+		if (str[i] == '-')
+			nb++;
+		i++;
+	}
+	if ((nb == 1 && str[0] != '-') || nb > 1 || (nb == 1
+			&& ft_strlen(str) == 1))
+	{
+		return (false);
+	}
+	return (true);
+}
+
 void	ft_exit(char **cflags)
 {
 	int	size_tab;
 
-	printf("%d\n", ft_atoi(cflags[0]));
 	size_tab = ft_size_tab(cflags);
 	if (size_tab >= 1)
 	{
-		if ((ft_atoi(cflags[0]) == -1 && ft_strlen(cflags[0]) > 2) || (ft_atoi(cflags[0]) == 0 && ft_strlen(cflags[0]) > 0) || ft_isallnum(cflags[0]))
+		if ((!ft_isallnum(cflags[0]) && !ft_check_minus_sign(cflags[0]))
+			|| (ft_atoi(cflags[0]) == -1 && ft_strlen(cflags[0]) > 2))
 		{
 			g_val_rtn = 255;
 			printf("Jean_MiShell: exit: %s: numeric argument required\n",
 				cflags[0]);
 		}
 		else
-		{
 			g_val_rtn = (unsigned char)ft_atoi(cflags[0]);
-		}
 	}
 	if (size_tab > 1)
 		printf("Jean_MiShell: exit: too many arguments\n");

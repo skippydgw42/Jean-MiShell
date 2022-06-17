@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:54:28 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/16 17:45:46 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/17 10:05:24 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static char	*ft_cpyvarname(char *str, int i, int q, int cp)
 	var[j] = '\0';
 	return (var);
 }
-
 
 static int	ft_finddellen_help(char c, int *q)
 {
