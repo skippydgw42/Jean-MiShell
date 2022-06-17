@@ -6,13 +6,13 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 14:50:21 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/16 12:48:07 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/16 17:39:07 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclds/JeanMiShell.h"
 
-int	ft_redic(t_data *data, t_pipex *vars)
+static int	ft_redic(t_data *data, t_pipex *vars)
 {
 	if (ft_files(data, vars) == false)
 	{
@@ -40,7 +40,8 @@ int	ft_exec(t_data *data)
 	vars = ft_init_struct_pipex(data);
 	if (vars == NULL)
 		return (false);
-	ft_init_pipe(vars);
+	if (!ft_init_pipe(vars))
+		return (false);
 	if (vars->nb_pipe == 0 && data->args_start->flag == BUILT_F)
 	{
 		fd_out = dup(STDOUT_FILENO);

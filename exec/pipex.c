@@ -6,13 +6,11 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 11:12:35 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/16 13:23:15 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/16 17:39:39 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclds/JeanMiShell.h"
-
-//void	et initialiser var globale dan l'exec
 
 static int	ft_pipe_child(t_data *data, t_pipex *vars)
 {

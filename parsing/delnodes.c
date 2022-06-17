@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   delnodes.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 14:55:14 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/16 15:09:10 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/16 17:43:19 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclds/JeanMiShell.h"
 
-int	ft_countsize(t_data *data)
+static int	ft_countsize(t_data *data)
 {
 	int	i;
 

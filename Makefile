@@ -6,7 +6,7 @@
 #    By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/26 15:59:40 by ltrinchi          #+#    #+#              #
-#    Updated: 2022/06/17 14:05:00 by mdegraeu         ###   ########.fr        #
+#    Updated: 2022/06/17 14:25:36 by mdegraeu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -111,7 +111,7 @@ HEADER = $(addprefix $(PATH_TO_HEADER), $(HEADER_WITHOUT_PATH))
 
 	##### COMMANDS ######
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 RM = rm -rf
 	#####################
 
@@ -123,6 +123,8 @@ LIBFT_A = $(PATH_TO_LIBFT)libft.a
 READLINE_LIB = -lreadline
 READLINE_HOMEBREW_LIB = -L ~/.brew/opt/readline/lib
 READLINE_HOMEBREW_INCLUDE = -I ~/.brew/opt/readline/include
+# READLINE_HOMEBREW_LIB = -L /opt/homebrew/opt/readline/lib
+# READLINE_HOMEBREW_INCLUDE = -I /opt/homebrew/opt/readline/include
 	###################
 
 	#################################

@@ -22,6 +22,7 @@ static int	ft_export_str(char *str, t_data *data)
 	{
 		printf("Jean_MiShell: export: `%s': not a valid identifier\n", varname);
 		g_val_rtn = 1;
+		return (EXIT_FAILURE);
 	}
 	value = ft_get_value(str);
 	if (ft_already_export(varname, value, data) == true)

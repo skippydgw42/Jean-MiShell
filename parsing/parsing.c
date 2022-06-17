@@ -6,13 +6,13 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 13:32:20 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/17 14:17:15 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/17 14:25:25 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclds/JeanMiShell.h"
 
-int	ft_presplitpipe_help(t_args *new, t_args *prev, char *str, int *i)
+static int	ft_presplitpipe_help(t_args *new, t_args *prev, char *str, int *i)
 {
 	int	q;
 
@@ -27,7 +27,7 @@ int	ft_presplitpipe_help(t_args *new, t_args *prev, char *str, int *i)
 	return (true);
 }
 
-int	ft_presplitpipe(t_args **lstargs, char *str)
+static int	ft_presplitpipe(t_args **lstargs, char *str)
 {
 	int		q;
 	int		i;

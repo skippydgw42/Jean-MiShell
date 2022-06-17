@@ -3,39 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   check_flag.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 13:35:42 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/16 14:56:37 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/16 17:43:00 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclds/JeanMiShell.h"
 
-t_args	*ft_genericflags(t_args *lstargs, t_args *set)
-{
-	int	redir;
-
-	redir = 0;
-	while (lstargs)
-	{
-		if (!ft_strcmp(lstargs->str, "|") && lstargs->next)
-			lstargs = lstargs->next;
-		lstargs->flag = ft_piperedir_flags(lstargs->str);
-		if (lstargs->flag == REDIR_F || lstargs->flag == HD_F)
-			redir = 1;
-		else if (lstargs->flag == PIPE_F || !lstargs->next)
-		{
-			if (redir == 0)
-				set->flag = ft_cmdbuilt_flags(set->str);
-			return (lstargs->next);
-		}
-		lstargs = lstargs->next;
-	}
-	return (lstargs);
-}
-
-t_args	*ft_setcmdflag(t_args *lstargs, t_args *set)
+static t_args	*ft_setcmdflag(t_args *lstargs, t_args *set)
 {
 	while (lstargs && lstargs->flag != PIPE_F)
 	{
@@ -50,7 +27,7 @@ t_args	*ft_setcmdflag(t_args *lstargs, t_args *set)
 	return (lstargs);
 }
 
-void	ft_cmdfileflags(t_args *lstargs)
+static void	ft_cmdfileflags(t_args *lstargs)
 {
 	t_args	*set;
 
@@ -76,6 +53,29 @@ void	ft_cmdfileflags(t_args *lstargs)
 		if (lstargs)
 			lstargs = lstargs->next;
 	}
+}
+
+t_args	*ft_genericflags(t_args *lstargs, t_args *set)
+{
+	int	redir;
+
+	redir = 0;
+	while (lstargs)
+	{
+		if (!ft_strcmp(lstargs->str, "|") && lstargs->next)
+			lstargs = lstargs->next;
+		lstargs->flag = ft_piperedir_flags(lstargs->str);
+		if (lstargs->flag == REDIR_F || lstargs->flag == HD_F)
+			redir = 1;
+		else if (lstargs->flag == PIPE_F || !lstargs->next)
+		{
+			if (redir == 0)
+				set->flag = ft_cmdbuilt_flags(set->str);
+			return (lstargs->next);
+		}
+		lstargs = lstargs->next;
+	}
+	return (lstargs);
 }
 
 void	ft_flag(t_data *data)

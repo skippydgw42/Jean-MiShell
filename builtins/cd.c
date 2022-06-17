@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 11:57:11 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/17 14:20:04 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/17 14:25:11 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	ft_cd(char **str, t_data *data)
 		}
 		else
 			ft_setpwd(data, "PWD", 1);
+		g_val_rtn = 0;
 	}
 	data->lstenv = data->env_start;
-	g_val_rtn = 0;
 }

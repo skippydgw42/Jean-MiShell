@@ -6,13 +6,13 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:54:28 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/17 13:52:26 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/17 14:25:20 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclds/JeanMiShell.h"
 
-char	*ft_cpyvarname(char *str, int i, int q, int cp)
+static char	*ft_cpyvarname(char *str, int i, int q, int cp)
 {
 	int		j;
 	char	*var;
@@ -31,6 +31,16 @@ char	*ft_cpyvarname(char *str, int i, int q, int cp)
 	}
 	var[j] = '\0';
 	return (var);
+}
+
+static int	ft_finddellen_help(char c, int *q)
+{
+	if (ft_quotes(c, *q) != *q)
+	{
+		*q = ft_quotes(c, *q);
+		return (1);
+	}
+	return (0);
 }
 
 char	*ft_find_varname(char *str, int q)
@@ -54,16 +64,6 @@ char	*ft_find_varname(char *str, int q)
 	}
 	var = ft_cpyvarname(str, i, q, cp);
 	return (var);
-}
-
-int	ft_finddellen_help(char c, int *q)
-{
-	if (ft_quotes(c, *q) != *q)
-	{
-		*q = ft_quotes(c, *q);
-		return (1);
-	}
-	return (0);
 }
 
 int	ft_finddellen(char *str)

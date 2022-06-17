@@ -6,11 +6,62 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 14:22:36 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/17 14:16:46 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/17 14:25:32 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclds/JeanMiShell.h"
+
+static int	ft_paralcpy(t_data *data, char *str, char *dst, int q)
+{
+	int		i;
+	int		j;
+	int		roll;
+	char	*g_var;
+
+	i = 0;
+	j = 0;
+	roll = ft_rollst(&data->lstenv, str, q);
+	if (roll == 1)
+	{
+		while (data->lstenv->value[j])
+			dst[i++] = data->lstenv->value[j++];
+	}
+	else if (roll == 2)
+	{
+		g_var = ft_itoa(g_val_rtn);
+		while (g_var[j])
+			dst[i++] = g_var[j++];
+		free(g_var);
+	}
+	data->lstenv = data->env_start;
+	return (i);
+}
+
+static void	ft_rcpy(t_data *data, char *str, char *dst, int q)
+{
+	int	i;
+	int	j;
+	int	prev_q;
+
+	i = 0;
+	j = 0;
+	while (str[i])
+	{
+		prev_q = q;
+		q = ft_quotes(str[i], q);
+		if (str[i] == '$' && q != 1)
+		{
+			j = j + ft_paralcpy(data, &str[i], &dst[j], q);
+			i++;
+			while (str[i] && !ft_separator(str[i]))
+				i++;
+		}
+		else
+			dst[j++] = str[i++];
+	}
+	dst[j] = '\0';
+}
 
 int	ft_separator(char c)
 {
@@ -47,57 +98,6 @@ int	ft_rollst(t_env **lst, char *str, int q)
 		free(to_find);
 	}
 	return (0);
-}
-
-int	ft_paralcpy(t_data *data, char *str, char *dst, int q)
-{
-	int		i;
-	int		j;
-	int		roll;
-	char	*g_var;
-
-	i = 0;
-	j = 0;
-	roll = ft_rollst(&data->lstenv, str, q);
-	if (roll == 1)
-	{
-		while (data->lstenv->value[j])
-			dst[i++] = data->lstenv->value[j++];
-	}
-	else if (roll == 2)
-	{
-		g_var = ft_itoa(g_val_rtn);
-		while (g_var[j])
-			dst[i++] = g_var[j++];
-		free(g_var);
-	}
-	data->lstenv = data->env_start;
-	return (i);
-}
-
-void	ft_rcpy(t_data *data, char *str, char *dst, int q)
-{
-	int	i;
-	int	j;
-	int	prev_q;
-
-	i = 0;
-	j = 0;
-	while (str[i])
-	{
-		prev_q = q;
-		q = ft_quotes(str[i], q);
-		if (str[i] == '$' && q != 1)
-		{
-			j = j + ft_paralcpy(data, &str[i], &dst[j], q);
-			i++;
-			while (str[i] && !ft_separator(str[i]))
-				i++;
-		}
-		else
-			dst[j++] = str[i++];
-	}
-	dst[j] = '\0';
 }
 
 int	ft_replace(t_data *data, t_args *args)

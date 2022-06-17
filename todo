@@ -1,0 +1,1 @@
+echo test "" "" "" test affiche "test test" au lieu de "test    test"

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   prepars_pipe.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 18:07:35 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/16 14:13:11 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/16 17:47:25 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclds/JeanMiShell.h"
 
-void	ft_npipe_help(char *str, int *i, int *x, int *q)
+static void	ft_npipe_help(char *str, int *i, int *x, int *q)
 {
 	while (str[*i] && str[*i] != '|')
 	{
@@ -23,7 +23,7 @@ void	ft_npipe_help(char *str, int *i, int *x, int *q)
 	}
 }
 
-int	ft_npipe_hlp(char *str, int *i, int size, int q)
+static int	ft_npipe_hlp(char *str, int *i, int size, int q)
 {
 	if (*i < size)
 	{

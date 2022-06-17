@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 11:18:06 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/06/16 12:01:27 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/16 17:40:24 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,29 +24,6 @@ static int	ft_check_path_exist(char **env)
 		i++;
 	}
 	return (false);
-}
-
-char	**ft_split_path(char **env)
-{
-	char	**list_path;
-	int		i;
-
-	i = 0;
-	if (ft_check_path_exist(env) == false)
-		return (NULL);
-	while (env[i])
-	{
-		if (ft_strnstr(env[i], "PATH=", ft_strlen(env[i])))
-			break ;
-		i++;
-	}
-	list_path = ft_split(&env[i][ft_strlen("PATH=")], ':');
-	if (!list_path)
-	{
-		perror("Error");
-		return (NULL);
-	}
-	return (list_path);
 }
 
 static void	ft_set_flag(t_args *start, int *type, int i)
@@ -77,6 +54,29 @@ static void	ft_set_file(char **rtn, int i, t_args *start, int *type)
 		return ;
 	if (ft_strchr(start->str, '/'))
 		type[i] = EXEC_P;
+}
+
+char	**ft_split_path(char **env)
+{
+	char	**list_path;
+	int		i;
+
+	i = 0;
+	if (ft_check_path_exist(env) == false)
+		return (NULL);
+	while (env[i])
+	{
+		if (ft_strnstr(env[i], "PATH=", ft_strlen(env[i])))
+			break ;
+		i++;
+	}
+	list_path = ft_split(&env[i][ft_strlen("PATH=")], ':');
+	if (!list_path)
+	{
+		perror("Error");
+		return (NULL);
+	}
+	return (list_path);
 }
 
 char	**ft_get_path_cmd(t_data *data, int nb_cmd, char **env, int *type)
