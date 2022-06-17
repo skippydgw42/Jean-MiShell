@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 13:32:20 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/16 15:08:06 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/17 14:17:15 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ int	ft_parsing(t_data *data, char *str)
 	if (!ft_delnodes(data))
 		return (false);
 	data->lstargs = data->args_start;
+	ft_delquotes(data);
 	if (!ft_parserr(data))
 	{
 		g_val_rtn = 258;

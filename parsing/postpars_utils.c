@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:54:28 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/15 17:36:46 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/17 13:52:26 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ int	ft_finddellen(char *str)
 	del = 0;
 	while (str[i])
 	{
-		del += ft_finddellen_help(str[i], &q);
 		if (str[i] == '$' && q != 1)
 		{
 			temp = ft_find_varname(&str[i], q);

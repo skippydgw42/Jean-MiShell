@@ -6,7 +6,7 @@
 #    By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/26 15:59:40 by ltrinchi          #+#    #+#              #
-#    Updated: 2022/06/16 15:09:53 by mdegraeu         ###   ########.fr        #
+#    Updated: 2022/06/17 14:05:00 by mdegraeu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,8 @@ PARSING_WITHOUT_PATH = \
 					thirdsplit.c \
 					thirdsplit_utils.c \
 					fourthsplit.c \
-					delnodes.c
+					delnodes.c \
+					delquotes.c
 
 EXEC_WITHOUT_PATH = \
 					exec.c \

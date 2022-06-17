@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 11:57:11 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/16 14:05:54 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/17 14:20:04 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ static void	ft_setpwd(t_data *data, char *varname, int x)
 
 	str = malloc(sizeof(char *) * 2);
 	if (!str)
-	 {
+	{
 		perror("Error");
 		return ;
-	 }
+	}
 	str[0] = ft_strjoin(varname, "=");
 	tmp = str[0];
 	if (x == 0)

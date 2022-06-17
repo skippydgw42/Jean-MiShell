@@ -6,7 +6,7 @@
 /*   By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 13:14:47 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/06/16 15:08:26 by mdegraeu         ###   ########.fr       */
+/*   Updated: 2022/06/17 14:05:14 by mdegraeu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,6 +208,7 @@ void	ft_flag(t_data *data);
 int		ft_cmdbuilt_flags(char *str);
 int		ft_piperedir_flags(char *str);
 int		ft_delnodes(t_data *data);
+int		ft_delquotes(t_data *data);
 int		ft_parserr(t_data *data);
 
 /****************************************/
