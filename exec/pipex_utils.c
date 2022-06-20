@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 11:15:37 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/14 15:31:11 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/20 11:11:04 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	ft_close_pipe(t_pipex *vars)
 	i = 0;
 	while (i <= vars->nb_pipe)
 	{
-		close(vars->pipe_array[i]);
+		if (vars->pipe_array[i] > 2)
+			close(vars->pipe_array[i]);
 		i++;
 	}
 }

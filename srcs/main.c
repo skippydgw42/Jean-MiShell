@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:58:35 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/06/16 18:14:06 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/20 11:03:37 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int ac, char **av, char **env)
 	if (!data)
 	{
 		perror("Error:");
-		return (errno);
+		return (EXIT_FAILURE);
 	}
 	data->lstenv = ft_set_lstenv(env);
 	data->env_start = data->lstenv;

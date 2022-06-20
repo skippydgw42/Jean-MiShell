@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 15:22:04 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/06/17 15:18:31 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/20 10:36:11 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	ft_files_help(t_args *start, t_pipex *vars)
 		if (type == OUTPUT_APPEND_P)
 			vars->fd_out = open(start->str, O_APPEND | O_WRONLY | O_CREAT,
 					0666);
-		if (vars->fd_out < 0)
+		if (vars->fd_out < 0 || vars->fd_in < 0)
 			return (false);
 	}
 	return (true);

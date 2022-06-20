@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:24:42 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/06/16 13:21:01 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/20 11:18:04 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static t_env	*ft_set_lstenv_help(char **env, int i)
 	new = malloc(sizeof(t_env));
 	if (!new)
 	{
-		perror("Error:");
-		exit(errno);
+		perror("Error set_lstenv");
+		exit(EXIT_FAILURE);
 	}
 	new->varname = ft_strdup(split[0]);
 	new->value = ft_strdup(split[1]);

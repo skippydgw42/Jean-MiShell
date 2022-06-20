@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 11:12:35 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/17 15:20:45 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/20 14:54:20 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	ft_pipe_child(t_data *data, t_pipex *vars)
 {
-	if (ft_files(data, vars) == false)
+	if (!ft_files(data, vars))
 	{
 		perror("Error");
 		exit(0);
@@ -47,7 +47,7 @@ static void	ft_waitpid(t_pipex *vars, int *arr_pid)
 		{
 			if (g_val_rtn == 131)
 				printf("Quit: 3\n");
-			if (g_val_rtn == 130)
+			else if (g_val_rtn == 130)
 				printf("\n");
 		}
 		else
@@ -56,6 +56,14 @@ static void	ft_waitpid(t_pipex *vars, int *arr_pid)
 			close(vars->heredoc_array[vars->i]);
 		vars->i++;
 	}
+}
+
+static int	ft_error_fork(t_pipex *vars, int *arr_pid)
+{
+	perror("Error");
+	ft_waitpid(vars, arr_pid);
+	free(arr_pid);
+	return (false);
 }
 
 int	ft_pipex(t_pipex *vars, t_data *data)
@@ -71,10 +79,7 @@ int	ft_pipex(t_pipex *vars, t_data *data)
 	{
 		arr_pid[vars->i] = fork();
 		if (arr_pid[vars->i] < 0)
-		{
-			free(arr_pid);
-			return (false);
-		}
+			return (ft_error_fork(vars, arr_pid));
 		if (arr_pid[vars->i] == 0)
 			ft_pipe_child(data, vars);
 		else if (arr_pid[vars->i] > 0)

@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 11:18:06 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/06/16 17:40:24 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/20 14:55:04 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,17 @@ static void	ft_set_flag(t_args *start, int *type, int i)
 	{
 		if (ft_strcmp(start->str, "echo") == 0)
 			type[i] = BUILT_ECHO_P;
-		if (ft_strcmp(start->str, "cd") == 0)
+		else if (ft_strcmp(start->str, "cd") == 0)
 			type[i] = BUILT_CD_P;
-		if (ft_strcmp(start->str, "pwd") == 0)
+		else if (ft_strcmp(start->str, "pwd") == 0)
 			type[i] = BUILT_PWD_P;
-		if (ft_strcmp(start->str, "export") == 0)
+		else if (ft_strcmp(start->str, "export") == 0)
 			type[i] = BUILT_EXPORT_P;
-		if (ft_strcmp(start->str, "unset") == 0)
+		else if (ft_strcmp(start->str, "unset") == 0)
 			type[i] = BUILT_UNSET_P;
-		if (ft_strcmp(start->str, "env") == 0)
+		else if (ft_strcmp(start->str, "env") == 0)
 			type[i] = BUILT_ENV_P;
-		if (ft_strcmp(start->str, "exit") == 0)
+		else if (ft_strcmp(start->str, "exit") == 0)
 			type[i] = BUILT_EXIT_P;
 	}
 }
@@ -99,7 +99,8 @@ char	**ft_get_path_cmd(t_data *data, int nb_cmd, char **env, int *type)
 			if (rtn[i] == NULL)
 				ft_set_file(rtn, i, start, type);
 		}
-		ft_set_flag(start, &type[i], i);
+		else if (start->flag == BUILT_F)
+			ft_set_flag(start, type, i);
 		if (start->flag == PIPE_F)
 			i++;
 		start = start->next;
