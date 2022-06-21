@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 11:18:06 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/06/20 14:55:04 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/21 09:39:19 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ char	**ft_split_path(char **env)
 	list_path = ft_split(&env[i][ft_strlen("PATH=")], ':');
 	if (!list_path)
 	{
-		perror("Error");
+		perror("Error split path");
 		return (NULL);
 	}
 	return (list_path);

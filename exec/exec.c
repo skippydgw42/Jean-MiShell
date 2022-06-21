@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 14:50:21 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/20 14:51:59 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/21 10:15:31 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static int	ft_redic(t_data *data, t_pipex *vars)
 	if (ft_files(data, vars) == false)
 	{
 		perror("Error");
+		return (false);
 	}
 	if (vars->redic_array[vars->i].input_type != 0)
 	{

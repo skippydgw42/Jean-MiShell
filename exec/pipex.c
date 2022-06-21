@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 11:12:35 by mdegraeu          #+#    #+#             */
-/*   Updated: 2022/06/20 14:54:20 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/21 09:39:13 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	ft_pipe_child(t_data *data, t_pipex *vars)
 {
 	if (!ft_files(data, vars))
 	{
-		perror("Error");
+		perror("Error file");
 		exit(0);
 	}
 	ft_set_signal_child();

@@ -6,11 +6,11 @@
 #    By: mdegraeu <mdegraeu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/26 15:59:40 by ltrinchi          #+#    #+#              #
-#    Updated: 2022/06/17 14:25:36 by mdegraeu         ###   ########.fr        #
+#    Updated: 2022/06/21 10:11:50 by ltrinchi         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Jean-MiShell
+NAME = minishell
 
 SRCS_WITHOUT_PATH = \
 					main.c	\

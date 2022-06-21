@@ -6,7 +6,7 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:38:54 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/06/16 11:22:17 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/21 09:39:26 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	ft_exit_signal(int sig)
 
 static int	ft_reset_settings_signal(void)
 {
-	perror("Error");
+	perror("Error heredoc");
 	signal(SIGINT, ft_signal_handler);
 	return (-1);
 }

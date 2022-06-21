@@ -6,11 +6,29 @@
 /*   By: ltrinchi <ltrinchi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 13:11:56 by ltrinchi          #+#    #+#             */
-/*   Updated: 2022/06/20 14:54:41 by ltrinchi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/21 14:10:24 by ltrinchi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclds/JeanMiShell.h"
+
+static int	ft_err_msg(char *str, int type)
+{
+	if (type == 1)
+	{
+		ft_putstr_fd("Error: ", 2);
+		ft_putstr_fd(str, 2);
+		ft_putstr_fd(": Command not found\n", 2);
+		return (127);
+	}
+	else
+	{
+		ft_putstr_fd("Error: ", 2);
+		ft_putstr_fd(str, 2);
+		ft_putstr_fd(": No such file or directory\n", 2);
+		return (127);
+	}
+}
 
 static int	ft_exec_process(t_pipex *vars, t_data *data)
 {
@@ -22,17 +40,9 @@ static int	ft_exec_process(t_pipex *vars, t_data *data)
 				vars->env) == -1)
 		{
 			if (vars->cmd_array->type[vars->i] == CMD_P)
-			{
-				printf("J.Mishell: %s: Command not found\n",
-					vars->cmd_array->path_cmd[vars->i]);
-				exit(127);
-			}
+				exit(ft_err_msg(vars->cmd_array->path_cmd[vars->i], 1));
 			if (vars->cmd_array->type[vars->i] == EXEC_P)
-			{
-				printf("J.Mishell: %s: No such file or directory\n",
-					vars->cmd_array->path_cmd[vars->i]);
-				exit(127);
-			}
+				exit(ft_err_msg(vars->cmd_array->path_cmd[vars->i], 0));
 		}
 	}
 	else
